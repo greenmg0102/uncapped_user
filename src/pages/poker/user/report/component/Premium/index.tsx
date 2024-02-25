@@ -8,14 +8,45 @@ import { hero8Site, stackArray, villianPokerTable } from '../../../../../../util
 import 'tippy.js/dist/tippy.css';
 import Squeeze from '../Squeeze'
 
-export default function Premium({ advancedOptionModal, setAdvancedOptionModal, actionPoint, arrayPoint, premiumStatus, setPremiumStatus, defaultReportSetting }: any) {
+export default function Premium({ advancedOptionModal, setAdvancedOptionModal, actionPoint, arrayPoint, premiumStatus, valueStatus, setPremiumStatus, defaultReportSetting }: any) {
 
     const MySwal = withReactContent(Swal);
     const [squeezeModal, setSqueezeModal] = useState(false)
 
+    const bufferAction = (title: any) => {
+        let realValueStatus = { action: title, heroPosition: [], stackDepth: [], VillianPosition: [] }
+        actionPoint(realValueStatus)
+        setPremiumStatus({ ...premiumStatus, action: title, heroPosition: undefined, stackDepth: undefined, VillianPosition: [] })
+    }
+
+    const bufferPosition = (index: any) => {
+
+        let availableHeroPostion = heroPositionValidation[valueStatus.action]
+
+        if (availableHeroPostion.some((item: any) => item === hero8Site[index]) === true) {
+
+            arrayPoint("heroPosition", [hero8Site[index]])
+            setPremiumStatus({ ...premiumStatus, heroPosition: index, stackDepth: undefined })
+
+        } else notification(`That position is not allow in ${valueStatus.action} `, 'error')
+
+    }
+
     const bufferVillian = (position: any) => {
         if (premiumStatus.VillianPosition.includes(position)) setPremiumStatus({ ...premiumStatus, VillianPosition: premiumStatus.VillianPosition.filter((item: any) => item !== position) })
         else setPremiumStatus({ ...premiumStatus, VillianPosition: [...premiumStatus.VillianPosition, position] })
+    }
+
+    const notification = (message: any, color: any) => {
+        MySwal.fire({
+            title: message,
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 2000,
+            showCloseButton: true,
+            customClass: { popup: `color-${color}` }
+        });
     }
 
     return (
@@ -56,10 +87,7 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
                                         <div className={clsx("mb-1 w-1/3 rounded-[4px] p-[1px] transition-all cursor-pointer bg-gray-900")}>
                                             <div
                                                 className={clsx('p-[4px] 2xl:p-[4px] 2xl:p-[6px] rounded-[4px] transition-all', premiumStatus.action === item.title ? "bg-gray-500 text-gray-100" : " bg-gray-800")}
-                                                onClick={() => {
-                                                    actionPoint(item.title)
-                                                    setPremiumStatus({ ...premiumStatus, action: item.title })
-                                                }}
+                                                onClick={() => bufferAction(item.title)}
                                             >
                                                 <p className='text-center'>{item.title}</p>
                                             </div>
@@ -104,10 +132,7 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
                                     >
                                         <div
                                             className={clsx('p-[4px] 2xl:p-[6px] rounded-[4px] transition-all', premiumStatus.heroPosition === index ? "bg-blue-500 text-gray-100" : "bg-gray-800")}
-                                            onClick={() => {
-                                                arrayPoint("heroPosition", [hero8Site[key]])
-                                                setPremiumStatus({ ...premiumStatus, heroPosition: index })
-                                            }}
+                                            onClick={() => bufferPosition(index)}
                                         >
                                             <p className='text-center'>{hero8Site[key]}</p>
                                         </div>
@@ -170,31 +195,15 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
                                             className={clsx('p-[4px] 2xl:p-[6px] rounded-[4px] transition-all', premiumStatus.VillianPosition.includes(index) ? "bg-red-800 text-gray-100 font-bold" : "bg-gray-800")}
                                             onClick={() => {
                                                 if (index >= premiumStatus.heroPosition) {
-                                                    MySwal.fire({
-                                                        title: "Villian can't be large or same than hero!",
-                                                        toast: true,
-                                                        position: 'top',
-                                                        showConfirmButton: false,
-                                                        timer: 2000,
-                                                        showCloseButton: true,
-                                                        customClass: { popup: "color-error" }
-                                                    });
+                                                    notification('Villian can"t be large or same than hero!', 'error')
                                                     return
                                                 }
                                                 else if (premiumStatus.VillianPosition.length === 2 && !premiumStatus.VillianPosition.some((item: any) => item === index)) {
-                                                    MySwal.fire({
-                                                        title: "Villian can't be large than hero!",
-                                                        toast: true,
-                                                        position: 'top',
-                                                        showConfirmButton: false,
-                                                        timer: 2000,
-                                                        showCloseButton: true,
-                                                        customClass: { popup: "color-error" }
-                                                    });
+                                                    notification('Villian can"t be large than hero!', 'error')
                                                     return
                                                 }
                                                 else {
-                                                    arrayPoint("VillianPosition", [hero8Site[key]])
+                                                    arrayPoint("VillianPosition", [hero8Site[index]])
                                                     bufferVillian(index)
                                                 }
                                             }}
@@ -209,12 +218,14 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
                 </div>
             </div>
             <Squeeze
+                valueStatus={valueStatus}
                 premiumStatus={premiumStatus}
                 squeezeModal={squeezeModal}
                 setPremiumStatus={(total: any) => setPremiumStatus(total)}
                 setSqueezeModal={(bool: boolean) => setSqueezeModal(bool)}
-                actionPoint={(premiumAction: any) => actionPoint(premiumAction)}
+                actionPoint={(premiumAction: any) => bufferAction(premiumAction)}
                 arrayPoint={(type: any, premiumArry: any) => arrayPoint(type, premiumArry)}
+                notification={(message: any, color: any) => notification(message, color)}
             />
         </div>
     )

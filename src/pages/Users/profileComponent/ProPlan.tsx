@@ -4,7 +4,7 @@ export default function ProPlan({ proPlan }: any) {
     if (Object.keys(proPlan).length > 0) {
 
         return (
-            <div className="panel w-full">
+            <div className="panel w-full md:w-1/2">
                 <div className="flex items-center justify-between mb-10">
                     <h5 className="font-semibold text-lg dark:text-white-light">{proPlan.title}</h5>
                     <button className="btn btn-primary">Renew Now</button>

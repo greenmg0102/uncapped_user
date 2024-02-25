@@ -208,10 +208,10 @@ const Report = () => {
     useEffect(() => {
 
         if (displayTabSelect === 1) {
+
             async function fetchDataAndDispatch() {
                 const data = {
-                    ...valueStatus, ...filter
-                    // range: `2023-11-30 to ${currentDate}`
+                    ...valueStatus, ...filter,
                 }
 
                 dispatch(toggleLoadingStatus())
@@ -353,11 +353,12 @@ const Report = () => {
                     />
                     <Premium
                         premiumStatus={premiumStatus}
+                        valueStatus={valueStatus}
                         advancedOptionModal={advancedOptionModal}
                         defaultReportSetting={defaultReportSetting}
                         setPremiumStatus={(total: any) => bufferSetPremiumStatus(total)}
                         setAdvancedOptionModal={(bool: boolean) => setAdvancedOptionModal(bool)}
-                        actionPoint={(premiumAction: any) => setValueStatus({ ...valueStatus, action: premiumAction })}
+                        actionPoint={(premiumAction: any) => setValueStatus({ ...valueStatus, ...premiumAction })}
                         arrayPoint={(type: any, premiumArry: any) => setValueStatus({ ...valueStatus, [type]: premiumArry })}
                     />
                 </div>

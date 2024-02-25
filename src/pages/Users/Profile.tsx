@@ -66,7 +66,7 @@ const Profile = () => {
         <div className="pt-5">
             <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-5">
                 <UserPersonal userInfo={userInfo} />
-                <div className="panel lg:col-span-2 xl:col-span-3 flex justify-between items-start">
+                <div className="panel lg:col-span-2 xl:col-span-3 flex justify-between items-start flex-wrap">
                     <Summary pokerTypeCount={pokerTypeCount} />
                     {proPlan === null || proPlan === undefined ? null : <ProPlan proPlan={proPlan} />}
                 </div>

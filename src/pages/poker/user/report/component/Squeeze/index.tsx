@@ -3,9 +3,20 @@ import clsx from 'clsx'
 import VillianPokerTable from './VillianPokerTable'
 import { hero8Site, stackArray, villianPokerTable } from '../../../../../../utils/reference/playCardColor'
 import { defaultReportSetting } from '../../../../../../utils/reference/reporting'
+import { heroPositionValidation } from '../../../../../../utils/reference/heroPositionValidation'
 import 'tippy.js/dist/tippy.css';
 
-export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, arrayPoint, premiumStatus, setPremiumStatus }: any) {
+export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, arrayPoint, premiumStatus, valueStatus, setPremiumStatus, notification }: any) {
+
+    const bufferPosition = (index: any) => {
+        let availableHeroPostion = heroPositionValidation[valueStatus.action]
+        if (availableHeroPostion.some((item: any) => item === hero8Site[index]) === true) {
+
+            arrayPoint("heroPosition", [hero8Site[index]])
+            setPremiumStatus({ ...premiumStatus, heroPosition: index, stackDepth: undefined })
+            
+        } else notification(`That position is not allow in ${valueStatus.action} `, 'error')
+    }
 
     return (
         <div className={
@@ -45,10 +56,7 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, ar
                                         <div className={clsx("mb-1 w-1/3 rounded-[4px] p-[1px] transition-all cursor-pointer bg-gray-900")}>
                                             <div
                                                 className={clsx('p-[4px] 2xl:p-[4px] 2xl:p-[6px] rounded-[4px] transition-all', premiumStatus.action === item.title ? "bg-gray-500 text-gray-100" : " bg-gray-800")}
-                                                onClick={() => {
-                                                    actionPoint(item.title)
-                                                    setPremiumStatus({ ...premiumStatus, action: item.title })
-                                                }}
+                                                onClick={() => actionPoint(item.title)}
                                             >
                                                 <p className='text-center'>{item.title}</p>
                                             </div>
@@ -78,10 +86,7 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, ar
                                     >
                                         <div
                                             className={clsx('2xl:p-[5.5px] rounded-[4px] transition-all', premiumStatus.heroPosition === index ? "bg-gray-500 text-gray-100" : " bg-gray-800")}
-                                            onClick={() => {
-                                                arrayPoint("heroPosition", [hero8Site[key]])
-                                                setPremiumStatus({ ...premiumStatus, heroPosition: index })
-                                            }}
+                                            onClick={() => bufferPosition(index)}
                                         >
 
                                             <p className='text-center'>{hero8Site[key]}</p>

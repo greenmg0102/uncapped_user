@@ -2,7 +2,7 @@ import { pokerMarkList } from '../../../utils/reference'
 export default function Summary({ pokerTypeCount }: any) {
 
     return (
-        <div className="panel w-full">
+        <div className="panel w-full md:w-1/2">
             <div className="mb-10">
                 <h5 className="font-semibold text-lg dark:text-white-light">Summary</h5>
             </div>
