@@ -43,7 +43,7 @@ export default function FilterInfo({ userTab, filter, valueStatus, userInfoResul
                     filter={filter}
                     tableSize={tableSize}
                     valueStatus={valueStatus}
-                    setFilter={({ filer, pokerType }: any) => setFilter({ filer, pokerType })}
+                    setFilter={(filer: any) => setFilter(filer)}
                     bufferRange={(range: any) => bufferRange(range)}
                     searchApply={searchApply}
                 />

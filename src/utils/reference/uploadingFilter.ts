@@ -11,14 +11,14 @@ export const pokerType = [
 ];
 
 export const tableSize = [
-    { title: 'All', value: 'N/A' },
-    { title: 3, value: 3 },
-    { title: 4, value: 4 },
-    { title: 5, value: 5 },
-    { title: 6, value: 6 },
-    { title: 7, value: 7 },
+    // { title: 'All', value: 'N/A' },
+    // { title: 3, value: 3 },
+    // { title: 4, value: 4 },
+    // { title: 5, value: 5 },
+    // { title: 6, value: 6 },
+    // { title: 7, value: 7 },
     { title: 8, value: 8 },
-    { title: 9, value: 9 },
+    // { title: 9, value: 9 },
 ];
 
 export const heroPosition = [

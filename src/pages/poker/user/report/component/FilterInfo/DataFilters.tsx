@@ -62,7 +62,7 @@ export default function DataFilters({ pokerType, filter, tableSize, valueStatus,
                     </div>
                 </div>
                 <div className="flex justify-between items-center mb-2">
-                    <p className="w-[25px] text-left mr-0 hidden 2xl:block">Date </p>
+                    <p className="w-[40px] text-left mr-0 hidden 2xl:block">Date </p>
                     <Flatpickr
                         options={{
                             mode: 'range',
@@ -70,7 +70,7 @@ export default function DataFilters({ pokerType, filter, tableSize, valueStatus,
                             position: 'auto left',
                         }}
                         value={filter.range}
-                        className="form-input form-input-sm  !border-primary !w-[150px] !px-1 !py-[5px]"
+                        className="form-input form-input-sm !border-primary !w-[150px] !px-1 !py-[5px]"
                         onChange={(range: any) => bufferRange(range)}
                     />
                 </div>

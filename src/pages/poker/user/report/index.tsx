@@ -153,9 +153,7 @@ const Report = () => {
         let real = valueStatus[type as keyof typeof valueStatus] as number[];
         let bufferList: number[] = []
 
-        if (real.includes(value)) {
-            bufferList = real.filter((item: any) => item !== value)
-        }
+        if (real.includes(value)) bufferList = real.filter((item: any) => item !== value)
         else bufferList = [...real, value]
         bufferSetValueStatus({ ...valueStatus, [type]: bufferList })
     }
