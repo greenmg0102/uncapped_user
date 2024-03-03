@@ -14,7 +14,7 @@ import SmallPlayCard from '../../../../../components/UI/playcard/SmallPlayCard';
 import { pokerMarkList } from '../../../../../utils/reference'
 import { toggleLoadingStatus } from "../../../../../store/utilConfigSlice"
 
-const Basic = () => {
+const HandTable = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -76,25 +76,12 @@ const Basic = () => {
 
     const hero8Site = ["UTG", "UTG+1", "LJ", "HJ", "CO", "BTN", "SB", "BB"]
 
-    const hero9Site = ["UTG", "UTG+1", "UTG+2", "LJ", "HJ", "CO", "BTN", "SB", "BB"]
+    // const hero9Site = ["UTG", "UTG+1", "UTG+2", "LJ", "HJ", "CO", "BTN", "SB", "BB"]
 
     const heroFinding = (reportContent: any): string => {
         if (reportContent.heroPosition !== null) return hero8Site[reportContent.heroPosition]
         else return ""
     };
-
-
-    // const heroFinding = (playlist: any): string => {
-    //     let index = playlist.findIndex((item: any, index: number) => {
-    //         return item.playerName === "Hero";
-    //     });
-
-    //     if (index === -1) return "N/A";
-    //     else {
-    //         if (playlist.length > 8) return hero9Site[index];
-    //         else return hero8Site[index];
-    //     }
-    // };
 
     const holdCard = (holeCardInfo: { rank: string, suit: string }): any => <SmallPlayCard holeCardInfo={holeCardInfo} />
 
@@ -112,6 +99,10 @@ const Basic = () => {
         "check": 'X',
         "all in, check": 'X',
     };
+
+    const facingPFAction = (list: any): any => {
+        return "FacingPFAction"
+    }
 
     return (
         <div className="panel">
@@ -132,7 +123,7 @@ const Basic = () => {
                     records={initialRecords}
                     columns={[
                         {
-                            accessor: 'handId', title: 'DETAILS', sortable: true, render: ({ handId }) => <div className="text-info flex justify-center items-center">
+                            accessor: 'handId', title: 'DETAILS', render: ({ handId }) => <div className="text-info flex justify-center items-center">
                                 <div className='w-[20px] h-[20px] hover:w-[40px] hover:h-[40px] transition-all'>
                                     <svg
                                         width="100%"
@@ -144,13 +135,6 @@ const Basic = () => {
                                         <path d="M391.166 156.304H501.7c228.857 0 422.263 184.597 422.263 403.115C923.963 780.312 742.427 960 519.315 960c-235.128 0-419.278-193.554-419.278-440.625 0-10.564 8.584-19.11 19.109-19.11h113.159c10.602 0 19.11 8.546 19.11 19.11 0 218.781 138.391 296.747 267.9 296.747 134.92 0 253.27-123.2 253.27-263.605 0-131.897-124.059-243.34-270.885-243.34l-106.555-3.227-3.979-149.646z" fill="#FF3B30" /><path d="M407.884 309.176v77.275c0 6.941-3.73 13.267-9.777 16.664-6.011 3.398-13.398 3.209-19.295-0.375L128.305 249.013c-5.71-3.508-9.147-9.669-9.147-16.383 0.078-6.681 3.585-12.876 9.333-16.312L378.998 66.729c5.894-3.542 13.285-3.657 19.221-0.221 6.008 3.358 9.665 9.702 9.665 16.609V309.176z" fill="#FF3B30" />
                                         <path d="M439.717 307.301l40.724-150.999h-72.557v150.035z" fill="#070707" />
                                     </svg>
-
-                                    {/* <img
-                                        src="/assets/images/pokerImage/replay.png"
-                                        alt="/assets/images/pokerImage/replay.png"
-                                        className="max-w-[20px] w-full m-auto mx-4 hover:cursor-pointer hover:max-w-[30px]"
-                                    /> */}
-
                                 </div>
                             </div>
                         },
@@ -164,12 +148,12 @@ const Basic = () => {
                                     />
                                 </div>
                         },
-                        { accessor: 'gameFormat', title: 'GAME FORMAT', sortable: true, render: ({ gameFormat }) => <strong className="text-info flex justify-center">{gameFormat}</strong> },
+                        { accessor: 'gameFormat', title: 'GAME FORMAT', render: ({ gameFormat }) => <strong className="text-info flex justify-center">{gameFormat}</strong> },
                         { accessor: 'maxTableSeats', title: 'TABLE SIZE', sortable: true, render: ({ maxTableSeats }) => <strong className="text-info flex justify-center">{maxTableSeats}-max</strong> },
                         { accessor: 'reportContent', title: 'HERO', sortable: true, render: ({ reportContent }) => <strong className="text-info flex justify-center">{heroFinding(reportContent)}</strong> },
                         {
-                            accessor: 'holeCards', title: 'HOLE CARDS', sortable: true, render: ({ holeCards }) => <strong className="text-info flex justify-center">
-                                <div className='flex jsutify-center items-center'>
+                            accessor: 'holeCards', title: 'HOLE CARDS', render: ({ holeCards }) => <strong className="text-info flex justify-center">
+                                <div className='flex justify-center items-center'>
                                     {holeCards[0].cards.map((item: any, index: any) =>
                                         <div key={index}>
                                             {holdCard(item)}
@@ -178,11 +162,38 @@ const Basic = () => {
                                 </div>
                             </strong>
                         },
+                        // {
+                        //     accessor: 'actions', title: 'Facing PF Action', sortable: true, render: ({ communityCards, actions }) => <strong className="text-info flex justify-center">
+                        //         <div className='flex justify-center items-center'>
+                        //             {communityCards.length === 0 ?
+                        //                 "UnOpened Pot"
+                        //                 :
+                        //                 facingPFAction(actions)
+                        //             }
+                        //         </div>
+                        //     </strong>
+                        // },
+                        // {
+                        //     accessor: 'communityCards', title: 'PF Action', sortable: true, render: ({ actions }) => <strong className="text-info flex justify-center">
+                        //         <div className='flex justify-center items-center'>
+                        //             {actions.filter((item: any) => item.playerName === "Hero").length > 0 ? actionSet[actions.filter((item: any) => item.playerName === "Hero").pop().action] : "Empty Hero"}
+                        //         </div>
+                        //     </strong>
+                        // },
                         {
-                            accessor: 'communityCards', title: 'BOARD', sortable: true, render: ({ communityCards }) => <strong className="text-info flex justify-start">
-                                <div className='flex jsutify-center items-center'>
-                                    {communityCards.map((item: any, index: any) =>
-                                        <div key={index}>
+                            accessor: 'actions', title: 'PF Act', render: ({ actions }) => <strong className="text-info flex justify-start">
+                                <div className='flex justify-center items-center'>
+                                    {actions.filter((item: any) => item.street === "preFlop" && item.playerName === "Hero").map((each: any, order: any) =>
+                                        <span key={order}>{actionSet[each.action]}</span>
+                                    )}
+                                </div>
+                            </strong>
+                        },
+                        {
+                            accessor: 'communityCards', title: 'Flop', render: ({ communityCards }) => <strong className="text-info flex justify-start">
+                                <div className='flex justify-center items-center'>
+                                    {communityCards.length > 3 && communityCards.slice(0, 3).map((item: any, index: any) =>
+                                        <div key={`flop-${index}`}>
                                             {holdCard(item)}
                                         </div>
                                     )}
@@ -190,44 +201,93 @@ const Basic = () => {
                             </strong>
                         },
                         {
-                            accessor: 'actions', title: 'ACTIONS', sortable: true, render: ({ actions }) =>
-                                <strong className="text-info flex justify-start items-center">
-                                    <div className={clsx(actions.findIndex((item: any) => item.street === "preFlop") !== -1 ? 'mr-1' : 'hidden')}>
-                                        <span className='text-white'>Preflop</span>
-                                        <div className='flex justify-center items-center'>
-                                            {actions.filter((item: any) => item.street === "preFlop").map((each: any, order: any) =>
-                                                <span key={order}>{actionSet[each.action]}</span>
-                                            )}
-                                        </div>
-                                    </div>
-                                    <div className={clsx(actions.findIndex((item: any) => item.street === "Flop") !== -1 ? 'mr-1' : 'hidden')}>
-                                        <span className='text-white'>Flop</span>
-                                        <div className='flex justify-center items-center'>
-                                            {actions.filter((item: any) => item.street === "Flop").map((each: any, order: any) =>
-                                                <span key={order}>{actionSet[each.action]}</span>
-                                            )}
-                                        </div>
-                                    </div>
-                                    <div className={clsx(actions.findIndex((item: any) => item.street === "Turn") !== -1 ? 'mr-1' : 'hidden')}>
-                                        <span className='text-white'>Turn</span>
-                                        <div className='flex justify-center items-center'>
-                                            {actions.filter((item: any) => item.street === "preFlop").map((each: any, order: any) =>
-                                                <span key={order}>{actionSet[each.action]}</span>
-                                            )}
-                                        </div>
-                                    </div>
-                                    <div className={clsx(actions.findIndex((item: any) => item.street === "River") !== -1 ? 'mr-1' : 'hidden')}>
-                                        <span className='text-white'>River</span>
-                                        <div className='flex justify-center items-center'>
-                                            {actions.filter((item: any) => item.street === "River").map((each: any, order: any) =>
-                                                <span key={order} className='text-white'>{actionSet[each.action]}</span>
-                                            )}
-                                        </div>
-                                    </div>
-                                </strong>
+                            accessor: 'actions', title: 'F Act', render: ({ actions }) => <strong className="text-info flex justify-start">
+                                <div className='flex justify-center items-center'>
+                                    {actions.filter((item: any) => item.street === "Flop" && item.playerName === "Hero").map((each: any, order: any) =>
+                                        <span key={order}>{actionSet[each.action]}</span>
+                                    )}
+                                </div>
+                            </strong>
                         },
+                        {
+                            accessor: 'communityCards', title: 'Turn', render: ({ communityCards }) => <strong className="text-info flex justify-start">
+                                <div className='flex justify-center items-center'>
+                                    {communityCards.length > 4 && communityCards.slice(3, 4).map((item: any, index: any) =>
+                                        <div key={`turn-${index}`}>
+                                            {holdCard(item)}
+                                        </div>
+                                    )}
+                                </div>
+                            </strong>
+                        },
+                        {
+                            accessor: 'actions', title: 'T Act', render: ({ actions }) => <strong className="text-info flex justify-start">
+                                <div className='flex justify-center items-center'>
+                                    {actions.filter((item: any) => item.street === "Turn" && item.playerName === "Hero").map((each: any, order: any) =>
+                                        <span key={order}>{actionSet[each.action]}</span>
+                                    )}
+                                </div>
+                            </strong>
+                        },
+                        {
+                            accessor: 'communityCards', title: 'River', render: ({ communityCards }) => <strong className="text-info flex justify-start">
+                                <div className='flex justify-center items-center'>
+                                    {communityCards.length === 5 && communityCards.slice(4, 5).map((item: any, index: any) =>
+                                        <div key={`river-${index}`}>
+                                            {holdCard(item)}
+                                        </div>
+                                    )}
+                                </div>
+                            </strong>
+                        },
+                        {
+                            accessor: 'actions', title: 'R Act', render: ({ actions }) => <strong className="text-info flex justify-start">
+                                <div className='flex justify-center items-center'>
+                                    {actions.filter((item: any) => item.street === "River" && item.playerName === "Hero").map((each: any, order: any) =>
+                                        <span key={order}>{actionSet[each.action]}</span>
+                                    )}
+                                </div>
+                            </strong>
+                        },
+                        // {
+                        //     accessor: 'actions', title: 'ACTIONS', render: ({ actions }) =>
+                        //         <strong className="text-info flex justify-start items-center">
+                        //             <div className={clsx(actions.findIndex((item: any) => item.street === "preFlop") !== -1 ? 'mr-1' : 'hidden')}>
+                        //                 <span className='text-white'>Preflop</span>
+                        //                 <div className='flex justify-center items-center'>
+                        //                     {actions.filter((item: any) => item.street === "preFlop").map((each: any, order: any) =>
+                        //                         <span key={order}>{actionSet[each.action]}</span>
+                        //                     )}
+                        //                 </div>
+                        //             </div>
+                        //             <div className={clsx(actions.findIndex((item: any) => item.street === "Flop") !== -1 ? 'mr-1' : 'hidden')}>
+                        //                 <span className='text-white'>Flop</span>
+                        //                 <div className='flex justify-center items-center'>
+                        //                     {actions.filter((item: any) => item.street === "Flop").map((each: any, order: any) =>
+                        //                         <span key={order}>{actionSet[each.action]}</span>
+                        //                     )}
+                        //                 </div>
+                        //             </div>
+                        //             <div className={clsx(actions.findIndex((item: any) => item.street === "Turn") !== -1 ? 'mr-1' : 'hidden')}>
+                        //                 <span className='text-white'>Turn</span>
+                        //                 <div className='flex justify-center items-center'>
+                        //                     {actions.filter((item: any) => item.street === "preFlop").map((each: any, order: any) =>
+                        //                         <span key={order}>{actionSet[each.action]}</span>
+                        //                     )}
+                        //                 </div>
+                        //             </div>
+                        //             <div className={clsx(actions.findIndex((item: any) => item.street === "River") !== -1 ? 'mr-1' : 'hidden')}>
+                        //                 <span className='text-white'>River</span>
+                        //                 <div className='flex justify-center items-center'>
+                        //                     {actions.filter((item: any) => item.street === "River").map((each: any, order: any) =>
+                        //                         <span key={order} className='text-white'>{actionSet[each.action]}</span>
+                        //                     )}
+                        //                 </div>
+                        //             </div>
+                        //         </strong>
+                        // },
                         { accessor: 'handDate', title: 'PLAYED DATE', sortable: true, render: ({ handDate }) => <strong className="text-info flex justify-center">{handDate}</strong> },
-                        { accessor: 'date', title: 'UPLOADED DATE', sortable: true, render: ({ date }) => <strong className="text-info flex justify-center">{date.toString().slice(0, 10).split("-").join("/")}</strong> },
+                        // { accessor: 'date', title: 'UPLOADED DATE', sortable: true, render: ({ date }) => <strong className="text-info flex justify-center">{date.toString().slice(0, 10).split("-").join("/")}</strong> },
                     ]}
                     totalRecords={totalCount}
                     recordsPerPage={pageSize}
@@ -245,4 +305,5 @@ const Basic = () => {
     );
 };
 
-export default Basic;
+export default HandTable
+HandTable;

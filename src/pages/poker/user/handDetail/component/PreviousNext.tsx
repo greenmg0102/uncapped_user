@@ -3,7 +3,7 @@ import clsx from 'clsx'
 const PreviousNext = ({ nextPrevious, status }: any) => {
 
     return (
-        <div className='w-1/4 flex justify-end items-center pr-2'>
+        <div className='w-full md:w-1/4 flex justify-end items-center pr-0 mt-4 md:mt-4 md:pr-2'>
             <div
                 className={
                     clsx(

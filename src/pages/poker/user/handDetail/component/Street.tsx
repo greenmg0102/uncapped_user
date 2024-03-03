@@ -4,9 +4,7 @@ import clsx from 'clsx'
 export default function Street({ status, viewStreet }: any) {
 
     return (
-        <div className='w-3/4 pr-0 sm:pr-4 flex justify-between items-center'>
-
-
+        <div className='w-full md:w-3/4 pr-0 sm:pr-4 flex justify-between items-center'>
             <div
                 className={clsx("w-[40px] h-[40px] p-10 rounded-full border border-[4px] flex justify-center items-center cursor-pointer transition-all hover:border-white hover:text-white",
                     status < 0 ? "border-gray-800" : "border-green-600")}
@@ -16,7 +14,7 @@ export default function Street({ status, viewStreet }: any) {
                     Preflop
                 </p>
             </div>
-            <div className={clsx('w-full h-[5px] mx-6 transition-all', status < 3 ? "bg-gray-800" : "bg-green-600")} />
+            <div className={clsx('w-full h-[5px] mx-0 md:mx-6 transition-all', status < 3 ? "bg-gray-800" : "bg-green-600")} />
             <div
                 className={clsx("w-[40px] h-[40px] p-10 rounded-full border border-[4px] flex justify-center items-center cursor-pointer transition-all hover:border-white hover:text-white",
                     status < 3 ? "border-gray-800" : "border-green-600")}
@@ -27,7 +25,7 @@ export default function Street({ status, viewStreet }: any) {
                 </p>
             </div>
 
-            <div className={clsx('w-full h-[5px] mx-6 transition-all', status < 4 ? "bg-gray-800" : "bg-green-600")} />
+            <div className={clsx('w-full h-[5px] mx-0 md:mx-6 transition-all', status < 4 ? "bg-gray-800" : "bg-green-600")} />
             <div
                 className={clsx("w-[40px] h-[40px] p-10 rounded-full border border-[4px] flex justify-center items-center cursor-pointer transition-all hover:border-white hover:text-white",
                     status < 4 ? "border-gray-800" : "border-green-600")}
@@ -37,7 +35,7 @@ export default function Street({ status, viewStreet }: any) {
                     Turn
                 </p>
             </div>
-            <div className={clsx('w-full h-[5px] mx-6 transition-all', status < 5 ? "bg-gray-800" : "bg-green-600")} />
+            <div className={clsx('w-full h-[5px] mx-0 md:mx-6 transition-all', status < 5 ? "bg-gray-800" : "bg-green-600")} />
             <div
                 className={clsx("w-[40px] h-[40px] p-10 rounded-full border border-[4px] flex justify-center items-center cursor-pointer transition-all hover:border-white hover:text-white",
                     status < 5 ? "border-gray-800" : "border-green-600")}

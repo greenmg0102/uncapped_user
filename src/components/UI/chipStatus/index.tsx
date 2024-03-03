@@ -1,27 +1,31 @@
 import { getChipStatus, getBBStatus } from '../../../utils/functions/chipCalculate'
 import { chipAmountColor, chipAmountColorInBB } from '../../../utils/reference/playCardArray'
+import styles from '../pokerTable/PokerTable.module.css'
 import clsx from 'clsx'
 
 export const ChipStatus = ({ totalBet }: any) => {
 
     return <div className='flex justify-center items-end'>
-        {/* <img
-            src={"/assets/images/playCardSymbol/PokerChips.png"}
-            className={clsx("transition-all", true ? 'bg-cover' : 'hidden')}
-            alt="suit"
-            width="50" height="50"
-        /> */}
         {Object.keys(getChipStatus(totalBet)).map((key: any, index: any) =>
             <div
                 key={index}
-                className='mr-[5px] flex flex-col'
+                className='relative mr-[30px]'
             >
                 {Array(getChipStatus(totalBet)[key]).fill(0).map((item: any, order: any) =>
                     <div
-                        key={order}
-                        className='w-[12px] h-[12px] mb-[1px] rounded-full'
-                        style={{ background: chipAmountColor[key] }}
-                    />
+                        className='absolute w-[40px] h-[20px]'
+                        style={{
+                            bottom: 5 * order
+                        }}
+                    >
+                        <div className={styles.rotate_svg}>
+                            <img
+                                src={`/assets/images/cheapSVG/chip${key}.png`}
+                                alt="image"
+                                className="w-[40px] h-[20px] object-cover"
+                            />
+                        </div>
+                    </div>
                 )}
             </div>
         )}
@@ -33,12 +37,6 @@ export const BBStatus = (totalBet: any, status: any) => {
 
     return <div>
         <div className='flex justify-center items-end'>
-            {/* <img
-            src={"/assets/images/playCardSymbol/PokerChips.png"}
-            className={clsx("transition-all", true ? 'bg-cover' : 'hidden')}
-            alt="suit"
-            width="50" height="50"
-        /> */}
             {Object.keys(getBBStatus(totalBet)).map((key: any, index: any) =>
                 <div
                     key={index}

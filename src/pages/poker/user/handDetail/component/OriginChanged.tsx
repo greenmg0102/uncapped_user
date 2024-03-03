@@ -16,7 +16,7 @@ const OriginChanged = ({ handData, stepRaw, receiveRaw }: any) => {
     return (
         <div>
             <Tab.Group>
-                <Tab.List className="mt-3 flex flex-wrap border-b border-white-light dark:border-[#191e3a]">
+                <Tab.List className="flex flex-wrap border-b border-white-light dark:border-[#191e3a]">
                     <Tab as={Fragment}>
                         {({ selected }) => (
                             <button

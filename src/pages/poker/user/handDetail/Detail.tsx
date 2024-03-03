@@ -15,7 +15,7 @@ const Detail = ({ handData }: any) => {
     return (
         <div>
             <div className="flex justify-between flex-wrap items-start transition-all mt-[12px]">
-                <div className="w-full lg:w-4/5 mb-4 pr-0 lg:pr-4 transition-all">
+                <div className="w-full xl:w-4/5 mb-4 pr-0 xl:pr-4 transition-all">
                     <div className="flex justify-center items-center flex-col">
                         <PokerTable
                             handData={handData}
@@ -24,7 +24,7 @@ const Detail = ({ handData }: any) => {
                         />
                     </div>
                 </div>
-                <div className="w-full lg:w-1/5 transition-all">
+                <div className="w-full xl:w-1/5 transition-all">
                     <div className="">
                         <OriginChanged
                             stepRaw={stepRaw}

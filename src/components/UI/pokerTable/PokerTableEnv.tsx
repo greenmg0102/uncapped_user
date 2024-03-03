@@ -7,7 +7,7 @@ import PokerSummary from './PokerSummary';
 import { ChipStatus } from '../chipStatus'
 import clsx from 'clsx'
 
-const PokerTableEnv = ({ handData, stage, currentStatus, isNext, isAnimation }: any) => {
+const PokerTableEnv = ({ handData, stage, currentStatus, isNext, isAnimation, chipAmountColor }: any) => {
 
     const [totalBet, setTotalBet] = useState(0)
     const [modalStatus, setModalStatus] = useState(false);
@@ -22,7 +22,7 @@ const PokerTableEnv = ({ handData, stage, currentStatus, isNext, isAnimation }: 
     let players = handData && handData.players
 
     return (
-        <div className='mt-12'>
+        <div className='relative py-16'>
             <div className={styles.playcard_table}>
                 {Object.keys(playSeatInfo).map((item: any, index: any) =>
                     <PlayerBet
@@ -79,7 +79,7 @@ const PokerTableEnv = ({ handData, stage, currentStatus, isNext, isAnimation }: 
                         {totalBet}
                     </p>
                 </div>
-                
+
                 <div className={styles.playcard_table_place}>
                     <i>
                         {handData && handData.pokerRoomId}
@@ -98,9 +98,11 @@ const PokerTableEnv = ({ handData, stage, currentStatus, isNext, isAnimation }: 
                     </div>
                 </div>
                 <div className={styles.playcard_table_place}>
+
                     <i>
                         {handData && handData.pokerRoomId}
                     </i>
+
                     <div className={styles.poker_panel}>
                         {
                             handData.communityCards && handData.communityCards
@@ -118,6 +120,20 @@ const PokerTableEnv = ({ handData, stage, currentStatus, isNext, isAnimation }: 
                     setModalStatus={(bool: any) => setModalStatus(bool)}
                     modalStatus={modalStatus}
                 />
+            </div>
+
+            <div className='absolute top-[0px] right-[0px] hidden md:block'>
+                {
+                    Object.keys(chipAmountColor).map((key: any, index: any) =>
+                        <div
+                            key={index}
+                            className='flex justify-start items-center mb-[4px] cursor-pointer text-gray-600 hover:text-gray-100 hover:font-bold transition-all'
+                        >
+                            <img src={`/assets/images/cheapSVG/chip${key}.png`} alt="image" className="w-[40px] h-[20px] object-cover" />
+                            <div className='ml-[12px] flex justify-start'>{key}</div>
+                        </div>
+                    )
+                }
             </div>
         </div >
     );

@@ -9,17 +9,17 @@
 
 .playcard_table_place {
     position: absolute;
-    top: 45%;
+    top: 48%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 65px;
+    font-size: 3em;
     background-color: rgba(0, 255, 0, 0.356);
     background: radial-gradient(circle at center, #166916, #083808 90%, #005200);
     width: 85%;
-    height: 85%;
+    height: 80%;
     border-radius: 100%;
     border-width: 3px;
     border-style: solid;
@@ -74,7 +74,7 @@
 
 .letter_animation_run {
     opacity: 0;
-    transform: translate(-50%, -50%) translateY(-90px);
+    transform: translate(-0%, -50%) translateY(-90px);
 }
 
 .letter_animation_run_fold {
@@ -89,6 +89,7 @@
     transition-timing-function: ease-in-out;
     z-index: 1;
 }
+
 .chip_betting_img {
     position: absolute;
     transform: translate(-50%, -50%);
@@ -102,6 +103,7 @@
     0% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
@@ -139,4 +141,9 @@
     border-style: solid;
     border-color: grey;
     box-shadow: 0 0 5px white, inset 0 0 5px white;
+}
+
+.rotate_svg {
+    position: absolute;
+    transform: rotateX(0deg);
 }

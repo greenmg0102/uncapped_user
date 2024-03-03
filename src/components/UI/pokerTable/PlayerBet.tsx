@@ -91,55 +91,35 @@ const PlayerBet = ({ playSeatInfo, item, playCount, handData, players, index, cu
         <div
             className={styles.playcard_table_user}
             style={{
-                top: (playSeatInfo[item].y - 5) + "%", left: (playSeatInfo[item].x - 5) + "%"
+                top: (playSeatInfo[item].y) + "%", left: (playSeatInfo[item].x) + "%"
             }}
         >
             <div className="relative z-[1]">
-                <div className={clsx("w-[110px] h-[60px] border border-[3px] bg-gray-300 py-1 pl-2 pr-6 rounded-[12px]", playInfo.playerName === "Hero" ? "border-red-600" : "border-gray-600")}>
-                    <div className={clsx(info.chipAmount !== 0 ? 'flex justify-center items-center' : 'opacity-0')}>
-                        {/* <img
-                            src={"/assets/images/playCardSymbol/PokerChips.png"}
-                            className={clsx("transition-all", info.anteAmount ? 'bg-cover' : 'hidden')}
-                            alt="suit"
-                            width="25" height="25"
-                        /> */}
-                        <p className='mb-0 text-gray-900 font-bold text-[16px]'>{info.chipAmount}</p>
+                <div className={clsx("relative w-[100px] md:w-[110px] h-[55px] border border-[3px] bg-gray-300 py-1 rounded-[12px]", playInfo.playerName === "Hero" ? "border-red-600" : "border-gray-600")}>
+
+                    <p className='text-center text-gray-900 font-bold text-[18px] mb-0'>
+                        {type === "hero9Site" ? hero9Site[playInfo.seatNumber] : hero8Site[playInfo.seatNumber]}
+                    </p>
+                    <p className='text-center mb-0 text-gray-900 font-bold text-[12px]'>{info.chipAmount}</p>
+
+                    <div className={clsx(buttonSeat === playInfo.seatNumber ? "absolute right-[0px] top-[15px]" : "hidden")}>
+                        <img
+                            src="https://static.thenounproject.com/png/485972-200.png"
+                            className="r48jcc pT0Scc iPVvYb"
+                            style={{ maxWidth: 20, height: 20, margin: 0, visibility: "visible", width: 20 }}
+                            alt="Vector Icon. Dealer Button With Card Suits For Playing Poker ..."
+                            data-xblocker="passed"
+                        />
                     </div>
-                    <p className='text-center text-gray-900 font-bold text-[16px]'>{playInfo.playerName}</p>
-                </div>
-                <div
-                    className={
-                        clsx(
-                            'absolute right-[-60px] top-[-15px] w-[80px] h-[80px] rounded-full border border-[3px] hover:border-white cursor-pointer flex justify-center items-center font-bold text-gray-900 transition-all',
-                            currentStatus.player === playInfo.playerName ? "bg-green-300 border-green-500 text-[20px]" : "bg-gray-400 border-gray-600 text-[16px]"
-                        )
-                    }
-                >
-                    <div>
-                        <p className='text-center'>
-                            {type === "hero9Site" ? hero9Site[playInfo.seatNumber] : hero8Site[playInfo.seatNumber]}
-                        </p>
-                        <div className={clsx(buttonSeat === playInfo.seatNumber ? "flex justify-center items-center" : "hidden")}>
-                            <img
-                                src="https://static.thenounproject.com/png/485972-200.png"
-                                className="r48jcc pT0Scc iPVvYb"
-                                style={{ maxWidth: 20, height: 20, margin: 0, visibility: "visible", width: 20 }}
-                                alt="Vector Icon. Dealer Button With Card Suits For Playing Poker ..."
-                                data-xblocker="passed"
-                            />
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <div
                 className={clsx(
                     info.anteAmount <= defaultAnte ? "hidden" : "",
-                    'absolute flex justify-center items-center flex-col font-bold text-gray-100 transition-all',
+                    'absolute flex justify-center items-center flex-col font-bold text-gray-100 transition-all absolute top-[150%] left-1/2 transform -translate-x-1/2 -translate-y-1/2',
                     playSeatInfo[item].cheapPosition && playSeatInfo[item].cheapPosition.x ? '' : 'hidden'
                 )}
-                style={{
-                    bottom: "-90%", left: "50%"
-                }}
             >
                 <img
                     src={"/assets/images/playCardSymbol/PokerChips.png"}
@@ -152,43 +132,35 @@ const PlayerBet = ({ playSeatInfo, item, playCount, handData, players, index, cu
             <div
                 className={
                     clsx(
-                        'absolute top-1/2 text-[20px] text-green-100 w-[200px] left-[100%] transform -translate-x-1/2 -translate-y-1/2 font-bold',
+                        'absolute top-1/2 text-[20px] text-green-100 text-center w-[110px] transform font-bold',
                         styles.letter_animation, info.smallBlind === 0 ? styles.letter_animation_pre : styles.letter_animation_run
                     )
                 }
-            >
-                Small Blind
-            </div>
+            > S B </div>
             <div
                 className={
                     clsx(
-                        'absolute top-1/2 text-[20px] text-green-500 w-[200px] left-[100%] transform -translate-x-1/2 -translate-y-1/2 font-bold',
+                        'absolute top-1/2 text-[20px] text-green-500 text-center w-[110px] transform font-bold',
                         styles.letter_animation, info.bigBlind === 0 ? styles.letter_animation_pre : styles.letter_animation_run
                     )
                 }
-            >
-                Big Blind
-            </div>
+            > B B </div>
             <div
                 className={
                     clsx(
-                        'absolute top-1/2 text-[30px] text-red-300 w-[200px] left-[100%] transform -translate-x-1/2 -translate-y-1/2 font-bold',
+                        'absolute top-1/2 text-[30px] text-red-300 text-center w-[110px] transform font-bold',
                         styles.letter_animation, info.status !== 'calls' ? styles.letter_animation_pre : styles.letter_animation_run
                     )
                 }
-            >
-                Call
-            </div>
+            > Call </div>
             <div
                 className={
                     clsx(
-                        'absolute top-1/2 text-[30px] text-red-700 w-[200px] left-[100%] transform -translate-x-1/2 -translate-y-1/2 font-bold',
+                        'absolute top-1/2 text-[30px] text-red-700 text-center w-[110px] transform font-bold',
                         styles.letter_animation, info.status !== 'raises' ? styles.letter_animation_pre : styles.letter_animation_run
                     )
                 }
-            >
-                Raise
-            </div>
+            > Raise </div>
             {info.status !== "folds" ?
                 <div>
                     {info.heroCard.length === 0 ?
@@ -197,7 +169,7 @@ const PlayerBet = ({ playSeatInfo, item, playCount, handData, players, index, cu
                             <img className="w-8 ltr:-ml-1 rtl:-mr-1 inline cursor-pointer hover:w-14 transition-all" src="/assets/images/poker-mark/backPlaycard.png" alt="logo" />
                         </div>
                         :
-                        <div className={clsx('absolute top-[-15px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center transition-all', info.dealt ? '' : 'hidden')} >
+                        <div className={clsx('absolute top-[-10px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center transition-all', info.dealt ? '' : 'hidden')} >
                             {info.heroCard.map((item: any, index: any) =>
                                 <SmallPlayCard
                                     key={index}
@@ -211,12 +183,11 @@ const PlayerBet = ({ playSeatInfo, item, playCount, handData, players, index, cu
                 <div
                     className={
                         clsx(
-                            'absolute transition-all text-[24px] font-bold text-white top-[0px]',
+                            'absolute top-1/2 text-[30px] text-center w-[110px] transform font-bold',
                             styles.letter_animation, info.status !== 'folds' ? styles.letter_animation_pre : styles.letter_animation_run_fold
                         )
-                    }>
-                    Fold
-                </div>
+                    }
+                > Fold </div>
             }
         </div>
     );

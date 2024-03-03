@@ -93,7 +93,8 @@ const PokerTable = ({ handData, isAnimation, receiveRaw }: any) => {
 
     return (
         <div className="w-full relative">
-            <div className='flex justify-start items-center'>
+
+            <div className='flex justify-start items-center flex-wrap'>
                 <Street
                     status={status}
                     viewStreet={(value: any) => viewStreet(value)}
@@ -103,34 +104,34 @@ const PokerTable = ({ handData, isAnimation, receiveRaw }: any) => {
                     status={status}
                 />
             </div>
-            <div className='mt-[100px]'>
-                <PokerTableEnv
-                    stage={status}
-                    isNext={isNext}
-                    handData={handData}
-                    isAnimation={isAnimation}
-                    currentStatus={currentStatus}
-                />
-            </div>
+
             <PlayControl
                 playSpeed={playSpeed}
                 setPlaySpeed={(value: any) => setPlaySpeed(value)}
                 setIsPlay={(value: any) => setIsPlay(value)}
             />
-            <div className='absolute top-[200px] right-0'>
+
+            <div className='flex justify-center flex-wrap md:hidden'>
                 {Object.keys(chipAmountColor).map((key: any, index: any) =>
                     <div
                         key={index}
                         className='flex justify-start items-center w-[100px] mb-[4px] cursor-pointer text-gray-600 hover:text-gray-100 hover:font-bold transition-all'
                     >
-                        <div
-                            className='w-[12px] h-[12px] mb-[1px] rounded-full'
-                            style={{ background: chipAmountColor[key] }}
-                        />
+                        <img src={`/assets/images/cheapSVG/chip${key}.png`} alt="image" className="w-[40px] h-[20px] object-cover" />
                         <div className='ml-[12px] flex justify-start'>{key}</div>
                     </div>
                 )}
             </div>
+
+            <PokerTableEnv
+                stage={status}
+                isNext={isNext}
+                handData={handData}
+                isAnimation={isAnimation}
+                currentStatus={currentStatus}
+                chipAmountColor={chipAmountColor}
+            />
+
         </div>
     );
 };
