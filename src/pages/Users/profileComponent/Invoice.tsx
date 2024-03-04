@@ -28,7 +28,7 @@ export default function Invoice({ isOpen, data, setIsOpen }: any) {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel as="div" className="panel max-w-[700px] border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8 text-black dark:text-white-dark">
+                            <Dialog.Panel as="div" className="panel max-w-[700px] border-0 p-0 rounded-lg overflow-hidden w-full max-w-xl my-8 text-black dark:text-white-dark">
                                 <div className="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
                                     <h5 className="font-bold text-lg">Invoice</h5>
                                     <svg viewBox="64 64 896 896" focusable="false" data-icon="fullscreen-exit" width="1.5em" height="1.5em" fill="currentColor" aria-hidden="true" className='hover:text-gray-200 text-primary cursor-pointer' onClick={() => setIsOpen(false)}>
@@ -45,7 +45,7 @@ export default function Invoice({ isOpen, data, setIsOpen }: any) {
                                                 className='flex justify-start items-center hover:text-gray-200 transition-all cursor-pointer mb-1'
                                             >
                                                 <p>{key} :</p>
-                                                <p>{data.invoice[key]}</p>
+                                                <p className='font-bold ml-2'>{data.invoice[key]}</p>
                                             </div>
                                         )
                                     }

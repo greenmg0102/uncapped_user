@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
+import { accessTokenDecode } from '../../../../../utils/middlewareFunction/accessTokenDecode';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Tippy from '@tippyjs/react';
@@ -14,7 +15,7 @@ export default function Crypto({ price, premiumId, isMonthly }: any) {
 
     const [availableCurrency, setAvailableCurrency] = useState([])
     const [regeneratingSecond, setRegeneratingSecond] = useState(300)
-    const [generating, setGenerating] = useState(false)
+    const [userProfileId, setUserProfileId] = useState(null)
     const [triedCount, setTriedCount] = useState(0)
 
     const [cryptoSetting, setCryptoSetting] = useState({
@@ -82,9 +83,13 @@ export default function Crypto({ price, premiumId, isMonthly }: any) {
                 }
                 let result = await paymentStatus(data)
 
-                if (result.payment_status !== "waiting") {
+                // if (result.payment_status !== "waiting") {
+                if (result.payment_status === "waiting") {
+
+                    const accessToken = localStorage.getItem('accessToken');
+
                     let data = {
-                        profilesId: "65849f7fdafd57880710c9ab",
+                        profilesId: accessTokenDecode(accessToken),
                         price: price,
                         currentType: 1,
                         period: isMonthly === true ? 1 : 0,
@@ -181,9 +186,7 @@ export default function Crypto({ price, premiumId, isMonthly }: any) {
     }
 
     return (
-        <div
-            className="p-4 py-1"
-        >
+        <div className="p-4 py-1">
             <div className="flex justify-between items-center flex-wrap">
                 <div className="w-full md:w-1/3 p-1">
                     <div className="flex justify-start items-center">
@@ -192,7 +195,7 @@ export default function Crypto({ price, premiumId, isMonthly }: any) {
                         </div>
                         <div className="w-full h-[2px] bg-gray-600" style={{ width: "calc(100% - 54px)" }}></div>
                     </div>
-                    <p className="text-gray-300 font-bold text-[14px] my-2">Select the Crypto Which You Wanna Pay</p>
+                    <p className="text-gray-300 font-bold text-[14px] my-2">Select the Crypto you want</p>
                     <p className="text-gray-400 text-[12px]">Select the Crypto you wanna deposit</p>
                 </div>
 
@@ -287,10 +290,10 @@ export default function Crypto({ price, premiumId, isMonthly }: any) {
                                 onClick={() => deposit()}
                             >
                                 {cryptoSetting.depositeAddress !== "" ?
-                                    <p>
+                                    <div className='flex justify-start items-center'>
                                         <svg viewBox="0 0 1024 1024" focusable="false" data-icon="loading" width="2em" height="2em" fill="currentColor" aria-hidden="true" className='animate-spin'><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg>
-                                        Regenerating the Address
-                                    </p>
+                                        <p className='ml-2'>Regenerating the Address</p>
+                                    </div>
                                     :
                                     "Generating Address"
                                 }

@@ -34,7 +34,7 @@ const Report = () => {
     const dispatch = useDispatch();
     const MySwal = withReactContent(Swal);
 
-    const displayTab = ["Chart Comparison", "Gradient Heat", "Detailed Table", "Histogram", "Deviation"]
+    const displayTab = ["Chart Comparison", "Gradient Heat", "Detailed Table", "Histogram"]
 
     const [displayTabSelect, setDisplayTabSelect] = useState(0)
 
@@ -106,7 +106,7 @@ const Report = () => {
 
     const [mainDataFilter, setMainDataFilter] = useState({
         heroPosition: "UTG",
-        stackDepth: 10,
+        stackDepth: 10
     })
 
     const bufferSetPremiumStatus = (total: any) => {
@@ -370,6 +370,7 @@ const Report = () => {
                     searchApply={searchApply}
                     setFilter={(total: any) => setFilter(total)}
                     setUserTab={(order: any) => setUserTab(order)}
+                    setAdvancedOptionModal={(bool: boolean) => setAdvancedOptionModal(bool)}
                     interruptValueStatus={(type: string, value: number) => interruptValueStatus(type, value)}
                 />
             </div>
@@ -444,7 +445,6 @@ const Report = () => {
                                                             bufferSetReportItemActive={(item: any) => bufferSetReportItemActive(item)}
                                                         /> : undefined
                                                 }
-                                                {displayTabSelect === 4 ? <PreflopChart finalResult={reportingResult} /> : undefined}
                                             </div>
                                         </div>
                                         <div className='w-full lg:w-1/2 flex justify-between items-start'>
@@ -488,7 +488,6 @@ const Report = () => {
                                                         }
                                                     </div> : null
                                                 }
-                                                {displayTabSelect === 4 ? <PreflopChart finalResult={userInfoResult} /> : undefined}
                                             </div>
                                         </div>
                                     </div>

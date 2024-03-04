@@ -48,7 +48,9 @@ const Analyze = ({ nodeList, decideNode, activeNode, activeNodeNumber, activeNod
                 activeNode={(type: any, nodeNumber: any, order: any) => activeNode(type, nodeNumber, order)}
                 decideNode={(type: any, nodeNumber: any, order: any, position: any, chipAmount: any) => decideNode(type, nodeNumber, order, position, chipAmount)}
             />
+
             <div className="flex justify-between flex-wrap items-start transition-all mt-[12px]">
+
                 <div className="w-full lg:w-3/5 pr-0 lg:pr-1 transition-all">
                     {
                         activeNodeNumber !== -1 &&
@@ -62,6 +64,7 @@ const Analyze = ({ nodeList, decideNode, activeNode, activeNodeNumber, activeNod
                         />
                     }
                 </div>
+
                 <div className={clsx(toolData && toolData.userResult ? "w-full lg:w-2/5 pr-0 lg:pr-1 transition-all self-stretch" : "hidden")}>
                     <OverChartCrad
                         hands={hands}

@@ -32,7 +32,7 @@ const DefaultButtonGroup = ({ valueStatus, disableStatus, setDisableStatus, defa
                 let processHeroPosition = currentHeroPostion.filter((item: any) => availableHeroPostion.some((each: any) => each === item))
                 bufferTotal.heroPosition = processHeroPosition
 
-                if (processHeroPosition.length === 0 && currentHeroPostion .length !== 0 ) notification('This position is not available for that action', 'info')
+                if (processHeroPosition.length === 0 && currentHeroPostion.length !== 0) notification('This position is not available for that action', 'info')
 
                 bufferTotal.stackDepth = []
                 bufferTotal.VillianPosition = []
@@ -59,6 +59,7 @@ const DefaultButtonGroup = ({ valueStatus, disableStatus, setDisableStatus, defa
             customClass: { popup: `color-${color}` }
         });
     }
+
     return (
         <div className="relative flex justify-between flex-wrap items-start p-1 2xl:h-[203px] rounded-[8px] 2xl:rounded-tr-[0px]">
             <div className='absolute top-[10px] left-[2px] flex justify-center items-center flex-col'>

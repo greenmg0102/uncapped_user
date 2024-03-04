@@ -217,7 +217,7 @@ const Summary = ({ selectCard, active, hands }: any) => {
     }
 
     return (
-        <div className='flex flex-col mt-[15px]'>
+        <div className='flex flex-col mt-[3px]'>
             <div className='flex justify-start items-center bg-gray-900'>
                 <div className='mb-0 flex-grow-0 bg-gray-900 p-1 w-[70px] text-center text-gray-300 font-bold'>Hand</div>
                 <div className='mb-0 flex-grow-0 bg-gray-900 p-1 w-[100px] text-center text-gray-300 font-bold'>strategy</div>
@@ -227,7 +227,7 @@ const Summary = ({ selectCard, active, hands }: any) => {
                 <div className='mb-0 flex-grow-0 bg-gray-900 p-1 w-[55px] text-center text-gray-300 font-bold'>EQR %</div>
                 <div className='mb-0 flex-grow-1'></div>
             </div>
-            <div className='h-[465px] overflow-y-auto'>
+            <div className='h-[435px] overflow-y-auto'>
                 {playCardArray.map((item: any, index: any) =>
                     symbolPresent(item)
                 )}

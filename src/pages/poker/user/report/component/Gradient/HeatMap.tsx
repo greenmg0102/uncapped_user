@@ -6,18 +6,15 @@ import { playCardArray } from '../../../../../../utils/reference'
 import { pokerStreetOptionUser } from '../../../../../../utils/reference/playCardColor'
 import { getSubtruck, findMaxMin, dividing } from '../../../../../../utils/actionValidation/reporting/getGlobalFrequency'
 
-
 const HeatMap = ({ isGrid, userTab, userInfoResult, reportingResult, globalFre, setInterestingPair, bufferSetReportItemActive, reportItemActive }: any) => {
 
     const [nextObject, setNextObject] = useState<any>({})
 
     useEffect(() => {
-
         if (Object.keys(userInfoResult).length > 0 && Object.keys(globalFre).length > 0) {
             let dividedValue = dividing(globalFre, userInfoResult, pokerStreetOptionUser.find((item: any) => item.id === userTab).stage)
             setNextObject(dividedValue)
         }
-
     }, [globalFre, userInfoResult, userTab])
 
     return (

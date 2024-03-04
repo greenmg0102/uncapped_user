@@ -21,7 +21,7 @@ export default function ProPlanItem({ payway, price, pay, proPlan, isMonthly, fi
                         </label>
                         <span className={`${!isMonthly ? 'text-white-dark' : 'text-primary'}`}>Yearly(20% save)</span>
                     </div>
-                    <img src="/assets/images/pokerImage/premiumBadge256.png" alt="img" className="absolute top-[20px] right-0 w-32 h-32 rounded-full" />
+                    <img src="/assets/images/pokerImage/premiumBadge256.png" alt="img" className="absolute top-[20px] right-0 w-16 h-16 md:w-28 md:h-28 rounded-full transition-all" />
                 </div>
 
                 <div className="group mt-4">
@@ -39,9 +39,9 @@ export default function ProPlanItem({ payway, price, pay, proPlan, isMonthly, fi
                             )}
                         </div>
                     )}
-                    <div className="flex items-center justify-between mb-4 font-semibold">
+                    <div className={clsx(payway === 'Free' ? "hidden" : "flex items-center justify-between mb-4 font-semibold")}>
                         <p className="flex items-center rounded-full bg-dark px-2 py-1 text-xs text-white-light font-semibold">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="ltr:mr-1 rtl:ml-1">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none " xmlns="http://www.w3.org/2000/svg" className="ltr:mr-1 rtl:ml-1">
                                 <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
                                 <path d="M12 8V12L14.5 14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
@@ -49,12 +49,12 @@ export default function ProPlanItem({ payway, price, pay, proPlan, isMonthly, fi
                         </p>
                         <p className="text-info">$25 / month</p>
                     </div>
-                    <div className="rounded-full h-2.5 p-0.5 bg-dark-light overflow-hidden mb-5 dark:bg-dark-light/10">
+                    <div className={clsx(payway === 'Free' ? "hidden" : "rounded-full h-2.5 p-0.5 bg-dark-light overflow-hidden mb-5 dark:bg-dark-light/10")}>
                         <div className="bg-gradient-to-r from-[#f67062] to-[#fc5296] w-full h-full rounded-full relative" style={{ width: '65%' }}></div>
                     </div>
                 </div>
 
-                <div className="flex items-center justify-between mb-5">
+                <div className={clsx(payway === 'Free' ? "hidden" : "flex items-center justify-between mb-5")}>
                     <h5 className="font-semibold text-lg dark:text-white-light">{proPlan.title}</h5>
                     <button className="btn btn-primary">Renew Now</button>
                 </div>

@@ -63,6 +63,7 @@ const GameAnalyze = () => {
         const accessToken = localStorage.getItem('accessToken');
         const refreshToken = localStorage.getItem('refreshToken');
         if (accessToken === null && refreshToken === null) navigate('/auth/boxed-signin');
+        
     }, [])
 
     useEffect(() => {

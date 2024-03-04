@@ -38,7 +38,6 @@ const OverViewCrad = ({ setActive, active, activeNodeNumber, rangeOption, nodeLi
 
     }, [nodeList, bufferNodeList, activeNodeNumber]);
 
-
     return (
         <div>
             {Object.keys(totalHand).length > 0 ?
@@ -49,6 +48,7 @@ const OverViewCrad = ({ setActive, active, activeNodeNumber, rangeOption, nodeLi
                             className='cursor-pointer'
                             style={{ width: "7.692%", padding: "2px" }}
                         >
+
                             <OverViewCradItem
                                 data={item}
                                 active={active}
@@ -56,6 +56,7 @@ const OverViewCrad = ({ setActive, active, activeNodeNumber, rangeOption, nodeLi
                                 handResult={totalHand[item]}
                                 selectItem={(value: string) => setActive(value)}
                             />
+
                         </div>
                     )}
                 </div>
@@ -63,7 +64,6 @@ const OverViewCrad = ({ setActive, active, activeNodeNumber, rangeOption, nodeLi
                 null
             }
         </div>
-
     );
 };
 

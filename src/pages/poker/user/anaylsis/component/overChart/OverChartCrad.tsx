@@ -89,7 +89,7 @@ const OverChartCrad = ({ active, selectCard, toolData, hands, currentOption, nod
                         />
                     </Tab.Panel>
                     <Tab.Panel>
-                        <div className="flex justify-between items-center flex-wrap h-[510px]">
+                        <div className="flex justify-between items-center flex-wrap h-[465px]">
                             {Array(category).fill(0).map((item: any, index: any) =>
                                 <PlayCardStaticItem
                                     key={index}

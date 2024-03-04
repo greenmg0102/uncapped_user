@@ -39,13 +39,13 @@ export default function ProPlan({ proPlan }: any) {
                 <div className="rounded-full h-2.5 p-0.5 bg-dark-light overflow-hidden mb-5 dark:bg-dark-light/10">
                     <div className="bg-gradient-to-r from-[#f67062] to-[#fc5296] w-full h-full rounded-full relative" style={{ width: '65%' }}></div>
                 </div>
+
             </div>
         )
-
     } else {
         return (
-            <div>
-                Free
+            <div className="panel w-full md:w-1/2 h-[24em] flex justify-center items-center">
+                Loading ...
             </div>
         )
     }

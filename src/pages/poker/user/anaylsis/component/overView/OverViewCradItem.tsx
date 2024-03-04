@@ -31,9 +31,10 @@ const OverViewCradItem = ({ data, selectItem, active, handResult, rangeOption }:
                     handResult={handResult}
                     rangeOption={rangeOption}
                 />
+
             </div>
             <div
-                className={clsx("transition-all duration-[1500] overflow-hidden", active === data ? "absolute w-[14em] h-[11em] top-0 left-0 border border-white border-[2px] rounded-[4px] dark:bg-gray-900 bg-[green] dark:hover:border-red-500 hover:bg-gray-900 z-10" : "absolute w-0 h-0 z-10")}
+                className={clsx("transition-all duration-[1500] overflow-hidden", active === data ? "absolute w-[14em] h-[11em] top-0 left-0 border border-white border-[1px] rounded-[4px] dark:bg-gray-900 bg-[green] dark:hover:border-red-500 hover:bg-gray-900 z-10" : "absolute w-0 h-0 z-10")}
                 onClick={() => activeItem(data)}
             >
                 <p className="text-[2em] p-2 font-bold text-white">

@@ -5,11 +5,11 @@ export default function ColorBar({ handResult }: any) {
             {handResult.evs.length > 0 ?
                 <div>
                     <div className="flex justify-between items-center">
-                        <p className="w-1/3 text-[#7d1f1f]">Action</p>
-                        <p className="w-1/3 text-[#7d1f1f] font-bold text-center">
+                        <p className="w-1/3 text-[#ffffff]">Action</p>
+                        <p className="w-1/3 text-[#ffffff] font-bold text-center">
                             EVS
                         </p>
-                        <p className="w-1/3 text-[#7d1f1f] font-bold text-right">
+                        <p className="w-1/3 text-[#ffffff] font-bold text-right">
                             Played
                         </p>
                     </div>
