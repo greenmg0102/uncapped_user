@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { toggleRTL, toggleTheme, toggleSidebar } from '../../store/themeConfigSlice';
 import { accessTokenDecode, expireTimeDecode } from '../../utils/middlewareFunction/accessTokenDecode';
 import { profileGet } from '../../utils/functions/usage/profile/profile'
+import { notificationRead } from '../../utils/functions/user/notification'
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import Dropdown from '../Dropdown';
@@ -39,7 +40,7 @@ const Header = () => {
             }
             fetchData()
             setProfileAvailable(expireTimeDecode(accessToken))
-        }else setProfileAvailable(false)
+        } else setProfileAvailable(false)
 
 
     }, [])
@@ -70,67 +71,50 @@ const Header = () => {
     const themeConfig = useSelector((state: IRootState) => state.themeConfig);
     const dispatch = useDispatch();
 
-    function createMarkup(messages: any) {
-        return { __html: messages };
-    }
-    const [messages, setMessages] = useState([
-        {
-            id: 1,
-            image: '<span class="grid place-content-center w-9 h-9 rounded-full bg-success-light dark:bg-success text-success dark:text-success-light"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>',
-            title: 'Congratulations!',
-            message: 'Your OS has been updated.',
-            time: '1hr',
-        },
-        {
-            id: 2,
-            image: '<span class="grid place-content-center w-9 h-9 rounded-full bg-info-light dark:bg-info text-info dark:text-info-light"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span>',
-            title: 'Did you know?',
-            message: 'You can switch between artboards.',
-            time: '2hr',
-        },
-        {
-            id: 3,
-            image: '<span class="grid place-content-center w-9 h-9 rounded-full bg-danger-light dark:bg-danger text-danger dark:text-danger-light"> <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>',
-            title: 'Something went wrong!',
-            message: 'Send Reposrt',
-            time: '2days',
-        },
-        {
-            id: 4,
-            image: '<span class="grid place-content-center w-9 h-9 rounded-full bg-warning-light dark:bg-warning text-warning dark:text-warning-light"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round">    <circle cx="12" cy="12" r="10"></circle>    <line x1="12" y1="8" x2="12" y2="12"></line>    <line x1="12" y1="16" x2="12.01" y2="16"></line></svg></span>',
-            title: 'Warning',
-            message: 'Your password strength is low.',
-            time: '5days',
-        },
-    ]);
-
-    const removeMessage = (value: number) => {
-        setMessages(messages.filter((user) => user.id !== value));
-    };
-
     const [notifications, setNotifications] = useState([
-        {
-            id: 1,
-            profile: 'user-profile.jpeg',
-            message: '<strong class="text-sm mr-1">John Doe</strong>invite you to <strong>Prototyping</strong>',
-            time: '45 min ago',
-        },
-        {
-            id: 2,
-            profile: 'profile-34.jpeg',
-            message: '<strong class="text-sm mr-1">Adam Nolan</strong>mentioned you to <strong>UX Basics</strong>',
-            time: '9h Ago',
-        },
-        {
-            id: 3,
-            profile: 'profile-16.jpg',
-            message: '<strong class="text-sm mr-1">Anna Morgan</strong>Upload a file',
-            time: '9h Ago',
-        },
+        // {
+        //     id: 1,
+        //     profile: 'user-profile.jpeg',
+        //     message: '<strong class="text-sm mr-1">John Doe</strong>invite you to <strong>Prototyping</strong>',
+        //     time: '45 min ago',
+        // },
+        // {
+        //     id: 2,
+        //     profile: 'profile-34.jpeg',
+        //     message: '<strong class="text-sm mr-1">Adam Nolan</strong>mentioned you to <strong>UX Basics</strong>',
+        //     time: '9h Ago',
+        // },
+        // {
+        //     id: 3,
+        //     profile: 'profile-16.jpg',
+        //     message: '<strong class="text-sm mr-1">Anna Morgan</strong>Upload a file',
+        //     time: '9h Ago',
+        // },
     ]);
+
+    useEffect(() => {
+        async function fetchData() {
+            let result = await notificationRead({})
+            console.log('result', result);
+
+            let real: any = []
+
+            result.forEach((item: any, index: any) => {
+                real.push({
+                    id: index + 1,
+                    profile: 'profile-16.jpg',
+                    sender: `<strong">${item.sender}</strong>`,
+                    message: `<strong class="text-sm mr-1">${item.content}</strong>`,
+                    time: item.createdAt.slice(0, 10),
+                })
+            });
+            setNotifications(real)
+        }
+        fetchData()
+    }, [])
 
     const removeNotification = (value: number) => {
-        setNotifications(notifications.filter((user) => user.id !== value));
+        setNotifications(notifications.filter((user: any) => user.id !== value));
     };
 
     const setLocale = (flag: string) => {
@@ -141,15 +125,14 @@ const Header = () => {
             dispatch(toggleRTL('ltr'));
         }
     };
+
     const [flag, setFlag] = useState(themeConfig.locale);
 
     const { t } = useTranslation();
 
     const gotoPath = (path: any) => {
-
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
-
         navigate(path);
     }
 
@@ -210,111 +193,7 @@ const Header = () => {
                                 </ul>
                             </Dropdown>
                         </div>
-                        <div className="dropdown shrink-0">
-                            <Dropdown
-                                offset={[0, 8]}
-                                placement={`${isRtl ? 'bottom-start' : 'bottom-end'}`}
-                                btnClassName="block p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60"
-                                button={
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M22 10C22.0185 10.7271 22 11.0542 22 12C22 15.7712 22 17.6569 20.8284 18.8284C19.6569 20 17.7712 20 14 20H10C6.22876 20 4.34315 20 3.17157 18.8284C2 17.6569 2 15.7712 2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H13"
-                                            stroke="currentColor"
-                                            strokeWidth="1.5"
-                                            strokeLinecap="round"
-                                        />
-                                        <path
-                                            d="M6 8L8.1589 9.79908C9.99553 11.3296 10.9139 12.0949 12 12.0949C13.0861 12.0949 14.0045 11.3296 15.8411 9.79908"
-                                            stroke="currentColor"
-                                            strokeWidth="1.5"
-                                            strokeLinecap="round"
-                                        />
-                                        <circle cx="19" cy="5" r="3" stroke="currentColor" strokeWidth="1.5" />
-                                    </svg>
-                                }
-                            >
-                                <ul className="!py-0 text-dark dark:text-white-dark w-[300px] sm:w-[375px] text-xs">
-                                    <li className="mb-5" onClick={(e) => e.stopPropagation()}>
-                                        <div className="hover:!bg-transparent overflow-hidden relative rounded-t-md p-5 text-white w-full !h-[68px]">
-                                            <div
-                                                className="absolute h-full w-full bg-no-repeat bg-center bg-cover inset-0 bg-"
-                                                style={{
-                                                    backgroundImage: `url('/assets/images/menu-heade.jpg')`,
-                                                    backgroundRepeat: 'no-repeat',
-                                                    width: '100%',
-                                                    height: '100%',
-                                                }}
-                                            ></div>
-                                            <h4 className="font-semibold relative z-10 text-lg">Messages</h4>
-                                        </div>
-                                    </li>
-                                    {messages.length > 0 ? (
-                                        <>
-                                            <li onClick={(e) => e.stopPropagation()}>
-                                                {messages.map((message) => {
-                                                    return (
-                                                        <div key={message.id} className="flex items-center py-3 px-5">
-                                                            <div dangerouslySetInnerHTML={createMarkup(message.image)}></div>
-                                                            <span className="px-3 dark:text-gray-500">
-                                                                <div className="font-semibold text-sm dark:text-white-light/90">{message.title}</div>
-                                                                <div>{message.message}</div>
-                                                            </span>
-                                                            <span className="font-semibold bg-white-dark/20 rounded text-dark/60 px-1 ltr:ml-auto rtl:mr-auto whitespace-pre dark:text-white-dark ltr:mr-2 rtl:ml-2">
-                                                                {message.time}
-                                                            </span>
-                                                            <button type="button" className="text-neutral-300 hover:text-danger" onClick={() => removeMessage(message.id)}>
-                                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
-                                                                    <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                    );
-                                                })}
-                                            </li>
-                                            <li className="border-t border-white-light text-center dark:border-white/10 mt-5">
-                                                <button type="button" className="text-primary font-semibold group dark:text-gray-400 justify-center !py-4 !h-[48px]">
-                                                    <span className="group-hover:underline ltr:mr-1 rtl:ml-1">VIEW ALL ACTIVITIES</span>
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        className="w-4 h-4 group-hover:translate-x-1 transition duration-300 ltr:ml-1 rtl:mr-1"
-                                                        fill="none"
-                                                        viewBox="0 0 24 24"
-                                                        stroke="currentColor"
-                                                        strokeWidth="1.5"
-                                                    >
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                                    </svg>
-                                                </button>
-                                            </li>
-                                        </>
-                                    ) : (
-                                        <li className="mb-5" onClick={(e) => e.stopPropagation()}>
-                                            <button type="button" className="!grid place-content-center hover:!bg-transparent text-lg min-h-[200px]">
-                                                <div className="mx-auto ring-4 ring-primary/30 rounded-full mb-4 text-white">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="40"
-                                                        height="40"
-                                                        viewBox="0 0 24 24"
-                                                        fill="#a9abb6"
-                                                        strokeWidth="1.5"
-                                                        stroke="currentColor"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        className="feather feather-info bg-primary rounded-full"
-                                                    >
-                                                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                                                    </svg>
-                                                </div>
-                                                No data available.
-                                            </button>
-                                        </li>
-                                    )}
-                                </ul>
-                            </Dropdown>
-                        </div>
+
                         <div className="dropdown shrink-0">
                             <Dropdown
                                 offset={[0, 8]}
@@ -347,7 +226,7 @@ const Header = () => {
                                     </li>
                                     {notifications.length > 0 ? (
                                         <>
-                                            {notifications.map((notification) => {
+                                            {notifications.map((notification: any) => {
                                                 return (
                                                     <li key={notification.id} className="dark:text-white-light/90" onClick={(e) => e.stopPropagation()}>
                                                         <div className="group flex items-center px-4 py-2">
@@ -359,6 +238,11 @@ const Header = () => {
                                                             </div>
                                                             <div className="ltr:pl-3 rtl:pr-3 flex flex-auto">
                                                                 <div className="ltr:pr-3 rtl:pl-3">
+                                                                    <span
+                                                                        className="text-sm block font-normal dark:text-gray-400"
+                                                                        dangerouslySetInnerHTML={{
+                                                                            __html: notification.sender,
+                                                                        }} />
                                                                     <h6
                                                                         dangerouslySetInnerHTML={{
                                                                             __html: notification.message,
@@ -478,49 +362,6 @@ const Header = () => {
                                             Profile
                                         </Link>
                                     </li>
-                                    {/* <li>
-                                        <Link to="/apps/mailbox" className="dark:hover:text-white">
-                                            <svg className="ltr:mr-2 rtl:ml-2 shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    opacity="0.5"
-                                                    d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12C22 15.7712 22 17.6569 20.8284 18.8284C19.6569 20 17.7712 20 14 20H10C6.22876 20 4.34315 20 3.17157 18.8284C2 17.6569 2 15.7712 2 12Z"
-                                                    stroke="currentColor"
-                                                    strokeWidth="1.5"
-                                                />
-                                                <path
-                                                    d="M6 8L8.1589 9.79908C9.99553 11.3296 10.9139 12.0949 12 12.0949C13.0861 12.0949 14.0045 11.3296 15.8411 9.79908L18 8"
-                                                    stroke="currentColor"
-                                                    strokeWidth="1.5"
-                                                    strokeLinecap="round"
-                                                />
-                                            </svg>
-                                            Inbox
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/auth/boxed-lockscreen" className="dark:hover:text-white">
-                                            <svg className="ltr:mr-2 rtl:ml-2 shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M2 16C2 13.1716 2 11.7574 2.87868 10.8787C3.75736 10 5.17157 10 8 10H16C18.8284 10 20.2426 10 21.1213 10.8787C22 11.7574 22 13.1716 22 16C22 18.8284 22 20.2426 21.1213 21.1213C20.2426 22 18.8284 22 16 22H8C5.17157 22 3.75736 22 2.87868 21.1213C2 20.2426 2 18.8284 2 16Z"
-                                                    stroke="currentColor"
-                                                    strokeWidth="1.5"
-                                                />
-                                                <path opacity="0.5" d="M6 10V8C6 4.68629 8.68629 2 12 2C15.3137 2 18 4.68629 18 8V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                                                <g opacity="0.5">
-                                                    <path d="M9 16C9 16.5523 8.55228 17 8 17C7.44772 17 7 16.5523 7 16C7 15.4477 7.44772 15 8 15C8.55228 15 9 15.4477 9 16Z" fill="currentColor" />
-                                                    <path
-                                                        d="M13 16C13 16.5523 12.5523 17 12 17C11.4477 17 11 16.5523 11 16C11 15.4477 11.4477 15 12 15C12.5523 15 13 15.4477 13 16Z"
-                                                        fill="currentColor"
-                                                    />
-                                                    <path
-                                                        d="M17 16C17 16.5523 16.5523 17 16 17C15.4477 17 15 16.5523 15 16C15 15.4477 15.4477 15 16 15C16.5523 15 17 15.4477 17 16Z"
-                                                        fill="currentColor"
-                                                    />
-                                                </g>
-                                            </svg>
-                                            Lock Screen
-                                        </Link>
-                                    </li> */}
                                     <li className="border-t border-white-light dark:border-white-light/10">
                                         <div onClick={() => gotoPath("/auth/boxed-signin")} className="flex justify-start items-center text-danger cursor-pointer !py-3 px-4">
                                             <svg className="ltr:mr-2 rtl:ml-2 rotate-90 shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

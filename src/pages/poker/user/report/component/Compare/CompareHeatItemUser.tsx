@@ -9,7 +9,7 @@ export default function CompareHeatItemUser({ userTab, data, handResult, standar
         <div
             className={
                 clsx(
-                    "transition-all relative w-full h-[2.3em] lg:h-[36px] flex justify-center items-center rounded-[4px] bg-gray-900 dark:hover:bg-gray-800 hover:bg-gray-900 cursor-pointer transition-all",
+                    "transition-all relative w-full h-[2.3em] lg:h-[36px] border border-gray-700 flex justify-center items-center rounded-[3px] bg-gray-900 dark:hover:bg-gray-800 hover:bg-gray-900 cursor-pointer transition-all",
                     reportItemActive === data ? "border border-yellow-500 border-[2px]" : ""
                 )
             }
