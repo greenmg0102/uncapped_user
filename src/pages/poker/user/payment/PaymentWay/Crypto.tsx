@@ -6,7 +6,6 @@ import withReactContent from 'sweetalert2-react-content';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import clsx from 'clsx'
-// import { cryptoPayMessage } from '../../../../../utils/reference/payment'
 import { paymentStatus, getAPIStatus, payLogCreate, createPayment } from '../../../../../utils/payment/crypto'
 
 export default function Crypto({ price, premiumId, isMonthly }: any) {
@@ -15,7 +14,6 @@ export default function Crypto({ price, premiumId, isMonthly }: any) {
 
     const [availableCurrency, setAvailableCurrency] = useState([])
     const [regeneratingSecond, setRegeneratingSecond] = useState(300)
-    const [userProfileId, setUserProfileId] = useState(null)
     const [triedCount, setTriedCount] = useState(0)
 
     const [cryptoSetting, setCryptoSetting] = useState({

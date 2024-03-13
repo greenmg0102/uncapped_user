@@ -1,6 +1,11 @@
 import axios from "axios";
 import type { AxiosResponse } from "axios";
 
+
+export async function deleteHand(data: any): Promise<AxiosResponse> {
+    return await axios.post("hand-detail/deleteHand", data)
+}
+
 export async function getHands(data: any): Promise<AxiosResponse> {
     return await axios.post("hand-detail/getHands", data)
 }

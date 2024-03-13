@@ -1,7 +1,6 @@
 import { Fragment, useState, useEffect } from 'react';
 import { Tab } from '@headlessui/react';
 import ProPlanItem from './PaymentWay/ProPlanItem'
-
 import PaymentWay from './PaymentWay';
 import { premiumRead } from '../../../../utils/functions/admin/PremiumManaging/PremiumManaging'
 
@@ -67,12 +66,8 @@ export default function Payment() {
                 )}
             </Tab.List>
 
-            <div
-                className="active p-4 pt-5 border border-gray-900 rounded-[8px] flex justify-between items-start flex-wrap"
-            >
-                <div
-                    className='w-full xl:w-2/5 border-r-[0px] xl:border-r-[1px] border border-dashed border-primary border-t-0 border-b-0 border-l-0 pr-4 transition-all'
-                >
+            <div className="active p-4 pt-5 border border-gray-900 rounded-[8px] flex justify-between items-start flex-wrap">
+                <div className='w-full xl:w-2/5 border-r-[0px] xl:border-r-[1px] border border-dashed border-primary border-t-0 border-b-0 border-l-0 pr-4 transition-all'>
                     {tabOrder === "" ? null :
                         <ProPlanItem
                             price={price}
@@ -85,9 +80,7 @@ export default function Payment() {
                     }
                 </div>
                 {
-                    payway === 'Free' ?
-                        undefined
-                        :
+                    payway === 'Free' ? undefined :
                         <div className='w-full xl:w-3/5 pl-2 mt-4 xl:mt-0 transition-all'>
                             <PaymentWay
                                 price={price}
@@ -97,9 +90,7 @@ export default function Payment() {
                             />
                         </div>
                 }
-
             </div>
-
         </Tab.Group>
     )
 }

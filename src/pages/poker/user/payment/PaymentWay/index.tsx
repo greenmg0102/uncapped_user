@@ -39,6 +39,7 @@ export default function PaymentWay({ price, setPayway, isMonthly, premiumId }: a
                             <Classical
                                 premiumId={premiumId}
                                 price={price}
+                                isMonthly={isMonthly}
                                 setPayway={(way: any) => setPayway(way)}
                             />
                         </div>

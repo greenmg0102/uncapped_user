@@ -13,22 +13,22 @@ function App({ children }: PropsWithChildren) {
 
         axiosAuthMiddleware.initialize(); // Call the initialization function
 
-        // document.addEventListener('contextmenu', event => event.preventDefault());
-        // document.onkeydown = function (e: any) {
-        //     if (e.keyCode == 123) return false;
-        // };
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function (e: any) {
+            if (e.keyCode == 123) return false;
+        };
 
-        // const clearBrowserCache = () => {
-        //     if ('caches' in window) {
-        //         caches.keys().then((names) => {
-        //             names.forEach((name) => {
-        //                 caches.delete(name);
-        //             });
-        //         });
-        //     }
-        // }
+        const clearBrowserCache = () => {
+            if ('caches' in window) {
+                caches.keys().then((names) => {
+                    names.forEach((name) => {
+                        caches.delete(name);
+                    });
+                });
+            }
+        }
         
-        // clearBrowserCache()
+        clearBrowserCache()
 
     }, []);
 

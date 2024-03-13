@@ -19,6 +19,9 @@ const Filtering = ({ rowData, filter, setFilter, fetchMyAPI, dragModel, setDragM
             <AdvancedFilter
                 dragModel={dragModel}
                 setDragModel={(bool: any) => setDragModel(bool)}
+                pokerType={pokerType}
+                tableSize={tableSize}
+                heroPosition={heroPosition}
             />
             <div className="flex justify-between items-center flex-wrap mb-2 z-[3] block">
                 <div className="flex justify-center xl:justify-start items-center flex-wrap">
@@ -113,13 +116,7 @@ const Filtering = ({ rowData, filter, setFilter, fetchMyAPI, dragModel, setDragM
                             onChange={(range: any) => bufferRange(range)}
                         />
                     </div>
-                    {/* <button
-                        type="button"
-                        className="btn btn-outline-info mr-4 btn-sm"
-                        onClick={() => setDragModel(true)}
-                    >
-                        Advanced Filter
-                    </button> */}
+
                 </div>
                 <div className='flex justify-between xl:justify-start items-center'>
                     <button
@@ -127,6 +124,13 @@ const Filtering = ({ rowData, filter, setFilter, fetchMyAPI, dragModel, setDragM
                         onClick={fetchMyAPI}
                     >
                         Seach
+                    </button>
+                    <button
+                        type="button"
+                        className="btn btn-outline-danger mr-4 btn-sm ml-1"
+                        onClick={() => setDragModel(!dragModel)}
+                    >
+                        Bundle hands Delete
                     </button>
                 </div>
                 <Download rowData={rowData} />

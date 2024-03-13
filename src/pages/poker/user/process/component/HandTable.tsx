@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import clsx from 'clsx'
 import Filtering from './Filtering'
 import { setPageTitle } from '../../../../../store/themeConfigSlice';
-import { getHands } from '../../../../../utils/functions/HandAPI'
+import { getHands, deleteHand } from '../../../../../utils/functions/HandAPI'
 import SmallPlayCard from '../../../../../components/UI/playcard/SmallPlayCard';
 import { pokerMarkList } from '../../../../../utils/reference'
 import { toggleLoadingStatus } from "../../../../../store/utilConfigSlice"
@@ -50,18 +50,15 @@ const HandTable = () => {
 
     async function fetchMyAPI() {
         const accessToken = localStorage.getItem('accessToken');
-
         const data = {
             pageNumber: page,
             pageSize: pageSize,
             ...filter,
             userId: accessTokenDecode(accessToken)
         }
-
         dispatch(toggleLoadingStatus())
         const response = await getHands(data)
         dispatch(toggleLoadingStatus())
-
         setInitialRecords(() => response.data.hands)
         setTotalCount(response.data.totalCount)
     }
@@ -83,6 +80,23 @@ const HandTable = () => {
         else return ""
     };
 
+    const itemDelete = async (id: any) => {
+        console.log("itemDelete", id);
+        const accessToken = localStorage.getItem('accessToken');
+        const data = {
+            id: id,
+            pageNumber: page,
+            pageSize: pageSize,
+            ...filter,
+            userId: accessTokenDecode(accessToken)
+        }
+        dispatch(toggleLoadingStatus())
+        const response = await deleteHand(data)
+        dispatch(toggleLoadingStatus())
+        setInitialRecords(() => response.data.hands)
+        setTotalCount(response.data.totalCount)
+    }
+
     const holdCard = (holeCardInfo: { rank: string, suit: string }): any => <SmallPlayCard holeCardInfo={holeCardInfo} />
 
     const checkDetailInfo = (_id: any) => navigate("/user/poker/process/" + _id);
@@ -99,10 +113,6 @@ const HandTable = () => {
         "check": 'X',
         "all in, check": 'X',
     };
-
-    const facingPFAction = (list: any): any => {
-        return "FacingPFAction"
-    }
 
     return (
         <div className="panel">
@@ -162,24 +172,6 @@ const HandTable = () => {
                                 </div>
                             </strong>
                         },
-                        // {
-                        //     accessor: 'actions', title: 'Facing PF Action', sortable: true, render: ({ communityCards, actions }) => <strong className="text-info flex justify-center">
-                        //         <div className='flex justify-center items-center'>
-                        //             {communityCards.length === 0 ?
-                        //                 "UnOpened Pot"
-                        //                 :
-                        //                 facingPFAction(actions)
-                        //             }
-                        //         </div>
-                        //     </strong>
-                        // },
-                        // {
-                        //     accessor: 'communityCards', title: 'PF Action', sortable: true, render: ({ actions }) => <strong className="text-info flex justify-center">
-                        //         <div className='flex justify-center items-center'>
-                        //             {actions.filter((item: any) => item.playerName === "Hero").length > 0 ? actionSet[actions.filter((item: any) => item.playerName === "Hero").pop().action] : "Empty Hero"}
-                        //         </div>
-                        //     </strong>
-                        // },
                         {
                             accessor: 'actions', title: 'PF Act', render: ({ actions }) => <strong className="text-info flex justify-start">
                                 <div className='flex justify-center items-center'>
@@ -249,45 +241,17 @@ const HandTable = () => {
                                 </div>
                             </strong>
                         },
-                        // {
-                        //     accessor: 'actions', title: 'ACTIONS', render: ({ actions }) =>
-                        //         <strong className="text-info flex justify-start items-center">
-                        //             <div className={clsx(actions.findIndex((item: any) => item.street === "preFlop") !== -1 ? 'mr-1' : 'hidden')}>
-                        //                 <span className='text-white'>Preflop</span>
-                        //                 <div className='flex justify-center items-center'>
-                        //                     {actions.filter((item: any) => item.street === "preFlop").map((each: any, order: any) =>
-                        //                         <span key={order}>{actionSet[each.action]}</span>
-                        //                     )}
-                        //                 </div>
-                        //             </div>
-                        //             <div className={clsx(actions.findIndex((item: any) => item.street === "Flop") !== -1 ? 'mr-1' : 'hidden')}>
-                        //                 <span className='text-white'>Flop</span>
-                        //                 <div className='flex justify-center items-center'>
-                        //                     {actions.filter((item: any) => item.street === "Flop").map((each: any, order: any) =>
-                        //                         <span key={order}>{actionSet[each.action]}</span>
-                        //                     )}
-                        //                 </div>
-                        //             </div>
-                        //             <div className={clsx(actions.findIndex((item: any) => item.street === "Turn") !== -1 ? 'mr-1' : 'hidden')}>
-                        //                 <span className='text-white'>Turn</span>
-                        //                 <div className='flex justify-center items-center'>
-                        //                     {actions.filter((item: any) => item.street === "preFlop").map((each: any, order: any) =>
-                        //                         <span key={order}>{actionSet[each.action]}</span>
-                        //                     )}
-                        //                 </div>
-                        //             </div>
-                        //             <div className={clsx(actions.findIndex((item: any) => item.street === "River") !== -1 ? 'mr-1' : 'hidden')}>
-                        //                 <span className='text-white'>River</span>
-                        //                 <div className='flex justify-center items-center'>
-                        //                     {actions.filter((item: any) => item.street === "River").map((each: any, order: any) =>
-                        //                         <span key={order} className='text-white'>{actionSet[each.action]}</span>
-                        //                     )}
-                        //                 </div>
-                        //             </div>
-                        //         </strong>
-                        // },
                         { accessor: 'handDate', title: 'PLAYED DATE', sortable: true, render: ({ handDate }) => <strong className="text-info flex justify-center">{handDate}</strong> },
-                        // { accessor: 'date', title: 'UPLOADED DATE', sortable: true, render: ({ date }) => <strong className="text-info flex justify-center">{date.toString().slice(0, 10).split("-").join("/")}</strong> },
+                        {
+                            accessor: '_id', title: 'Action', sortable: true, render: ({ _id }) =>
+                                <button
+                                    type="button"
+                                    className="btn btn-outline-primary rounded-full"
+                                    onClick={() => itemDelete(_id)}
+                                >
+                                    Delet
+                                </button>
+                        },
                     ]}
                     totalRecords={totalCount}
                     recordsPerPage={pageSize}

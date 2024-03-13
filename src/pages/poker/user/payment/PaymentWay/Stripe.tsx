@@ -5,6 +5,7 @@ import type { Stripe } from '@stripe/stripe-js'
 export default function Stripe({ price, way, setPayway }: any) {
 
     async function handleCheckout() {
+        
         const stripe = await getStripe() as Stripe;
         const { error } = await stripe.redirectToCheckout({
             lineItems: [

@@ -4,30 +4,29 @@ import Stripe from "./Stripe"
 import MasterCard from "./MasterCard"
 import Visa from "./Visa"
 
-export default function Classical({ price, premiumId, setPayway }: any) {
+export default function Classical({ price, premiumId, isMonthly, setPayway }: any) {
 
     return (
-        <div
-            className="p-4 py-1"
-        >
-            <div
-                className="p-4 py-1 flex justify-start items-center flex-wrap content-start"
-            >
+        <div className="p-4 py-1">
+            <div className="p-4 py-1 flex justify-around items-center flex-wrap content-start">
                 <Paypal
                     way={premiumId}
                     price={price}
+                    isMonthly={isMonthly}
                     setPayway={(way: any) => setPayway(way)}
                 />
+
                 <Stripe
                     way={premiumId}
                     price={price}
                     setPayway={(way: any) => setPayway(way)}
                 />
-                <Payoneer
+
+                {/* <Payoneer
                     way={premiumId}
                     price={price}
                     setPayway={(way: any) => setPayway(way)}
-                />
+                /> */}
                 {/* <MasterCard
                     way={premiumId}
                     price={price}

@@ -27,7 +27,6 @@ const Header = () => {
 
     const [profileAvailable, setProfileAvailable] = useState(true)
 
-
     useEffect(() => {
 
         const accessToken = localStorage.getItem('accessToken');
@@ -41,7 +40,6 @@ const Header = () => {
             fetchData()
             setProfileAvailable(expireTimeDecode(accessToken))
         } else setProfileAvailable(false)
-
 
     }, [])
 
@@ -71,31 +69,11 @@ const Header = () => {
     const themeConfig = useSelector((state: IRootState) => state.themeConfig);
     const dispatch = useDispatch();
 
-    const [notifications, setNotifications] = useState([
-        // {
-        //     id: 1,
-        //     profile: 'user-profile.jpeg',
-        //     message: '<strong class="text-sm mr-1">John Doe</strong>invite you to <strong>Prototyping</strong>',
-        //     time: '45 min ago',
-        // },
-        // {
-        //     id: 2,
-        //     profile: 'profile-34.jpeg',
-        //     message: '<strong class="text-sm mr-1">Adam Nolan</strong>mentioned you to <strong>UX Basics</strong>',
-        //     time: '9h Ago',
-        // },
-        // {
-        //     id: 3,
-        //     profile: 'profile-16.jpg',
-        //     message: '<strong class="text-sm mr-1">Anna Morgan</strong>Upload a file',
-        //     time: '9h Ago',
-        // },
-    ]);
+    const [notifications, setNotifications] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
             let result = await notificationRead({})
-            console.log('result', result);
 
             let real: any = []
 
