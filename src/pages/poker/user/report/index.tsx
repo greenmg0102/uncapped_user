@@ -115,7 +115,7 @@ const Report = () => {
             MySwal.fire({
                 title: "Villian can't be large than hero!",
                 toast: true,
-                position: 'top',
+                position: 'top-end',
                 showConfirmButton: false,
                 timer: 2000,
                 showCloseButton: true,
@@ -126,7 +126,7 @@ const Report = () => {
             MySwal.fire({
                 title: "We limit the villian count as 2",
                 toast: true,
-                position: 'top',
+                position: 'top-end',
                 showConfirmButton: false,
                 timer: 2000,
                 showCloseButton: true,
@@ -497,7 +497,7 @@ const Report = () => {
                     </div>
                 </div>
 
-                <div className='w-full 2xl:w-[25%] p-1 pb-[43px] border border-gray-700 rounded-[8px] p-2 h-[540px] mt-4'>
+                <div className='w-full 2xl:w-[25%] p-1 border border-gray-700 rounded-[8px] p-2 mt-4'>
 
                     <UserDetailList
                         page={page}

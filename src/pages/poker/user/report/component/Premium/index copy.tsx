@@ -20,7 +20,7 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
             MySwal.fire({
                 title: "It can 't be same as Hero position and Villian position",
                 toast: true,
-                position: 'top',
+                position: 'top-end',
                 showConfirmButton: false,
                 timer: 3000,
                 showCloseButton: true,

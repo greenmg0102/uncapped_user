@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import CountUp from 'react-countup';
 import { NavLink } from 'react-router-dom';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 import { getInfo } from '../../../../utils/functions/user/landing/statistic'
 import { numberDisplaying, numberDacking } from '../../../../../src/utils/actionValidation/landing/numberDisplaying'
 
@@ -8,8 +10,8 @@ export default function Stastic() {
 
     const [totalStatistic, setTotalStatistic] = useState<any>({
         totalUser: 0,
-        totalHand: 0,
-        totalVisit: 0
+        totalVisit: 0,
+        totalHand: 0
     })
 
     useEffect(() => {
@@ -29,61 +31,67 @@ export default function Stastic() {
 
             setTotalStatistic({ ...totalStatistic, totalUser: result.totalUser, totalHand: result.totalHand, totalVisit: result.totalVisit })
         }
+
         fetchData()
     }, [])
 
     return (
         <div className='pb-5 mt-4 md:mt-0'>
             <div className='flex justify-between md:justify-around lg:justify-between items-center mt-1'>
-                <div className='flex justify-center items-center flex-col'>
-                    <svg
-                        viewBox="64 64 896 896"
-                        focusable="false"
-                        data-icon="user"
-                        width="1.6em"
-                        height="1.6em"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"></path>
-                    </svg>
-                    <p className='text-xl sm:text-xl text-center mt-2 text-primary'>
-                        <CountUp start={0} end={numberDisplaying(totalStatistic.totalUser)} duration={2} className="text-xl sm:text-xl text-center"></CountUp> {numberDacking(totalStatistic.totalUser)}
-                    </p>
-                </div>
-                <div className='flex justify-center items-center flex-col'>
-                    <svg
-                        viewBox="64 64 896 896"
-                        focusable="false"
-                        data-icon="property-safety"
-                        width="1.6em"
-                        height="1.6em"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path d="M866.9 169.9L527.1 54.1C523 52.7 517.5 52 512 52s-11 .7-15.1 2.1L157.1 169.9c-8.3 2.8-15.1 12.4-15.1 21.2v482.4c0 8.8 5.7 20.4 12.6 25.9L499.3 968c3.5 2.7 8 4.1 12.6 4.1s9.2-1.4 12.6-4.1l344.7-268.6c6.9-5.4 12.6-17 12.6-25.9V191.1c.2-8.8-6.6-18.3-14.9-21.2zM810 654.3L512 886.5 214 654.3V226.7l298-101.6 298 101.6v427.6zM430.5 318h-46c-1.7 0-3.3.4-4.8 1.2a10.1 10.1 0 00-4 13.6l88 161.1h-45.2c-5.5 0-10 4.5-10 10v21.3c0 5.5 4.5 10 10 10h63.1v29.7h-63.1c-5.5 0-10 4.5-10 10v21.3c0 5.5 4.5 10 10 10h63.1V658c0 5.5 4.5 10 10 10h41.3c5.5 0 10-4.5 10-10v-51.8h63.4c5.5 0 10-4.5 10-10v-21.3c0-5.5-4.5-10-10-10h-63.4v-29.7h63.4c5.5 0 10-4.5 10-10v-21.3c0-5.5-4.5-10-10-10h-45.7l87.7-161.1a10.05 10.05 0 00-8.8-14.8h-45c-3.8 0-7.2 2.1-8.9 5.5l-73.2 144.3-72.9-144.3c-1.7-3.4-5.2-5.5-9-5.5z"></path>
-                    </svg>
-                    <p className='text-xl sm:text-xl text-center mt-2 text-primary'>
-                        <CountUp start={0} end={numberDisplaying(totalStatistic.totalVisit)} duration={1.5} className="text-primary text-xl sm:text-xl text-center"></CountUp> {numberDacking(totalStatistic.totalVisit)}
-                    </p>
-                </div>
-
-                <div className='flex justify-center items-center flex-col'>
-                    <svg
-                        viewBox="64 64 896 896"
-                        focusable="false"
-                        data-icon="database"
-                        width="1.6em"
-                        height="1.6em"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path d="M832 64H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V96c0-17.7-14.3-32-32-32zm-600 72h560v208H232V136zm560 480H232V408h560v208zm0 272H232V680h560v208zM304 240a40 40 0 1080 0 40 40 0 10-80 0zm0 272a40 40 0 1080 0 40 40 0 10-80 0zm0 272a40 40 0 1080 0 40 40 0 10-80 0z"></path>
-                    </svg>
-                    <p className='text-xl sm:text-xl text-center mt-2 text-primary'>
-                        <CountUp start={0} end={numberDisplaying(totalStatistic.totalHand)} duration={3} className="text-primary text-xl sm:text-xl text-center"></CountUp> {numberDacking(totalStatistic.totalHand)}
-                    </p>
-                </div>
+                <Tippy content="Total users count">
+                    <div className='flex justify-center items-center flex-col cursor-pointer'>
+                        <svg
+                            viewBox="64 64 896 896"
+                            focusable="false"
+                            data-icon="user"
+                            width="1.6em"
+                            height="1.6em"
+                            fill="currentColor"
+                            aria-hidden="true"
+                        >
+                            <path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"></path>
+                        </svg>
+                        <p className='text-xl sm:text-xl text-center mt-2 text-primary'>
+                            <CountUp start={0} end={totalStatistic.totalUser} duration={2} className="text-xl sm:text-xl text-center"></CountUp> {numberDacking(totalStatistic.totalUser)}
+                        </p>
+                    </div>
+                </Tippy>
+                <Tippy content="Total visiting count">
+                    <div className='flex justify-center items-center flex-col cursor-pointer'>
+                        <svg
+                            viewBox="64 64 896 896"
+                            focusable="false"
+                            data-icon="property-safety"
+                            width="1.6em"
+                            height="1.6em"
+                            fill="currentColor"
+                            aria-hidden="true"
+                        >
+                            <path d="M866.9 169.9L527.1 54.1C523 52.7 517.5 52 512 52s-11 .7-15.1 2.1L157.1 169.9c-8.3 2.8-15.1 12.4-15.1 21.2v482.4c0 8.8 5.7 20.4 12.6 25.9L499.3 968c3.5 2.7 8 4.1 12.6 4.1s9.2-1.4 12.6-4.1l344.7-268.6c6.9-5.4 12.6-17 12.6-25.9V191.1c.2-8.8-6.6-18.3-14.9-21.2zM810 654.3L512 886.5 214 654.3V226.7l298-101.6 298 101.6v427.6zM430.5 318h-46c-1.7 0-3.3.4-4.8 1.2a10.1 10.1 0 00-4 13.6l88 161.1h-45.2c-5.5 0-10 4.5-10 10v21.3c0 5.5 4.5 10 10 10h63.1v29.7h-63.1c-5.5 0-10 4.5-10 10v21.3c0 5.5 4.5 10 10 10h63.1V658c0 5.5 4.5 10 10 10h41.3c5.5 0 10-4.5 10-10v-51.8h63.4c5.5 0 10-4.5 10-10v-21.3c0-5.5-4.5-10-10-10h-63.4v-29.7h63.4c5.5 0 10-4.5 10-10v-21.3c0-5.5-4.5-10-10-10h-45.7l87.7-161.1a10.05 10.05 0 00-8.8-14.8h-45c-3.8 0-7.2 2.1-8.9 5.5l-73.2 144.3-72.9-144.3c-1.7-3.4-5.2-5.5-9-5.5z"></path>
+                        </svg>
+                        <p className='text-xl sm:text-xl text-center mt-2 text-primary'>
+                            <CountUp start={0} end={totalStatistic.totalVisit} duration={1.5} className="text-primary text-xl sm:text-xl text-center"></CountUp> {numberDacking(totalStatistic.totalVisit)}
+                        </p>
+                    </div>
+                </Tippy>
+                <Tippy content="Total hands count">
+                    <div className='flex justify-center items-center flex-col cursor-pointer'>
+                        <svg
+                            viewBox="64 64 896 896"
+                            focusable="false"
+                            data-icon="database"
+                            width="1.6em"
+                            height="1.6em"
+                            fill="currentColor"
+                            aria-hidden="true"
+                        >
+                            <path d="M832 64H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V96c0-17.7-14.3-32-32-32zm-600 72h560v208H232V136zm560 480H232V408h560v208zm0 272H232V680h560v208zM304 240a40 40 0 1080 0 40 40 0 10-80 0zm0 272a40 40 0 1080 0 40 40 0 10-80 0zm0 272a40 40 0 1080 0 40 40 0 10-80 0z"></path>
+                        </svg>
+                        <p className='text-xl sm:text-xl text-center mt-2 text-primary'>
+                            <CountUp start={0} end={numberDisplaying(totalStatistic.totalHand)} duration={3} className="text-primary text-xl sm:text-xl text-center"></CountUp> {numberDacking(totalStatistic.totalHand)}
+                        </p>
+                    </div>
+                </Tippy>
             </div>
 
             <div className='block sm:flex sm:justify-between lg:block'>

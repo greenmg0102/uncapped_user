@@ -9,7 +9,7 @@ const GradientUserItem = ({ nextObject, userTab, data, subValue, standard, repor
     return (
         <div
             className={clsx("relative rounded-[2px] h-[36px] cursor-pointer transition-all opacity-[1]")}
-            style={{ backgroundColor: findNearestColor(Math.abs((1 - reportingResultItem.played[0]) - nextObject)) }}
+            style={{ backgroundColor: handResult === undefined ? findNearestColor(0) : findNearestColor(Math.abs((1 - reportingResultItem.played[0]) - nextObject)) }}
             onClick={() => {
                 bufferSetReportItemActive(data)
                 setInterestingPair(actionNodeDistinguish(handResult, userTab) ? actionNodeDistinguish(handResult, userTab) : [])

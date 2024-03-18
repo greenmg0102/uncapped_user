@@ -39,7 +39,7 @@ export default function UserDetailList({ userResultList, page, pageSize, activeU
   const holdCard = (holeCardInfo: { rank: string, suit: string }): any => <ChipPlayCard holeCardInfo={holeCardInfo} />
 
   return (
-    <div className='relative w-[full] 2xl:h-[530px]'>
+    <div className='relative w-full'>
       {
         Object.keys(activeNodeData).length > 0 ?
           <HandRawData
@@ -119,7 +119,7 @@ export default function UserDetailList({ userResultList, page, pageSize, activeU
             <p className='text-[20px] mt-4'>There is no hands.</p>
           </div>
           :
-          <div className="overflow-y-auto cursor-pointer h-[420px]">
+          <div className="overflow-y-auto cursor-pointer py-0">
             {
               userResultList &&
               userResultList.result &&

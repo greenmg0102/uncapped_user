@@ -2,10 +2,11 @@ import Dropdown from '../../../../../components/Dropdown';
 import Flatpickr from 'react-flatpickr';
 import Download from './Download'
 import AdvancedFilter from './AdvancedFilter'
+import clsx from 'clsx'
 import { pokerType, tableSize, heroPosition } from '../../../../../utils/reference/uploadingFilter'
 import 'flatpickr/dist/flatpickr.css';
 
-const Filtering = ({ rowData, filter, setFilter, fetchMyAPI, dragModel, setDragModel }: any) => {
+const Filtering = ({ pageSize, page, rowData, filter, setFilter, dragModel, setDragModel, setInitialRecords, setTotalCount }: any) => {
 
     const bufferRange = (range: any) => {
         const startDate = new Date(Date.parse(range[0]));
@@ -20,10 +21,21 @@ const Filtering = ({ rowData, filter, setFilter, fetchMyAPI, dragModel, setDragM
                 dragModel={dragModel}
                 setDragModel={(bool: any) => setDragModel(bool)}
                 pokerType={pokerType}
+                pageSize={pageSize}
+                page={page}
                 tableSize={tableSize}
                 heroPosition={heroPosition}
+                setInitialRecords={(hands: any) => setInitialRecords(hands)}
+                setTotalCount={(totalCount: any) => setInitialRecords(totalCount)}
             />
-            <div className="flex justify-between items-center flex-wrap mb-2 z-[3] block">
+            <div
+                className={
+                    clsx(
+                        "transition-all",
+                        dragModel ? " overflow-hidden h-[0px]" : "flex justify-between items-center flex-wrap mb-2 z-[3] block"
+                    )
+                }
+            >
                 <div className="flex justify-center xl:justify-start items-center flex-wrap">
                     <div className='flex justify-start items-center my-[4px] mr-4'>
                         <p className='mb-0 mr-[8px] text-[14px] w-[75px]'>Poker Type</p>
@@ -116,24 +128,17 @@ const Filtering = ({ rowData, filter, setFilter, fetchMyAPI, dragModel, setDragM
                             onChange={(range: any) => bufferRange(range)}
                         />
                     </div>
-
                 </div>
                 <div className='flex justify-between xl:justify-start items-center'>
                     <button
-                        type="button" className="btn btn-outline-success btn-sm w-[100px]"
-                        onClick={fetchMyAPI}
-                    >
-                        Seach
-                    </button>
-                    <button
                         type="button"
-                        className="btn btn-outline-danger mr-4 btn-sm ml-1"
+                        className="btn btn-outline-danger btn-sm ml-1 mb-2 mr-4"
                         onClick={() => setDragModel(!dragModel)}
                     >
-                        Bundle hands Delete
+                        Purge Hands
                     </button>
+                    <Download rowData={rowData} />
                 </div>
-                <Download rowData={rowData} />
             </div >
         </div>
     );

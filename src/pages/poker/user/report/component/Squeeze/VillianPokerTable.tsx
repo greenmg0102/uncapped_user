@@ -11,7 +11,7 @@ export default function VillianPokerTable({ villianPokerTable, premiumStatus, se
             MySwal.fire({
                 title: "Villian can't be large or same than hero!",
                 toast: true,
-                position: 'top',
+                position: 'top-end',
                 showConfirmButton: false,
                 timer: 2000,
                 showCloseButton: true,
@@ -23,7 +23,7 @@ export default function VillianPokerTable({ villianPokerTable, premiumStatus, se
             MySwal.fire({
                 title: "Villian can't be large than hero!",
                 toast: true,
-                position: 'top',
+                position: 'top-end',
                 showConfirmButton: false,
                 timer: 2000,
                 showCloseButton: true,

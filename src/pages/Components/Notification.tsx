@@ -51,7 +51,7 @@ const Notification = () => {
         MySwal.fire({
             title: 'Example notification text.',
             toast: true,
-            position: 'top',
+            position: 'top-end',
             showConfirmButton: false,
             timer: 3000,
             showCloseButton: true,
@@ -323,7 +323,7 @@ const MySwal = withReactContent(Swal);
         MySwal.fire({
             title: 'Example notification text.',
             toast: true,
-            position: 'top',
+            position: 'top-end',
             showConfirmButton: false,
             timer: 3000,
             showCloseButton: true,

@@ -47,6 +47,17 @@ export default function Crypto({ price, premiumId, isMonthly }: any) {
         setAvailableCurrency([])
         const apiKey = "8K6XVN8-8W44DYN-N5BTE8W-BF5K3N1"
         async function fetchData() {
+            MySwal.fire({
+                title: 'Generating the available crypto',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                showCloseButton: true,
+                customClass: {
+                    popup: 'color-info',
+                },
+            });
             let apiStatus = await getAPIStatus(apiKey)
             if (typeof apiStatus !== "string") {
                 let result = apiStatus.filter((item: any) => item.min_amount < price && item.max_amount > price)
@@ -153,6 +164,19 @@ export default function Crypto({ price, premiumId, isMonthly }: any) {
                 price_amount: price,
                 pay_currency: cryptoSetting.crypto,
             }
+
+            MySwal.fire({
+                title: 'Please wait for generating the address',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                showCloseButton: true,
+                customClass: {
+                    popup: 'color-info',
+                },
+            });
+
             let result = await createPayment(data)
 
             setCryptoSetting({ ...cryptoSetting, paymentId: result.payment_id, depositeAddress: result.pay_address })

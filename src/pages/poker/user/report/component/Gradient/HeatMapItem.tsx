@@ -3,11 +3,12 @@ import { actionNodeDistinguish } from '../../../../../../utils/system/actionNode
 import clsx from 'clsx'
 
 const HeatMapItem = ({ nextObject, userTab, data, reportingResultItem, handResult, setInterestingPair, bufferSetReportItemActive, reportItemActive }: any) => {
+
     return (
         <div
             className={clsx("relative h-[36px] z-[1] cursor-pointer transition-all", reportItemActive === data ? "rounded-[4px]" : "rounded-[0px]")}
             style={{
-                backgroundColor: findNearestColor(Math.abs((1 - reportingResultItem.played[0]) - nextObject)),
+                backgroundColor: handResult === undefined ? findNearestColor(0) : findNearestColor(Math.abs((1 - reportingResultItem.played[0]) - nextObject)),
                 filter: reportItemActive === data ? `blur(${0}px)` : `blur(${25}px)`
             }}
             onClick={() => {

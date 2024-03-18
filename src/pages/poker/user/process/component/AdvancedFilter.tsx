@@ -1,13 +1,67 @@
+import { useState, useEffect, Fragment } from 'react';
+import Dropdown from '../../../../../components/Dropdown';
+import { useDispatch } from 'react-redux';
+import Flatpickr from 'react-flatpickr';
+import { Dialog, Transition } from '@headlessui/react';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { Button, Modal, Space } from 'antd';
+import { accessTokenDecode } from '../../../../../utils/middlewareFunction/accessTokenDecode'
 import clsx from 'clsx'
+import { bundleDeleteHand } from '../../../../../utils/functions/HandAPI'
+import 'flatpickr/dist/flatpickr.css';
+import { toggleLoadingStatus } from "../../../../../store/utilConfigSlice"
 
-export default function AdvancedFilter({ dragModel, setDragModel, pokerType, tableSize, heroPosition }: any) {
+export default function AdvancedFilter({ pageSize, page, dragModel, setDragModel, pokerType, tableSize, heroPosition, setInitialRecords, setTotalCount }: any) {
+
+    const dispatch = useDispatch();
+
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 1);
+    const nextDay = currentDate.toISOString().split('T')[0];
+
+    const [filter, setFilter] = useState({
+        pokerType: "N/A",
+        tableSize: "N/A",
+        heroPosition: "N/A",
+        range: `2023-11-30 to ${nextDay}`,
+        newRange: `2023-11-30 to ${nextDay}`
+    })
+
+    const [modal2, setModal2] = useState(false);
+
+    const bufferRange = (range: any) => {
+        const startDate = new Date(Date.parse(range[0]));
+        const endDate = new Date(Date.parse(range[1]));
+        const formattedRange = `${startDate.toISOString().split('T')[0]} to ${endDate.toISOString().split('T')[0]}`;
+        setFilter({ ...filter, range: formattedRange });
+    }
+
+    const bundleDelete = async () => {
+
+        setModal2(false)
+
+        const accessToken = localStorage.getItem('accessToken');
+        const data = {
+            pageNumber: page,
+            pageSize: pageSize,
+            ...filter,
+            userId: accessTokenDecode(accessToken)
+        }
+        dispatch(toggleLoadingStatus())
+        let result: any = await bundleDeleteHand(data)
+        dispatch(toggleLoadingStatus())
+        setInitialRecords(() => result.hands)
+        setTotalCount(result.totalCount)
+    }
+
+
 
     return (
         <div
             className={
                 clsx(
-                    "relative w-full transition-all overflow-hidden",
-                    dragModel ? "border border-dashed border-primary rounded-[12px] rounded-br-[4px] rounded-bl-[4px] p-2 pt-4" : "h-[0px]"
+                    "relative w-full transition-all",
+                    dragModel ? "border border-dashed border-primary rounded-[12px] rounded-br-[4px] rounded-bl-[4px] p-2 pt-4" : " overflow-hidden h-[0px]"
                 )
             }
         >
@@ -17,13 +71,169 @@ export default function AdvancedFilter({ dragModel, setDragModel, pokerType, tab
                 </svg>
             </div>
             <p className='text-center text-[20px] font-bold'>Bundle hands Deleting Option</p>
-            <div className='flex justify-end mt-2'>
-                <button
-                    type="button"
-                    className="btn btn-outline-danger btn-sm"
-                >
-                    Bundle hands Delete
-                </button>
+
+            <div className='flex justify-between mt-2'>
+                <div className='flex justify-start items-center'>
+
+                    <div className='flex justify-start items-center my-[4px] mr-4'>
+                        <p className='mb-0 mr-[8px] text-[14px] w-[75px]'>Poker Type</p>
+                        <div className="inline-flex">
+                            <button className="btn btn-outline-primary ltr:rounded-r-none rtl:rounded-l-none btn-sm">{filter.pokerType}</button>
+                            <div className="dropdown">
+                                <Dropdown
+                                    placement='bottom-end'
+                                    btnClassName="btn  btn-sm btn-outline-primary ltr:rounded-l-none rtl:rounded-r-none dropdown-toggle before:border-[5px] before:border-l-transparent before:border-r-transparent before:border-t-inherit before:border-b-0 before:inline-block hover:before:border-t-white-light h-full"
+                                    button={<span className="sr-only"></span>}
+                                >
+                                    <ul className="!min-w-[170px]">
+                                        {pokerType.map((item: any, index: any) =>
+                                            <li key={index}>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setFilter({ ...filter, pokerType: item.value })}
+                                                >
+                                                    {item.title}
+                                                </button>
+                                            </li>
+                                        )}
+                                    </ul>
+                                </Dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='flex justify-start items-center my-[4px] mr-4'>
+                        <p className='mb-0 mr-[8px] text-[14px] w-[65px]'>Table Size</p>
+                        <div className="inline-flex">
+                            <button className="btn btn-outline-primary ltr:rounded-r-none rtl:rounded-l-none btn-sm">{filter.tableSize}</button>
+                            <div className="dropdown">
+                                <Dropdown
+                                    placement='bottom-end'
+                                    btnClassName="btn  btn-sm btn-outline-primary ltr:rounded-l-none rtl:rounded-r-none dropdown-toggle before:border-[5px] before:border-l-transparent before:border-r-transparent before:border-t-inherit before:border-b-0 before:inline-block hover:before:border-t-white-light h-full"
+                                    button={<span className="sr-only"></span>}
+                                >
+                                    <ul className="!min-w-[170px]">
+                                        {tableSize.map((item: any, index: any) =>
+                                            <li key={index}>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setFilter({ ...filter, tableSize: item.value })}
+                                                >
+                                                    {item.title}
+                                                </button>
+                                            </li>
+                                        )}
+                                    </ul>
+                                </Dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='flex justify-start items-center my-[4px] mr-4'>
+                        <p className='mb-0 mr-[8px] text-[14px] w-[85px]'>Hero Position</p>
+                        <div className="inline-flex">
+                            <button className="btn btn-outline-primary ltr:rounded-r-none rtl:rounded-l-none btn-sm">{filter.heroPosition}</button>
+                            <div className="dropdown">
+                                <Dropdown
+                                    placement='bottom-end'
+                                    btnClassName="btn  btn-sm btn-outline-primary ltr:rounded-l-none rtl:rounded-r-none dropdown-toggle before:border-[5px] before:border-l-transparent before:border-r-transparent before:border-t-inherit before:border-b-0 before:inline-block hover:before:border-t-white-light h-full"
+                                    button={<span className="sr-only"></span>}
+                                >
+                                    <ul className="!min-w-[170px]">
+                                        {heroPosition.map((item: any, index: any) =>
+                                            <li key={index}>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setFilter({ ...filter, heroPosition: item.value })}
+                                                >
+                                                    {item.title}
+                                                </button>
+                                            </li>
+                                        )}
+                                    </ul>
+                                </Dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='flex justify-start items-center my-[4px] mr-4'>
+                        <p className='mb-0 mr-[4x] text-[14px] w-[40px]'>Date</p>
+                        <Flatpickr
+                            options={{
+                                mode: 'range',
+                                dateFormat: 'Y-m-d',
+                                position: 'auto left',
+                            }}
+                            value={filter.range}
+                            className="form-input !border-primary !w-[190px] !py-[5px] !pb-[2px] !px-[4px]"
+                            onChange={(range: any) => bufferRange(range)}
+                        />
+                    </div>
+                </div>
+                <div className='flex'>
+                    <button
+                        type="button"
+                        className="btn btn-outline-success btn-sm ml-1"
+                        onClick={() => setDragModel(false)}
+                    >
+                        S e a r c h
+                    </button>
+                    <button
+                        type="button"
+                        className="btn btn-outline-danger ml-4 btn-sm"
+                        onClick={() => setModal2(true)}
+                    >
+                        Purge Hands
+                    </button>
+
+                    <Transition appear show={modal2} as={Fragment}>
+                        <Dialog as="div" open={modal2} onClose={() => setModal2(false)}>
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0"
+                                enterTo="opacity-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100"
+                                leaveTo="opacity-0"
+                            >
+                                <div className="fixed inset-0" />
+                            </Transition.Child>
+                            <div className="fixed inset-0 bg-[black]/60 z-[999] overflow-y-auto">
+                                <div className="flex items-center justify-center min-h-screen px-4">
+                                    <Transition.Child
+                                        as={Fragment}
+                                        enter="ease-out duration-300"
+                                        enterFrom="opacity-0 scale-95"
+                                        enterTo="opacity-100 scale-100"
+                                        leave="ease-in duration-200"
+                                        leaveFrom="opacity-100 scale-100"
+                                        leaveTo="opacity-0 scale-95"
+                                    >
+                                        <Dialog.Panel as="div" className="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8 text-black dark:text-white-dark">
+                                            <div className="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
+                                                <h5 className="font-bold text-lg">Do you wanna really purge hands?  </h5>
+                                                <button type="button" className="text-white-dark hover:text-dark" onClick={() => setModal2(false)}>
+                                                </button>
+                                            </div>
+                                            <div className="p-5">
+                                                <p>
+                                                    Purge function removes selected hands from your database, do you wish to continue?
+                                                </p>
+                                                <div className="flex justify-end items-center mt-8">
+                                                    <button type="button" className="btn btn-outline-danger" onClick={() => setModal2(false)}>
+                                                        Cancel
+                                                    </button>
+                                                    <button type="button" className="btn btn-primary ltr:ml-4 rtl:mr-4" onClick={() => bundleDelete()}>
+                                                        Purge hands
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </Dialog.Panel>
+                                    </Transition.Child>
+                                </div>
+                            </div>
+                        </Dialog>
+                    </Transition>
+
+                </div>
             </div>
         </div>
     )

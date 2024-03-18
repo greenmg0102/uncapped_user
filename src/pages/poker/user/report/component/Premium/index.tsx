@@ -41,7 +41,7 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
         MySwal.fire({
             title: message,
             toast: true,
-            position: 'top',
+            position: 'top-end',
             showConfirmButton: false,
             timer: 2000,
             showCloseButton: true,

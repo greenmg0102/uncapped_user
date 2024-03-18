@@ -47,7 +47,7 @@ const FileUploadPreview = () => {
             MySwal.fire({
                 title: `You cannot select more than ${availableCount}`,
                 toast: true,
-                position: 'top',
+                position: 'top-end',
                 showConfirmButton: false,
                 timer: 3000,
                 showCloseButton: true,
@@ -133,7 +133,7 @@ const FileUploadPreview = () => {
             MySwal.fire({
                 title: `The type of the ${name} file is not correct.`,
                 toast: true,
-                position: 'top',
+                position: 'top-end',
                 showConfirmButton: false,
                 timer: 3000,
                 showCloseButton: true,

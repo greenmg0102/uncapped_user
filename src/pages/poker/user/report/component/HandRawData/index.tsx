@@ -29,7 +29,7 @@ export default function HandRawData({ handRawData, activeNodeData, setHandRawDat
                 MySwal.fire({
                     title: 'The Hand was copied.',
                     toast: true,
-                    position: 'top',
+                    position: 'top-end',
                     showConfirmButton: false,
                     timer: 3000,
                     showCloseButton: true,

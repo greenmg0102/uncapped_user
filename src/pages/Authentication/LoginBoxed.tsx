@@ -6,10 +6,13 @@ import { setPageTitle, toggleRTL } from '../../store/themeConfigSlice';
 import Dropdown from '../../components/Dropdown';
 import { join } from '../../utils/functions/auth/join'
 import i18next from 'i18next';
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
 
 const LoginBoxed = () => {
 
     const dispatch = useDispatch();
+    const MySwal = withReactContent(Swal);
 
     useEffect(() => {
         dispatch(setPageTitle('Login Boxed'));
@@ -26,13 +29,10 @@ const LoginBoxed = () => {
         password: ""
     })
 
-
     const setLocale = (flag: string) => {
         setFlag(flag);
         if (flag.toLowerCase() === 'ae') dispatch(toggleRTL('rtl'));
         else dispatch(toggleRTL('ltr'));
-
-
     };
 
     const submitForm = async () => {
@@ -40,6 +40,16 @@ const LoginBoxed = () => {
             let result = await join(credential)
             if (result.result) {
                 navigate(result.redirectUrl)
+            }else{
+                MySwal.fire({
+                    title: result.message,
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    showCloseButton: true,
+                    customClass: { popup: "color-error" }
+                });
             }
         } else {
 

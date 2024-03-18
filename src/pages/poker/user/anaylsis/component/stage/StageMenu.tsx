@@ -33,7 +33,7 @@ const StageMenu = ({ stageStatus, bettingList, setStageStatus, reset }: any) => 
         MySwal.fire({
             title: message,
             toast: true,
-            position: 'top',
+            position: 'top-end',
             showConfirmButton: false,
             timer: 3000,
             showCloseButton: true,

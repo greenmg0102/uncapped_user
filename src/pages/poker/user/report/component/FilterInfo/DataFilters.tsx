@@ -70,7 +70,7 @@ export default function DataFilters({ pokerType, filter, tableSize, valueStatus,
                             position: 'auto left',
                         }}
                         value={filter.range}
-                        className="form-input form-input-sm !border-primary !w-[150px] !px-1 !py-[5px]"
+                        className="form-input form-input-sm !border-primary !w-[170px] !px-1 !py-[5px]"
                         onChange={(range: any) => bufferRange(range)}
                     />
                 </div>

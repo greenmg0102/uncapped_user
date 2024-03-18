@@ -6,7 +6,7 @@ export default function UserPersonal({ userInfo }: any) {
         <div className="panel">
             <div className="flex items-center justify-between mb-5">
                 <h5 className="font-semibold text-lg dark:text-white-light">Profile</h5>
-                <Link to="/users/user-account-settings" className="ltr:ml-auto rtl:mr-auto btn btn-primary p-2 rounded-full">
+                {/* <Link to="/users/user-account-settings" className="ltr:ml-auto rtl:mr-auto btn btn-primary p-2 rounded-full">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
                         <path opacity="0.5" d="M4 22H20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                         <path
@@ -21,7 +21,7 @@ export default function UserPersonal({ userInfo }: any) {
                             strokeWidth="1.5"
                         />
                     </svg>
-                </Link>
+                </Link> */}
             </div>
             <div className="mb-5">
                 <div className="flex flex-col justify-center items-center">

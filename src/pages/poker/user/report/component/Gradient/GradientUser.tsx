@@ -19,18 +19,9 @@ const GradientUser = ({ userTab, userInfoResult, globalFre, reportingResult, set
         if (Object.keys(userInfoResult).length > 0 && Object.keys(globalFre).length > 0) {
             let dividedValue = dividing(globalFre, userInfoResult, pokerStreetOptionUser.find((item: any) => item.id === userTab).stage)
             setNextObject(dividedValue)
-            // let calculatedValue = findMaxMin(dividedValue, userInfoResult)
         }
 
     }, [globalFre, userInfoResult, userTab])
-
-    // const minium = (global: any, current: any): any => {
-    //     let max = standard.max
-    //     let min = standard.min
-    //     if (getSubtruck(global, current) > max) setStandard({ ...standard, max: getSubtruck(global, current) })
-    //     if (getSubtruck(global, current) < min) setStandard({ ...standard, min: getSubtruck(global, current) })
-    //     return getSubtruck(global, current)
-    // }
 
     return (
         <div>

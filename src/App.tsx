@@ -13,22 +13,21 @@ function App({ children }: PropsWithChildren) {
 
         axiosAuthMiddleware.initialize(); // Call the initialization function
 
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.onkeydown = function (e: any) {
-            if (e.keyCode == 123) return false;
-        };
+        // document.addEventListener('contextmenu', event => event.preventDefault());
+        // document.onkeydown = function (e: any) {
+        //     if (e.keyCode == 123) return false;
+        // };
 
-        const clearBrowserCache = () => {
-            if ('caches' in window) {
-                caches.keys().then((names) => {
-                    names.forEach((name) => {
-                        caches.delete(name);
-                    });
-                });
-            }
-        }
-        
-        clearBrowserCache()
+        // const clearBrowserCache = () => {
+        //     if ('caches' in window) {
+        //         caches.keys().then((names) => {
+        //             names.forEach((name) => {
+        //                 caches.delete(name);
+        //             });
+        //         });
+        //     }
+        // }
+        // clearBrowserCache()
 
     }, []);
 
@@ -44,7 +43,7 @@ function App({ children }: PropsWithChildren) {
         dispatch(toggleNavbar(localStorage.getItem('navbar') || themeConfig.navbar));
         dispatch(toggleLocale(localStorage.getItem('i18nextLng') || themeConfig.locale));
         dispatch(toggleSemidark(localStorage.getItem('semidark') || themeConfig.semidark));
-    
+
     }, [dispatch, themeConfig.theme, themeConfig.menu, themeConfig.layout, themeConfig.rtlClass, themeConfig.animation, themeConfig.navbar, themeConfig.locale, themeConfig.semidark]);
 
     return (

@@ -241,9 +241,9 @@ const Sidebar = () => {
                                                 <li>
                                                     <NavLink to="/users/profile">{t('Profile')}</NavLink>
                                                 </li>
-                                                <li>
+                                                {/* <li>
                                                     <NavLink to="/users/user-account-settings">{t('Account_settings')}</NavLink>
-                                                </li>
+                                                </li> */}
                                             </ul>
                                         </AnimateHeight>
                                     </li>

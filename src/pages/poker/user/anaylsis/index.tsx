@@ -163,7 +163,7 @@ const GameAnalyze = () => {
         MySwal.fire({
             title: 'There is no action.',
             toast: true,
-            position: 'top',
+            position: 'top-end',
             showConfirmButton: false,
             timer: 3000,
             showCloseButton: true

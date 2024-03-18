@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
+import clsx from 'clsx'
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -45,10 +46,17 @@ const NewsItem = () => {
                             <SwiperSlide key={i}>
                                 <img
                                     src={item.image}
-                                    className="w-full h-[350px] object-cover bg-green-900 rounded-[8px] opacity-[0.5]"
+                                    className={
+                                        clsx(
+                                            "w-full h-[350px] object-cover bg-green-900 rounded-[8px] transition-all",
+                                            blogList.length > 0 ? "opacity-[0.5]"
+                                                :
+                                                "opacity-[1]"
+                                        )
+                                    }
                                     alt="itemImage"
                                     style={{
-                                        background: "linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0))"
+                                        // background: "linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0))"
                                     }}
                                 />
                             </SwiperSlide>

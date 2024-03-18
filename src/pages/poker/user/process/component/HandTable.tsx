@@ -81,7 +81,6 @@ const HandTable = () => {
     };
 
     const itemDelete = async (id: any) => {
-        console.log("itemDelete", id);
         const accessToken = localStorage.getItem('accessToken');
         const data = {
             id: id,
@@ -117,12 +116,15 @@ const HandTable = () => {
     return (
         <div className="panel">
             <Filtering
+                page={page}
                 filter={filter}
                 rowData={rowData}
+                pageSize={pageSize}
                 dragModel={dragModel}
-                fetchMyAPI={() => fetchMyAPI()}
                 setFilter={(total: any) => setFilter(total)}
                 setDragModel={(bool: any) => setDragModel(bool)}
+                setInitialRecords={(hands: any) => setInitialRecords(hands)}
+                setTotalCount={(totalCount: any) => setInitialRecords(totalCount)}
             />
 
             <div className="datatables">
@@ -249,7 +251,7 @@ const HandTable = () => {
                                     className="btn btn-outline-primary rounded-full"
                                     onClick={() => itemDelete(_id)}
                                 >
-                                    Delet
+                                    Delete
                                 </button>
                         },
                     ]}
