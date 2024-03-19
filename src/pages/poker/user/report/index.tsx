@@ -313,17 +313,17 @@ const Report = () => {
 
         async function fetchMyAPI() {
             const detailedTableGetData: any = { ...valueStatus, ...filter }
-            if (
-                detailedTableGetData.action !== "" &&
-                detailedTableGetData.pokerType !== "N/A" &&
-                detailedTableGetData.tableSize !== -1 &&
-                detailedTableGetData.heroPosition.length !== 0 &&
-                detailedTableGetData.stackDepth.length !== 0 &&
-                detailedTableGetData.range !== undefined
-            ) {
+            // if (
+            //     detailedTableGetData.action !== "" &&
+            //     detailedTableGetData.pokerType !== "N/A" &&
+            //     detailedTableGetData.tableSize !== -1 &&
+            //     detailedTableGetData.heroPosition.length !== 0 &&
+            //     detailedTableGetData.stackDepth.length !== 0 &&
+            //     detailedTableGetData.range !== undefined
+            // ) {
                 const detailResult = await detailedTableGet(detailedTableGetData)
                 setDetailedTable(detailResult)
-            }
+            // }
         }
         fetchMyAPI()
     }, [valueStatus, filter])

@@ -12,6 +12,7 @@ import UploadUI from './component/UploadUI';
 import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import clsx from 'clsx';
+import { uploadingStatus, totalHands, passedTime, fileStatusAccept, completedStatus, rejectedStatus } from "../../../../store/uploadingStatusSlice"
 
 const FileUploadPreview = () => {
 
@@ -56,11 +57,28 @@ const FileUploadPreview = () => {
                 },
             });
         } else {
+
+            const intervalId = setInterval(myFunction, 1000);
+
+            function myFunction() {
+
+                dispatch(passedTime())
+
+                if (totalCount === rejectedCount + completedAmonut && totalCount !== 0) {
+                    clearInterval(intervalId);
+                }
+            }
+
             setTotalCount(files.length);
+            dispatch(totalHands(files.length))
 
             for (let i = 0; i < files.length; i++) {
                 const fileItem = files[i];
                 setFileStatus({ ...fileStatus, filename: fileItem.name, fileSize: fileItem.size })
+                dispatch(fileStatusAccept({
+                    filename: fileItem.name,
+                    fileSize: fileItem.size,
+                }))
                 if (fileItem.type.startsWith("text/")) {
                     const readerText = new FileReader();
                     readerText.onload = (event: any) => {
@@ -77,6 +95,9 @@ const FileUploadPreview = () => {
 
                 let result;
                 result = await handleStreamFile(fileItem);
+
+                dispatch(uploadingStatus(i))
+
                 if (result !== 200) {
                     let currentValidationError = validationError;
                     currentValidationError.push({
@@ -88,8 +109,11 @@ const FileUploadPreview = () => {
 
                     setValidationError(currentValidationError);
                     setRejectedCount(prerejectedCount => prerejectedCount + 1);
+                    dispatch(rejectedStatus(files.length - i))
+
                 } else {
                     setCompletedAmonut(prevCompletedAmount => prevCompletedAmount + 1); // Update using the previous state
+                    dispatch(completedStatus(files.length - i))
                 }
             }
         }
@@ -104,6 +128,7 @@ const FileUploadPreview = () => {
                 reader.onloadend = async (event: any) => {
                     const file = event.target.result;
                     const result = await handleFileUpload(file);
+
                     resolve(result);
                 };
             } else {
@@ -113,7 +138,7 @@ const FileUploadPreview = () => {
     }
 
     const handleFileUpload = async (file: any) => {
-        const url = 'https://api.uncappedtheory.com/api/v1/data-stream/data';
+        const url = 'http://localhost:8000/api/v1/data-stream/data';
         const options = {
             method: 'post',
             body: file,
@@ -123,7 +148,9 @@ const FileUploadPreview = () => {
             },
             responseType: 'json',
         };
+
         const response = await fetch(url, options);
+
         return response.status;
     }
 

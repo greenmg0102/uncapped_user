@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import clsx from 'clsx'
 import { IRootState } from '../../store';
 import { useNavigate } from 'react-router-dom';
 import { toggleRTL, toggleTheme, toggleSidebar } from '../../store/themeConfigSlice';
@@ -15,6 +16,12 @@ const Header = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const loadingStatus = useSelector((state: IRootState) => state.uploadingStatusSlice.current);
+    const totalHand = useSelector((state: IRootState) => state.uploadingStatusSlice.total);
+    const passedTime = useSelector((state: IRootState) => state.uploadingStatusSlice.passedTime);
+    const fileStatus = useSelector((state: IRootState) => state.uploadingStatusSlice.fileData);
+    const complete = useSelector((state: IRootState) => state.uploadingStatusSlice.complete);
+    const rejected = useSelector((state: IRootState) => state.uploadingStatusSlice.rejected);
 
     const [userInfo, setUserInfo] = useState({
         firstName: '',
@@ -63,6 +70,24 @@ const Header = () => {
             }
         }
     }, [location]);
+
+
+    function displayTime(seconds: any) {
+        if (seconds < 59) {
+            seconds++;
+            return `${seconds} seconds`;
+        } else if (seconds > 59 && seconds < 3600) {
+            let minutes = Math.floor(seconds / 60);
+            let remainingSeconds = seconds % 60;
+            return `${minutes} minutes ${remainingSeconds} seconds`;
+        } else {
+            let hours = Math.floor(seconds / 3600);
+            let remainingMinutes = Math.floor((seconds % 3600) / 60);
+            let remainingSeconds = seconds % 60;
+            return `${hours} hour ${remainingMinutes} minutes ${remainingSeconds} seconds`;
+        }
+    }
+
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
 
@@ -141,6 +166,53 @@ const Header = () => {
 
                     </div>
                     <div className="sm: ltr:sm:ml-0 ltr:ml-auto sm:rtl:mr-0 rtl:mr-auto flex items-center space-x-1.5 lg:space-x-2 rtl:space-x-reverse dark:text-[#d0d2d6]">
+
+                        <div className="dropdown shrink-0">
+                            <Dropdown
+                                offset={[0, 8]}
+                                placement={`${isRtl ? 'bottom-start' : 'bottom-end'}`}
+                                btnClassName="block bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60 rounded-[4px]"
+                                button={
+                                    <div className={clsx(totalHand === 0 ? "hidden" : "flex justify-center items-end cursor-pointer bg-dark/40 py-2 px-2 rounded-[4px] border border-green-800")}>
+                                        <p className='text-red-400 text-[18px]'>{(loadingStatus === 0 ? 0 : loadingStatus * 100 / totalHand).toFixed(0)} <span className='text-[12px] text-gray-400'> %</span></p>
+                                        <div className='flex justify-center items-end px-2'>
+                                            <p className='text0-center text-gray-200 text-[14px] mb-0'>{totalHand} / </p>
+                                            <p className='text0-center text-gray-300 text-[10px] mb-0'>{loadingStatus}</p>
+                                        </div>
+                                        <p className='text-green-400'>{displayTime(passedTime)}</p>
+                                    </div>
+                                }
+                            >
+                                <div className='border border-green-800 w-[280px] mt-12 p-2 bg-gray-900'>
+                                    {/* <div className="w-full h-1.5 bg-[#ebedf2] dark:bg-dark/40 rounded-full flex">
+                                        <div
+                                            className="bg-warning h-1.5 rounded-full rounded-bl-full text-center text-white text-xs transition-all"
+                                            style={{ width: `calc(${(complete) * (100 / (totalHand - rejected))}%)` }}
+                                        ></div>
+                                    </div>
+                                    <p className='text-center mt-2'>Active Upload</p>
+                                    <div className='flex justify-between items-center'>
+                                        <p className='text-gray-400 text-[12px]'>Total Files</p>
+                                        <p className='text-gray-400 text-[12px]'>{totalHand}</p>
+                                    </div>
+                                    <div className='flex justify-between items-center'>
+                                        <p className='text-gray-400 text-[12px]'>Completed Files</p>
+                                        <p className='text-gray-400 text-[12px]'>{complete}</p>
+                                    </div>
+                                    <div className='flex justify-between items-center'>
+                                        <p className='text-gray-400 text-[12px]'>Rejected Files</p>
+                                        <p className='text-gray-400 text-[12px]'>{rejected}</p>
+                                    </div> */}
+                                    <p className='text-center mt-2'>Upload Status</p>
+                                    <div className='flex justify-between items-center'>
+                                        <p className='text-gray-300 mt-2 mb-1'>File Size</p>
+                                        <p className='text-gray-400 text-[12px]'>{fileStatus.fileSize} KBytes</p>
+                                    </div>
+                                    <p className='text-gray-300 mt-2 mb-1'>File Name</p>
+                                    <p className='text-gray-400 text-[12px]'>{fileStatus.filename}</p>
+                                </div>
+                            </Dropdown>
+                        </div>
 
                         <div className="dropdown shrink-0">
                             <Dropdown
@@ -361,7 +433,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-        </header>
+        </header >
     );
 };
 
