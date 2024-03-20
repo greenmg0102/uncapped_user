@@ -5,10 +5,11 @@ import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
 import { heroPositionValidation } from '../../../../../../utils/reference/heroPositionValidation'
 import { hero8Site, stackArray, villianPokerTable } from '../../../../../../utils/reference/playCardColor'
+import { defaultReportSetting } from '../../../../../../utils/reference/reporting'
 import 'tippy.js/dist/tippy.css';
 import Squeeze from '../Squeeze'
 
-export default function Premium({ advancedOptionModal, setAdvancedOptionModal, actionPoint, arrayPoint, premiumStatus, valueStatus, setPremiumStatus, defaultReportSetting }: any) {
+export default function Premium({ advancedOptionModal, setAdvancedOptionModal, actionPoint, setValueStatus, arrayPoint, premiumStatus, valueStatus, setPremiumStatus, defaultReportSetting }: any) {
 
     const MySwal = withReactContent(Swal);
     const [squeezeModal, setSqueezeModal] = useState(false)
@@ -16,20 +17,59 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
     const bufferAction = (title: any) => {
         let realValueStatus = { action: title, heroPosition: [], stackDepth: [], VillianPosition: [] }
         actionPoint(realValueStatus)
-        setPremiumStatus({ ...premiumStatus, action: title, heroPosition: undefined, stackDepth: undefined, VillianPosition: [] })
+        setPremiumStatus({ ...premiumStatus, action: title, heroPosition: [], stackDepth: [], VillianPosition: [] })
     }
 
     const bufferPosition = (index: any) => {
-
         let availableHeroPostion = heroPositionValidation[valueStatus.action]
 
         if (availableHeroPostion.some((item: any) => item === hero8Site[index]) === true) {
+            let currentAction = valueStatus.action
+            if (valueStatus.heroPosition.some((currentHero: any) => currentHero === hero8Site[index])) {
+                let real = valueStatus.heroPosition.filter((currentHero: any) => currentHero !== hero8Site[index])
 
-            arrayPoint("heroPosition", [hero8Site[index]])
-            setPremiumStatus({ ...premiumStatus, heroPosition: index, stackDepth: undefined })
+                let realValueStatus = { action: currentAction, heroPosition: real, stackDepth: [], VillianPosition: [] }
+                actionPoint(realValueStatus)
+                setPremiumStatus({ ...premiumStatus, action: currentAction, heroPosition: real, stackDepth: [], VillianPosition: [] })
 
+            } else {
+
+                let currentHeroPosition = valueStatus.heroPosition
+                let real = [...currentHeroPosition, hero8Site[index]]
+
+                let isMatch = checkMatch(defaultReportSetting.heroPosition, real);
+
+                if (isMatch) {
+                    let realValueStatus = { action: currentAction, heroPosition: real, stackDepth: [], VillianPosition: [] }
+                    actionPoint(realValueStatus)
+                    setPremiumStatus({ ...premiumStatus, action: currentAction, heroPosition: real, stackDepth: [], VillianPosition: [] })
+                } else {
+                    notification('Range has been exceeded', 'info')
+                }
+            }
         } else notification(`That position is not allow in ${valueStatus.action} `, 'error')
+    }
 
+    const bufferStack = (index: any) => {
+        if (valueStatus.stackDepth.some((currentStack: any) => currentStack === index)) {
+            let real = valueStatus.stackDepth.filter((currentStack: any) => currentStack !== index)
+            arrayPoint("stackDepth", real)
+            setPremiumStatus({ ...premiumStatus, stackDepth: real })
+        } else {
+
+            let currentStack = valueStatus.stackDepth
+            let real = [...currentStack, index]
+
+            let isMatch = stackMatch(defaultReportSetting.stackDepth, real);
+
+            if (isMatch) {
+                arrayPoint("stackDepth", real)
+                setPremiumStatus({ ...premiumStatus, stackDepth: real })
+            } else {
+                notification('Range has been exceeded', 'info')
+            }
+
+        }
     }
 
     const bufferVillian = (position: any) => {
@@ -47,6 +87,44 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
             showCloseButton: true,
             customClass: { popup: `color-${color}` }
         });
+    }
+
+    function checkMatch(heroPosition: any, randomArray: any) {
+        for (let i = 0; i < heroPosition.length; i++) {
+            const position = heroPosition[i];
+            const stringList = position.stringList;
+            let match = true;
+
+            for (let j = 0; j < randomArray.length; j++) {
+                if (!stringList.includes(randomArray[j])) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function stackMatch(stackDepthList: any, randomArray: any) {
+        for (let i = 0; i < stackDepthList.length; i++) {
+            const position = stackDepthList[i];
+            const valueList = position.valueList;
+            let match = true;
+
+            for (let j = 0; j < randomArray.length; j++) {
+                if (!valueList.includes(randomArray[j] === 40 ? 398750 : randomArray[j])) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                return true;
+            }
+        }
+        return false;
     }
 
     return (
@@ -122,7 +200,7 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
                         <div className={
                             clsx(
                                 'flex justify-between items-center flex-wrap rounded-[4px]',
-                                premiumStatus.heroPosition === undefined && premiumStatus.action !== "" ? "border border-dashed" : "text-gray-600"
+                                premiumStatus.heroPosition.length === 0 && premiumStatus.action !== "" ? "border border-dashed" : "text-gray-600"
                             )}
                         >
                             {Object.keys(hero8Site).map((key: any, index: any) =>
@@ -131,7 +209,7 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
                                         className={clsx("mb-[3px] w-1/2 p-[1px] transition-all cursor-pointer")}
                                     >
                                         <div
-                                            className={clsx('p-[4px] 2xl:p-[6px] rounded-[4px] transition-all', premiumStatus.heroPosition === index ? "bg-blue-500 text-gray-100" : "bg-gray-800")}
+                                            className={clsx('p-[4px] 2xl:p-[6px] rounded-[4px] transition-all', premiumStatus.heroPosition.includes(hero8Site[index]) ? "bg-blue-500 text-gray-100" : "bg-gray-800")}
                                             onClick={() => bufferPosition(index)}
                                         >
                                             <p className='text-center'>{hero8Site[key]}</p>
@@ -155,18 +233,15 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
                         <div className={
                             clsx(
                                 'flex justify-between items-center flex-wrap rounded-[4px]',
-                                premiumStatus.stackDepth === undefined && premiumStatus.heroPosition !== undefined ? "border border-dashed" : "text-gray-600"
+                                premiumStatus.stackDepth.length === 0 && premiumStatus.heroPosition !== undefined ? "border border-dashed" : "text-gray-600"
                             )}
                         >
                             {stackArray.map((item: any) =>
                                 <Tippy key={item} content={item}>
                                     <div className={clsx("mb-[3px] w-1/2 p-[1px] transition-all cursor-pointer")}>
                                         <div
-                                            className={clsx('p-[0.5px] 2xl:p-[2px] rounded-[4px] transition-all', premiumStatus.stackDepth === item ? "bg-gray-500 text-gray-100" : " bg-gray-800")}
-                                            onClick={() => {
-                                                arrayPoint("stackDepth", [item])
-                                                setPremiumStatus({ ...premiumStatus, stackDepth: item })
-                                            }}
+                                            className={clsx('p-[0.5px] 2xl:p-[2px] rounded-[4px] transition-all', premiumStatus.stackDepth.includes(item) ? "bg-gray-500 text-gray-100" : " bg-gray-800")}
+                                            onClick={() => bufferStack(item)}
                                         >
                                             <p className='text-center'>{item === 398750 ? 40 : item} bb</p>
                                         </div>
@@ -224,6 +299,7 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
                 setPremiumStatus={(total: any) => setPremiumStatus(total)}
                 setSqueezeModal={(bool: boolean) => setSqueezeModal(bool)}
                 actionPoint={(premiumAction: any) => bufferAction(premiumAction)}
+                setValueStatus={(total: any) => setValueStatus(total)}
                 arrayPoint={(type: any, premiumArry: any) => arrayPoint(type, premiumArry)}
                 notification={(message: any, color: any) => notification(message, color)}
             />

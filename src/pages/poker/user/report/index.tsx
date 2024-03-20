@@ -59,8 +59,8 @@ const Report = () => {
     })
 
     const [premiumStatus, setPremiumStatus] = useState({
-        heroPosition: undefined,
-        stackDepth: undefined,
+        heroPosition: [],
+        stackDepth: [],
         VillianPosition: [],
         action: ""
     })
@@ -149,7 +149,6 @@ const Report = () => {
     }
 
     const interruptValueStatus = (type: string, value: number) => {
-
         let real = valueStatus[type as keyof typeof valueStatus] as number[];
         let bufferList: number[] = []
 
@@ -159,14 +158,12 @@ const Report = () => {
     }
 
     const searchApply = async () => {
-
         const data = { ...valueStatus, ...filter }
         const response = await reportIntegration(data)
         setUserInfoResult(response.userData)
     }
 
     const bufferCurrentHand = async (handType: any) => {
-
         const data = {
             actionType: actionType,
             handType: handType,
@@ -176,7 +173,6 @@ const Report = () => {
             pageSize: pageSize,
             ...filter
         }
-
         const response = await handPair(data)
         setUserResultList(response)
     }
@@ -286,7 +282,6 @@ const Report = () => {
             ...mainDataFilter,
             ...filter,
         }
-
         if (
             filter.pokerType !== "N/A" &&
             filter.tableSize !== -1 &&
@@ -321,8 +316,8 @@ const Report = () => {
             //     detailedTableGetData.stackDepth.length !== 0 &&
             //     detailedTableGetData.range !== undefined
             // ) {
-                const detailResult = await detailedTableGet(detailedTableGetData)
-                setDetailedTable(detailResult)
+            const detailResult = await detailedTableGet(detailedTableGetData)
+            setDetailedTable(detailResult)
             // }
         }
         fetchMyAPI()
@@ -357,6 +352,7 @@ const Report = () => {
                         setPremiumStatus={(total: any) => bufferSetPremiumStatus(total)}
                         setAdvancedOptionModal={(bool: boolean) => setAdvancedOptionModal(bool)}
                         actionPoint={(premiumAction: any) => setValueStatus({ ...valueStatus, ...premiumAction })}
+                        setValueStatus={(total: any) => setValueStatus(total)}
                         arrayPoint={(type: any, premiumArry: any) => setValueStatus({ ...valueStatus, [type]: premiumArry })}
                     />
                 </div>

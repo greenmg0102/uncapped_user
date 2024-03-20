@@ -58,7 +58,7 @@ export default function VillianPokerTable({ villianPokerTable, premiumStatus, se
                         onClick={() => bufferVillian(item.postion)}
                     >
                         <p className="text-center text-[12px]">{item.title}</p>
-                        <p className={clsx(premiumStatus.stackDepth !== undefined ? "text-center" : "opacity-0")} >{premiumStatus.stackDepth}</p>
+                        {/* <p className={clsx(premiumStatus.stackDepth !== undefined ? "text-center" : "opacity-0")} >{premiumStatus.stackDepth}</p> */}
                     </div>
                 )}
             </div>
