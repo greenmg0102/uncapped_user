@@ -71,7 +71,7 @@ const Report = () => {
 
     const [detailedTable, setDetailedTable] = useState([])
 
-    const [userTab, setUserTab] = useState(0)
+    const [userTab, setUserTab] = useState(1)
 
     const [reportItemActive, setReportItemActive] = useState("")
 
@@ -332,6 +332,7 @@ const Report = () => {
         fetchMyAPI()
     }, [])
 
+
     return (
         <div>
             <div className='relative flex justify-between items-center flex-wrap w-full 2xl:h-[205px]'>
@@ -362,6 +363,7 @@ const Report = () => {
                     valueStatus={valueStatus}
                     pokerTypeCount={pokerTypeCount}
                     userInfoResult={userInfoResult}
+                    reportingResult={reportingResult}
                     defaultReportSetting={defaultReportSetting}
                     searchApply={searchApply}
                     setFilter={(total: any) => setFilter(total)}

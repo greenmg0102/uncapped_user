@@ -1,15 +1,27 @@
 import clsx from 'clsx'
 import { findNearestColor } from '../../../../../..//utils/actionValidation/reporting/getGlobalFrequency'
 import { actionNodeDistinguish } from '../../../../../../utils/system/actionNodeDistinguish'
+import { pokerStreetOptionUser } from '../../../../../../utils/reference/playCardColor'
 
 const GradientUserItem = ({ nextObject, userTab, data, subValue, standard, reportingResultItem, handResult, setInterestingPair, bufferSetReportItemActive, reportItemActive }: any) => {
 
+    let kind = pokerStreetOptionUser.find((item: any) => item.id === userTab).stage
+
     let total = handResult && handResult.frequency && Object.values(handResult.frequency).reduce((acc: any, val: any) => acc + val, 0);
+
+    // if (handResult !== undefined) {
+    //     console.log("data", data);
+    //     console.log("userTab", userTab);
+    //     console.log("handResult", handResult);
+    //     console.log("nextObject", nextObject);
+    //     console.log("reportingResultItem.played", reportingResultItem.played, reportingResultItem.played[4 - userTab]);
+    //     console.log("color", findNearestColor(Math.abs((1 - reportingResultItem.played[4 - userTab]) - nextObject)));
+    // }
 
     return (
         <div
             className={clsx("relative rounded-[2px] h-[36px] cursor-pointer transition-all opacity-[1]")}
-            style={{ backgroundColor: handResult === undefined ? findNearestColor(0) : findNearestColor(Math.abs((1 - reportingResultItem.played[0]) - nextObject)) }}
+            style={{ backgroundColor: handResult === undefined || handResult.frequency[kind] === 0 ? findNearestColor(0) : findNearestColor(Math.abs((1 - reportingResultItem.played[4 - userTab]) - nextObject)) }}
             onClick={() => {
                 bufferSetReportItemActive(data)
                 setInterestingPair(actionNodeDistinguish(handResult, userTab) ? actionNodeDistinguish(handResult, userTab) : [])
@@ -21,12 +33,20 @@ const GradientUserItem = ({ nextObject, userTab, data, subValue, standard, repor
                 </p>
             </div>
 
+            {/* <p className={clsx(subValue > 0 ? "absolute bottom-[-2px] right-[2px] text-white mix-blend-difference text-[12px]" : "hidden")}>
+                {
+                    Math.abs((1 - reportingResultItem.played[4 - userTab]) - nextObject).toFixed(2) === "NaN" || Math.abs((1 - reportingResultItem.played[4 - userTab]) - nextObject).toFixed(2) === "0.00" ?
+                        undefined : Math.abs((1 - reportingResultItem.played[4 - userTab]) - nextObject).toFixed(2)
+                }
+            </p> */}
+
             <p className={clsx(subValue > 0 ? "absolute bottom-[-2px] right-[2px] text-white mix-blend-difference text-[12px]" : "hidden")}>
                 {
-                    Math.abs((1 - reportingResultItem.played[0]) - nextObject).toFixed(2) === "NaN" || Math.abs((1 - reportingResultItem.played[0]) - nextObject).toFixed(2) === "0.00" ?
-                        undefined : Math.abs((1 - reportingResultItem.played[0]) - nextObject).toFixed(2)
+                    Math.abs((1 - reportingResultItem.played[4 - parseInt(userTab)]) - nextObject).toFixed(2) === "NaN" || Math.abs((1 - reportingResultItem.played[4 - parseInt(userTab)]) - nextObject).toFixed(2) === "0.00" ?
+                        null : Math.abs((1 - reportingResultItem.played[4 - parseInt(userTab)]) - nextObject).toFixed(2)
                 }
             </p>
+
 
             <div className={clsx("absolute", reportItemActive === data ? "z-[3] w-[180px] h-[120px] bg-gray-800 top-[-2px] left-[-2px] rounded-[4px] px-[5px] border border-gray-400 border-[2px]" : "w-0 h-0 hidden")}>
 

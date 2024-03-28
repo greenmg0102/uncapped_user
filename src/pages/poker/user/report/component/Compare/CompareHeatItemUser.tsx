@@ -10,7 +10,7 @@ export default function CompareHeatItemUser({ userTab, data, handResult, standar
             className={
                 clsx(
                     "transition-all relative w-full h-[2.3em] lg:h-[36px] border border-gray-700 flex justify-center items-center rounded-[3px] bg-gray-900 dark:hover:bg-gray-800 hover:bg-gray-900 cursor-pointer transition-all",
-                    reportItemActive === data ? "border border-yellow-500 border-[2px]" : ""
+                    reportItemActive === data ? "border border-yellow-500 border-[1px]" : ""
                 )
             }
             onClick={() => {
@@ -21,9 +21,17 @@ export default function CompareHeatItemUser({ userTab, data, handResult, standar
             <p className="absolute text-[1.2em] text-gray-400 z-[1] left-0 top-0">
                 {data}
             </p>
-
-            <div className={clsx("absolute", reportItemActive === data ? "z-[3] w-[180px] h-[120px] bg-gray-800 top-[-2px] left-[-2px] rounded-[4px] px-[5px] border border-gray-400 border-[2px]" : "w-0 h-0 hidden")}>
-
+            <div
+                className={
+                    clsx(
+                        "absolute",
+                        reportItemActive === data && handResult !== undefined ?
+                            "z-[3] w-[180px] h-[120px] bg-gray-800 top-[-2px] left-[-2px] rounded-[4px] px-[5px] border border-gray-400 border-[2px]"
+                            :
+                            "w-0 h-0 hidden"
+                    )
+                }
+            >
                 <div className='flex justify-between items-end mt-[3px] mb-[10px] text-[#3d7cb8]'>
                     <p className='text-[20px] text-gray-200'>{data}</p>
                     <p>{total}</p>
@@ -62,7 +70,9 @@ export default function CompareHeatItemUser({ userTab, data, handResult, standar
                     <p className="absolute text-[1em] text-gray-100 z-[1] bottom-0 right-0">
                         {
                             (handResult && handResult.frequency && handResult.frequency && handResult.frequency[standard.stage]) === 0 ?
-                                undefined : (handResult && handResult.frequency && handResult.frequency && handResult.frequency[standard.stage])
+                                undefined
+                                :
+                                (handResult && handResult.frequency && handResult.frequency && handResult.frequency[standard.stage])
                         }
                     </p>
             }
@@ -81,9 +91,9 @@ export default function CompareHeatItemUser({ userTab, data, handResult, standar
                         />
                     </div>
                     :
-                    <div className="relative w-full h-[2.3em] lg:h-[36px]">
+                    <div className="relative w-full h-[2.3em] lg:h-[34px]">
                         <div
-                            className={clsx("absolute w-full h-[2.3em] lg:h-[36px]", `bg-[${definite.color[standard.stage]}]`)}
+                            className={clsx("absolute w-full h-[2.3em] lg:h-[34px]", `rounded-[4px] bg-[${definite.color[standard.stage]}]`)}
                             style={{
                                 opacity: handResult === undefined || definite[standard.stage] === 0 ? 0
                                     :

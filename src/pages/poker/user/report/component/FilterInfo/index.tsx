@@ -8,7 +8,8 @@ import ReportFilter from './ReportFilter'
 import UserInfo from './UserInfo'
 import DataFilters from './DataFilters'
 
-export default function FilterInfo({ userTab, filter, valueStatus, userInfoResult, defaultReportSetting, setAdvancedOptionModal, setFilter, searchApply, interruptValueStatus, pokerTypeCount, setUserTab }: any) {
+export default function FilterInfo({ userTab, filter, valueStatus, userInfoResult, defaultReportSetting, setAdvancedOptionModal, setFilter, reportingResult, searchApply, interruptValueStatus, pokerTypeCount, setUserTab }: any) {
+
 
     const bufferRange = (range: any) => {
         const startDate = new Date(Date.parse(range[0]));
@@ -24,6 +25,7 @@ export default function FilterInfo({ userTab, filter, valueStatus, userInfoResul
                     userTab={userTab}
                     valueStatus={valueStatus}
                     userInfoResult={userInfoResult}
+                    reportingResult={reportingResult}
                     defaultReportSetting={defaultReportSetting}
                     setUserTab={(order: any) => setUserTab(order)}
                     setAdvancedOptionModal={(bool: boolean) => setAdvancedOptionModal(bool)}

@@ -57,12 +57,10 @@ export const dividing = (globalFre: any, userInfoResult: any, userTab: any): any
     playCardArray.forEach((cardPair: any) => {
 
         let gValue = globalFre[cardPair]
-
         let userValue = userTab === "total" ?
             userInfoResult[cardPair] && userInfoResult[cardPair].frequency && Object.values(userInfoResult[cardPair].frequency).reduce((acc: any, val: any) => acc + val, 0)
             :
             userInfoResult[cardPair] && userInfoResult[cardPair].frequency && userInfoResult[cardPair] && userInfoResult[cardPair].frequency[userTab]
-
         let buffer = 0
 
         if (gValue !== undefined && userValue !== undefined) {
@@ -70,7 +68,6 @@ export const dividing = (globalFre: any, userInfoResult: any, userTab: any): any
             result[cardPair] = buffer
         } else result[cardPair] = 0
     });
-
     return result
 }
 

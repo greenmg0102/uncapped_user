@@ -4,11 +4,22 @@ import clsx from 'clsx'
 
 const HeatMapItem = ({ nextObject, userTab, data, reportingResultItem, handResult, setInterestingPair, bufferSetReportItemActive, reportItemActive }: any) => {
 
+    if (handResult !== undefined) {
+
+        // console.log("data", data);
+        // console.log("userTab", userTab);
+        // console.log("handResult", handResult);
+        // console.log("nextObject", nextObject);
+        // console.log("reportingResultItem.played", reportingResultItem.played, reportingResultItem.played[4 - userTab]);
+        // console.log("color", findNearestColor(Math.abs((1 - reportingResultItem.played[4 - userTab]) - nextObject)));
+    }
+
     return (
         <div
             className={clsx("relative h-[36px] z-[1] cursor-pointer transition-all", reportItemActive === data ? "rounded-[4px]" : "rounded-[0px]")}
             style={{
-                backgroundColor: handResult === undefined ? findNearestColor(0) : findNearestColor(Math.abs((1 - reportingResultItem.played[0]) - nextObject)),
+                // backgroundColor: (handResult === undefined || nextObject === 0) ? findNearestColor(0) : findNearestColor(Math.abs((1 - reportingResultItem.played[4 - userTab]) - nextObject)),
+                backgroundColor: handResult === undefined ? findNearestColor(0) : findNearestColor(Math.abs((reportingResultItem.played[4 - userTab] - nextObject))),
                 filter: reportItemActive === data ? `blur(${0}px)` : `blur(${25}px)`
             }}
             onClick={() => {
@@ -24,7 +35,7 @@ const HeatMapItem = ({ nextObject, userTab, data, reportingResultItem, handResul
                 </div>
                 <div className='flex justify-between items-center'>
                     <p className='text-gray-900 font-bold'>Total</p>
-                    <p className='text-gray-900 font-bold'>{(Math.abs((1 - reportingResultItem.played[0]) - nextObject) * 100).toFixed(2)}</p>
+                    <p className='text-gray-900 font-bold'>{(Math.abs((1 - reportingResultItem.played[4 - userTab]) - nextObject) * 100).toFixed(2)}</p>
                 </div>
             </div>
         </div>

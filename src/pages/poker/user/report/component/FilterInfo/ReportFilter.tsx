@@ -1,9 +1,26 @@
+import { useEffect, useState } from 'react'
 import EachButton from '../eachButton'
 import clsx from 'clsx'
 import StreetItem from '../../component/secondPanel'
 import { pokerStreetOptionUser } from '../../../../../../utils/reference/playCardColor'
 
-export default function ReportFilter({ valueStatus, defaultReportSetting, userTab, setAdvancedOptionModal, userInfoResult, interruptValueStatus, setUserTab }: any) {
+export default function ReportFilter({ valueStatus, defaultReportSetting, userTab, reportingResult, setAdvancedOptionModal, userInfoResult, interruptValueStatus, setUserTab }: any) {
+
+    const [critical, setCritical] = useState([false, false, false, false])
+
+    useEffect(() => {
+
+        let critical = [false, false, false, false]
+
+        Object.keys(reportingResult).forEach((key: any) => {
+            reportingResult[key].played.forEach((item: any, index: any) => {
+                critical[index] = critical[index] ? critical[index] : !critical[index] && item !== 0
+            })
+        })
+
+        setCritical(critical)
+        
+    }, [reportingResult])
 
     return (
         <div className=''>
@@ -13,7 +30,7 @@ export default function ReportFilter({ valueStatus, defaultReportSetting, userTa
             <div className='pl-1 mb-1'>
                 <div className="flex justify-start items-center mb-1">
                     <div className='w-[70px] flex justify-between items-center pr-1'>
-                        <p className="text-left">Action :</p>
+                        <p className="text-left">Action </p>
                         <p className="text-left">:</p>
                     </div>
                     {valueStatus.action !== "" ?
@@ -146,6 +163,8 @@ export default function ReportFilter({ valueStatus, defaultReportSetting, userTa
                                 key={index}
                                 item={item}
                                 userTab={userTab}
+                                critical={critical[index]}
+                                action={valueStatus.action}
                                 userResult={userInfoResult}
                                 setUserTab={(order: any) => setUserTab(order)}
                             />

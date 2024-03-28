@@ -83,7 +83,7 @@ export const restructure = (hands: any, actions: any) => {
 
         evs[0] = indexFold !== -1 ? hands[key].evs[indexFold] : 0
         evs[1] = indexCall !== -1 ? hands[key].evs[indexCall] : 0
-        evs[2] = indexListRaise.length === 2 ? 0 : indexListRaise.length === 2 ? hands[key].evs[indexListRaise[0]] : 0
+        evs[2] = indexListRaise.length === 0 ? 0 : indexListRaise.length === 2 ? hands[key].evs[indexListRaise[0]] : 0
         evs[3] = indexListRaise.length === 0 ? 0 : indexListRaise.length === 2 ? hands[key].evs[indexListRaise[1]] : hands[key].evs[indexListRaise[0]]
 
         allin += played[3]

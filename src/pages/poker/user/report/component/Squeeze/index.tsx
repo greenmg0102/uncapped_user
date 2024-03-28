@@ -12,7 +12,12 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, se
 
         let availableHeroPostion = heroPositionValidation[valueStatus.action]
 
-        if (availableHeroPostion.some((item: any) => item === hero8Site[index]) === true) {
+        // if (availableHeroPostion.some((item: any) => item === hero8Site[index]) === true) {
+        if
+            (
+            //    availableHeroPostion.some((item: any) => item === hero8Site[index]) === true
+            true
+        ) {
             let currentAction = valueStatus.action
             if (valueStatus.heroPosition.some((currentHero: any) => currentHero === hero8Site[index])) {
                 let real = valueStatus.heroPosition.filter((currentHero: any) => currentHero !== hero8Site[index])

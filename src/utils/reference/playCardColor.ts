@@ -268,28 +268,33 @@ export const pokerStreetOptionUser: any = [
     {
         id: 4,
         stage: "fold",
-        color: '#3d7cb8'
+        color: '#3d7cb8',
+        available: ["vs RFI", "vs 3-Bet", "VS 4-Bet", "vs RFI"]
     },
     {
         id: 3,
         stage: "call",
-        color: '#00cf00'
+        color: '#00cf00',
+        available: ["vs RFI", "vs 3-Bet", "VS 4-Bet", "vs RFI"]
     },
     {
         id: 2,
         stage: "raise",
-        color: '#ff0000'
+        color: '#ff0000',
+        available: ["vs RFI", "vs 3-Bet", "VS 4-Bet", "vs RFI", "RFI", "3-Bet", "4-Bet", "5-Bet +"]
     },
     {
         id: 1,
         stage: "allin",
-        color: '#7d1f1f'
+        color: '#7d1f1f',
+        available: ["vs RFI", "vs 3-Bet", "VS 4-Bet", "vs RFI", "RFI", "3-Bet", "4-Bet", "5-Bet +"]
     },
-    {
-        id: 0,
-        stage: "total",
-        color: '#323424'
-    },
+    // {
+    //     id: 0,
+    //     stage: "total",
+    //     color: '#323424',
+    //     available: ["vs RFI", "vs 3-Bet", "VS 4-Bet", "vs RFI"]
+    // },
 ]
 
 export const pokerStageExample: any = [

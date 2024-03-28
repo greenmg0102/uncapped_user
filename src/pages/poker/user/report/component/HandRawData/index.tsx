@@ -14,13 +14,84 @@ export default function HandRawData({ handRawData, activeNodeData, setHandRawDat
     const [isBB, setIsBB] = useState(false)
 
     useEffect(() => {
-
         if (Object.keys(activeNodeData).length > 0) {
             let real = activeNodeData.rawData.split("\n");
             setHandData(real)
         }
-
     }, [activeNodeData])
+
+    useEffect(() => {
+
+        let real = activeNodeData.rawData.split("\n");
+        if (isBB) {
+
+            let buffer: any = []
+
+            const seatRegexp = /\(([\d,]+) in chips\)/;
+            const antRegexp = /ante (\d+)/;
+            const smallBlindRegexp = /small blind (\d+)/;
+            const bigBlindRegexp = /big blind (\d+)/;
+
+            const raisesRegexp = /raises (\d+) to (\d+)/;
+            const callRegexp = /calls (\d+)/;
+
+            handData.forEach((element: any) => {
+                if (element.match(seatRegexp)) {
+                    const number = element.match(seatRegexp)[1].replace(/,/g, '');
+                    const updatedString = element.replace(/\(\d+,\d+ in chips\)/, `(${(number / activeNodeData.bigBlind).toFixed(2)}bb in chips)`);
+                    buffer.push(updatedString)
+                }
+                else if (element.match(antRegexp)) {
+                    const match = element.match(antRegexp);
+                    const lastNumber = match ? match[1] : null;
+                    const updatedString = element.replace(antRegexp, `${(lastNumber / activeNodeData.bigBlind).toFixed(2)}bb`);
+                    buffer.push(updatedString)
+                }
+                else if (element.match(smallBlindRegexp)) {
+                    const match = element.match(smallBlindRegexp);
+                    const lastNumber = match ? match[1] : null;
+                    const updatedString = element.replace(smallBlindRegexp, `${(lastNumber / activeNodeData.bigBlind).toFixed(1)}bb`);
+                    buffer.push(updatedString)
+                }
+                else if (element.match(bigBlindRegexp)) {
+                    const match = element.match(bigBlindRegexp);
+                    const lastNumber = match ? match[1] : null;
+                    const updatedString = element.replace(bigBlindRegexp, `${(lastNumber / activeNodeData.bigBlind).toFixed(1)}bb`);
+                    buffer.push(updatedString)
+                }
+                else if (element.match(raisesRegexp)) {
+                    const match = element.match(raisesRegexp);
+                    const raiseValue1 = match ? match[1] : null;
+                    const raiseValue2 = match ? match[2] : null;
+                    let count = 0;
+                    const updatedString = element.replace(/\d+/g, (match: any) => {
+                        count++;
+                        if (count === 1) {
+                            return `${(raiseValue1 / activeNodeData.bigBlind).toFixed(2)}bb`;
+                        } else if (count === 2) {
+                            return `${(raiseValue2 / activeNodeData.bigBlind).toFixed(2)}bb`;
+                        }
+                        return match;
+                    });
+                    buffer.push(updatedString)
+                }
+                else if (element.match(callRegexp)) {
+                    const match = element.match(callRegexp);
+                    const lastNumber = match ? match[1] : null;
+                    const updatedString = element.replace(callRegexp, `${(lastNumber / activeNodeData.bigBlind).toFixed(2)}bb`);
+                    buffer.push(updatedString)
+                }
+                else {
+                    buffer.push(element)
+                }
+            });
+
+            setHandData(buffer)
+
+        } else {
+            setHandData(real)
+        }
+    }, [isBB])
 
 
     const copyToClipboard = () => {
@@ -120,12 +191,12 @@ export default function HandRawData({ handRawData, activeNodeData, setHandRawDat
                                 </div>
                                 <div className='flex justify-end items-center px-5 pt-2'>
 
-                                    <Tippy content={isBB ? "Convert to bb" : "Convert to chips"}>
+                                    <Tippy content={isBB ? "Convert to chips" : "Convert to bb"}>
                                         <p
                                             className='mb-0 font-bold cursor-pointer mr-2 hover:text-primary hover:border-primary transition-all cursor-pointer p-[1px] px-[2px] border border-gray-400 rounded-[6px]'
                                             onClick={() => setIsBB(!isBB)}
                                         >
-                                            {isBB ? "BB" : "Ch"}
+                                            {isBB ? "Ch" : "BB"}
                                         </p>
                                     </Tippy>
 
