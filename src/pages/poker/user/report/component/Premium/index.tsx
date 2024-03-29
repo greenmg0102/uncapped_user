@@ -9,10 +9,15 @@ import { defaultReportSetting } from '../../../../../../utils/reference/reportin
 import 'tippy.js/dist/tippy.css';
 import Squeeze from '../Squeeze'
 
-export default function Premium({ advancedOptionModal, setAdvancedOptionModal, actionPoint, setValueStatus, arrayPoint, premiumStatus, valueStatus, setPremiumStatus, defaultReportSetting }: any) {
+export default function Premium({ advancedOptionModal, setAdvancedOptionModal, actionPoint, setValueStatus, arrayPoint, premiumStatus, valueStatus, setIsSqueeze, setPremiumStatus, defaultReportSetting, squeezeSetting, setSqueezeSetting }: any) {
 
     const MySwal = withReactContent(Swal);
     const [squeezeModal, setSqueezeModal] = useState(false)
+
+    const bufferSqueezeHandle = (bool: any) => {
+        setSqueezeModal(bool)
+        setIsSqueeze(bool)
+    }
 
     const bufferAction = (title: any) => {
         let realValueStatus = { action: title, heroPosition: [], stackDepth: [], VillianPosition: [] }
@@ -24,9 +29,9 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
         let availableHeroPostion = heroPositionValidation[valueStatus.action]
 
         if
-        (
-        //    availableHeroPostion.some((item: any) => item === hero8Site[index]) === true
-        true
+            (
+            //    availableHeroPostion.some((item: any) => item === hero8Site[index]) === true
+            true
         ) {
             let currentAction = valueStatus.action
             if (valueStatus.heroPosition.some((currentHero: any) => currentHero === hero8Site[index])) {
@@ -182,7 +187,7 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
                                 <div className={clsx("mb-1 w-1/3 rounded-[4px] p-[1px] transition-all cursor-pointer bg-gray-900")}>
                                     <div
                                         className={clsx('p-1 rounded-[4px] transition-all bg-gray-800 border border-blue-500 border-dashed')}
-                                        onClick={() => setSqueezeModal(true)}
+                                        onClick={() => bufferSqueezeHandle(true)}
                                     >
                                         <p className='text-center'>Squeeze</p>
                                     </div>
@@ -300,10 +305,12 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
                 valueStatus={valueStatus}
                 premiumStatus={premiumStatus}
                 squeezeModal={squeezeModal}
-                setPremiumStatus={(total: any) => setPremiumStatus(total)}
-                setSqueezeModal={(bool: boolean) => setSqueezeModal(bool)}
-                actionPoint={(premiumAction: any) => bufferAction(premiumAction)}
+                squeezeSetting={squeezeSetting}
                 setValueStatus={(total: any) => setValueStatus(total)}
+                setPremiumStatus={(total: any) => setPremiumStatus(total)}
+                setSqueezeSetting={(total: any) => setSqueezeSetting(total)}
+                setSqueezeModal={(bool: boolean) => bufferSqueezeHandle(bool)}
+                actionPoint={(premiumAction: any) => bufferAction(premiumAction)}
                 arrayPoint={(type: any, premiumArry: any) => arrayPoint(type, premiumArry)}
                 notification={(message: any, color: any) => notification(message, color)}
             />

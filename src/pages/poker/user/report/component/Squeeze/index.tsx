@@ -6,7 +6,7 @@ import { defaultReportSetting } from '../../../../../../utils/reference/reportin
 import { heroPositionValidation } from '../../../../../../utils/reference/heroPositionValidation'
 import 'tippy.js/dist/tippy.css';
 
-export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, setValueStatus, arrayPoint, premiumStatus, valueStatus, setPremiumStatus, notification }: any) {
+export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, setValueStatus, arrayPoint, premiumStatus, valueStatus, setPremiumStatus, notification, squeezeSetting, setSqueezeSetting }: any) {
 
     const bufferPosition = (index: any) => {
 
@@ -107,6 +107,10 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, se
         return false;
     }
 
+
+    // squeezeSetting = { squeezeSetting }
+    // setSqueezeSetting = {(total: any) => setSqueezeSetting(total)
+
     return (
         <div className={
             clsx(
@@ -134,6 +138,51 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, se
                             </Tippy>
                         </div>
                         <div>
+                            <div className='flex justify-between items-center mt-[1px] border border-red-700 mb-[6px] rounded-[4px]'>
+                                <div className='w-[40%] text-center text-gray-100 bg-gray-600 rounded-tl-[4px] rounded-bl-[4px] p-[1px] 2xl:py-[5.5px]'>
+                                    Squeeze
+                                </div>
+                                <div className='w-[60%] text-center text-gray-100 bg-gray-600 rounded-tr-[4px] rounded-br-[4px] p-[1px] 2xl:py-[5.5px]'>
+                                    VS Squeeze
+                                </div>
+                            </div>
+                            <div className='flex justify-between items-start'>
+                                <div
+                                    className={clsx("mb-1 w-[40%] p-[1px] transition-all cursor-pointer")}
+                                >
+                                    {defaultReportSetting.squeezeAction.squeeze.map((item: any, index: any) =>
+                                        <div
+                                            key={index}
+                                            className={clsx(
+                                                '2xl:p-[5.5px] rounded-tl-[4px] rounded-bl-[4px] transition-all mb-[6px]',
+                                                squeezeSetting.squeeze === item ? "bg-gray-500 text-gray-100" : " bg-gray-800"
+                                            )}
+                                            onClick={() => setSqueezeSetting({ ...squeezeSetting, squeeze: squeezeSetting.squeeze === item ? null : item })}
+                                        >
+                                            <p className='text-center'>{item}</p>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div
+                                    className={clsx("mb-1 w-[60%] p-[1px] transition-all cursor-pointer")}
+                                >
+                                    {defaultReportSetting.squeezeAction.action.map((item: any, index: any) =>
+                                        <div
+                                            key={index}
+                                            className={clsx(
+                                                '2xl:p-[5.5px] rounded-tr-[4px] rounded-br-[4px] transition-all mb-[6px]',
+                                                squeezeSetting.squeezeAction === item.value ? "bg-gray-500 text-gray-100" : " bg-gray-800"
+                                            )}
+                                            onClick={() => setSqueezeSetting({ ...squeezeSetting, squeezeAction: squeezeSetting.squeezeAction === item.value ? null : item.value })}
+                                        >
+                                            <p className='text-center'>{item.value}</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        {/* <div>
                             <div className={
                                 clsx(
                                     'flex justify-between items-center flex-wrap rounded-[4px]',
@@ -153,10 +202,10 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, se
                                     </Tippy>
                                 )}
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className='w-[30%]'>
-                        <div className='flex justify-center items-center mb-0 p-1 pt-2 pb-[12px]'>
+                        <div className='flex justify-center items-center mb-0 p-1 pt-2 pb-[9px]'>
                             <p className='text-center font-bold text-[16px] text-gray-300 mb-0 pr-2'>
                                 Hero Pos
                             </p>
@@ -170,7 +219,7 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, se
                             {Object.keys(hero8Site).map((key: any, index: any) =>
                                 <Tippy key={index} content={hero8Site[key]}>
                                     <div
-                                        className={clsx("mb-1 w-1/2 p-[1px] transition-all cursor-pointer")}
+                                        className={clsx("mb-[5px] w-1/2 p-[1px] transition-all cursor-pointer")}
                                     >
                                         <div
                                             className={clsx('2xl:p-[5.5px] rounded-[4px] transition-all', premiumStatus.heroPosition.includes(hero8Site[index]) ? "bg-gray-500 text-gray-100" : " bg-gray-800")}
@@ -185,7 +234,7 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, se
                         </div>
                     </div>
                     <div className='w-[30%]'>
-                        <div className='flex justify-center items-center mb-0 p-1 pt-2 pb-[12px]'>
+                        <div className='flex justify-center items-center mb-0 p-1 pt-2 pb-[8px]'>
                             <p className='text-center font-bold text-[16px] text-gray-300 mb-0 pr-2'>
                                 Stack Dep
                             </p>

@@ -37,7 +37,7 @@ const Report = () => {
     const displayTab = ["Chart Comparison", "Gradient Heat", "Detailed Table", "Histogram"]
 
     const [displayTabSelect, setDisplayTabSelect] = useState(0)
-
+    const [isSqueeze, setIsSqueeze] = useState(false)
     const [valueStatus, setValueStatus] = useState<valueStatusInterFace>({
         heroPosition: [],
         heroPositionIndex: -1,
@@ -45,6 +45,11 @@ const Report = () => {
         VillianPosition: [],
         villianPositionIndex: -1,
         action: ""
+    })
+
+    const [squeezeSetting, setSqueezeSetting] = useState({
+        squeeze: null,
+        squeezeAction: null
     })
 
     const [pokerTypeCount, setPokerTypeCount] = useState([])
@@ -221,25 +226,40 @@ const Report = () => {
     }, [displayTabSelect]);
 
     useEffect(() => {
-
-        const data = { ...valueStatus, ...filter }
-
+        const data = { ...valueStatus, ...filter, isSqueeze: isSqueeze }
         if (
             data.action !== "" &&
             data.heroPosition.length !== 0 &&
             data.stackDepth.length !== 0
         ) {
             async function fetchData() {
-
                 dispatch(toggleLoadingStatus())
                 const response = await reportIntegration(data)
                 dispatch(toggleLoadingStatus())
-
                 setUserInfoResult(response.userData)
             }
             fetchData()
         }
     }, [valueStatus, filter])
+
+    useEffect(() => {
+        const data = { ...valueStatus, ...filter, ...squeezeSetting, isSqueeze: isSqueeze }
+
+        if (
+            data.heroPosition.length !== 0 &&
+            data.stackDepth.length !== 0 &&
+            data.squeeze !== null &&
+            data.squeezeAction !== null
+        ) {
+            async function fetchData() {
+                dispatch(toggleLoadingStatus())
+                const response = await reportIntegration(data)
+                dispatch(toggleLoadingStatus())
+                setUserInfoResult(response.userData)
+            }
+            fetchData()
+        }
+    }, [valueStatus, filter, squeezeSetting])
 
 
     useEffect(() => {
@@ -300,6 +320,36 @@ const Report = () => {
 
     useEffect(() => {
 
+        const data = {
+            action: valueStatus.action,
+            heroPositionList: valueStatus.heroPosition,
+            stackDepthList: valueStatus.stackDepth,
+            VillianPosition: valueStatus.VillianPosition,
+            isSqueeze: isSqueeze,
+            ...squeezeSetting,
+            ...mainDataFilter,
+            ...filter
+        }
+
+        if (
+            data.pokerType !== "N/A" &&
+            data.tableSize !== -1 &&
+            data.heroPositionList.length !== 0 &&
+            data.stackDepthList.length !== 0 &&
+            data.range !== undefined &&
+            data.squeeze !== null &&
+            data.squeezeAction !== null
+        ) {
+            async function fetchMyAPI() {
+                const response = await mainDataHandInfo(data)
+                setReportingResult(response)
+            }
+            fetchMyAPI()
+        }
+    }, [mainDataFilter, valueStatus, filter, squeezeSetting])
+
+    useEffect(() => {
+
         dispatch(setPageTitle('Statistical Report'));
 
         const accessToken = localStorage.getItem('accessToken');
@@ -349,7 +399,10 @@ const Report = () => {
                         premiumStatus={premiumStatus}
                         valueStatus={valueStatus}
                         advancedOptionModal={advancedOptionModal}
+                        squeezeSetting={squeezeSetting}
                         defaultReportSetting={defaultReportSetting}
+                        setIsSqueeze={(bool: any) => setIsSqueeze(bool)}
+                        setSqueezeSetting={(total: any) => setSqueezeSetting(total)}
                         setPremiumStatus={(total: any) => bufferSetPremiumStatus(total)}
                         setAdvancedOptionModal={(bool: boolean) => setAdvancedOptionModal(bool)}
                         actionPoint={(premiumAction: any) => setValueStatus({ ...valueStatus, ...premiumAction })}

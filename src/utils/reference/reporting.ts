@@ -1,4 +1,29 @@
 export const defaultReportSetting: any = {
+    squeezeAction: {
+        squeeze: [
+            '1 Caller',
+            '2 Caller',
+            '3 Caller',
+        ],
+        action: [
+            {
+                text: 'First',
+                value: 'First Action'
+            },
+            {
+                text: 'Middle',
+                value: 'Middle Action'
+            },
+            {
+                text: 'Last',
+                value: 'Last Action'
+            },
+            {
+                text: 'Cold',
+                value: 'Cold Action'
+            },
+        ],
+    },
     heroPosition: [
         {
             id: 0,
