@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 import PreflopChart from './component/PreflopChart'
 import { defaultReportSetting } from '../../../../utils/reference/reporting'
 import { reportEachPair, reportIntegration, userHandInfo, mainDataHandInfo, detailedTableGet, conditionPair, getGloabalOpertunity } from '../../../../utils/functions/user/report/Report'
+import { raisingSizeTabelExtracting } from '../../../../utils/functions/user/report/RaiseSizing'
 import { validationSeatWhenDefiningAction } from '../../../../utils/reference/playCardColor'
 import { handPair } from '../../../../utils/functions/user/report/MACD'
 
@@ -46,6 +47,16 @@ const Report = () => {
         villianPositionIndex: -1,
         action: ""
     })
+
+    const [squeezePanel, setSqueezePanel] = useState({
+        type: undefined,
+        RFI: undefined,
+        caller: [],
+        bet3: undefined,
+        hero: [],
+        SqueezeStackDepth: [0]
+    })
+    const [actionLit, setActionList] = useState<any>([])
 
     const [squeezeSetting, setSqueezeSetting] = useState({
         squeeze: null,
@@ -95,6 +106,7 @@ const Report = () => {
         totalCount: 0,
         result: []
     })
+
     const [userResultModal, setUserResultModal] = useState(false)
     const [advancedOptionModal, setAdvancedOptionModal] = useState(false)
     const [activeUserData, setActiveUserData] = useState("Pairs")
@@ -182,6 +194,26 @@ const Report = () => {
         setUserResultList(response)
     }
 
+    const raiseSizingTable = async (type: any, field: any, position: any, actionType: any, stackDepth: any) => {
+
+        const data = {
+            type: type,
+            field: field,
+            position: position,
+            actionType: actionType,
+            stackDepth: stackDepth,
+            ...filter
+        }
+
+        let result = await raisingSizeTabelExtracting(data)
+
+        setUserResultList({
+            totalCount: 1,
+            result: result.length > 10 ? result.slice(0, 10) : result
+        })
+
+    }
+
     useEffect(() => {
         async function fetchDataAndDispatch() {
 
@@ -238,28 +270,43 @@ const Report = () => {
                 dispatch(toggleLoadingStatus())
                 setUserInfoResult(response.userData)
             }
-            fetchData()
+            // fetchData()
         }
     }, [valueStatus, filter])
 
     useEffect(() => {
-        const data = { ...valueStatus, ...filter, ...squeezeSetting, isSqueeze: isSqueeze }
+        let data1: any = {
+            // ...valueStatus,
+            // ...squeezeSetting,
+            ...filter,
+            ...squeezePanel,
+            // isSqueeze: isSqueeze
+        }
 
         if (
-            data.heroPosition.length !== 0 &&
-            data.stackDepth.length !== 0 &&
-            data.squeeze !== null &&
-            data.squeezeAction !== null
+            // data.heroPosition.length !== 0 &&
+            // data.stackDepth.length !== 0 &&
+
+            data1.RFI !== undefined &&
+            data1.caller.length !== 0 &&
+            data1.bet3 !== undefined &&
+            data1.hero.length !== 0 &&
+            data1.SqueezeStackDepth.length !== 0
+
+            // data.squeeze !== null &&
+            // data.squeezeAction !== null
         ) {
             async function fetchData() {
                 dispatch(toggleLoadingStatus())
-                const response = await reportIntegration(data)
+                data1.isSqueeze = true
+                data1.actionLit = actionLit
+                const response = await reportIntegration(data1)
                 dispatch(toggleLoadingStatus())
                 setUserInfoResult(response.userData)
             }
             fetchData()
         }
-    }, [valueStatus, filter, squeezeSetting])
+    }, [filter, squeezePanel, actionLit])
 
 
     useEffect(() => {
@@ -320,33 +367,45 @@ const Report = () => {
 
     useEffect(() => {
 
-        const data = {
-            action: valueStatus.action,
-            heroPositionList: valueStatus.heroPosition,
-            stackDepthList: valueStatus.stackDepth,
-            VillianPosition: valueStatus.VillianPosition,
-            isSqueeze: isSqueeze,
-            ...squeezeSetting,
-            ...mainDataFilter,
-            ...filter
+        let data2: any = {
+            // action: valueStatus.action,
+            // heroPositionList: valueStatus.heroPosition,
+            // stackDepthList: valueStatus.stackDepth,
+            // VillianPosition: valueStatus.VillianPosition,
+            // isSqueeze: isSqueeze,
+            // ...squeezeSetting,
+            // ...mainDataFilter,
+            ...filter,
+            ...squeezePanel
         }
 
         if (
-            data.pokerType !== "N/A" &&
-            data.tableSize !== -1 &&
-            data.heroPositionList.length !== 0 &&
-            data.stackDepthList.length !== 0 &&
-            data.range !== undefined &&
-            data.squeeze !== null &&
-            data.squeezeAction !== null
+            data2.pokerType !== "N/A" &&
+            data2.tableSize !== -1 &&
+
+            data2.RFI !== undefined &&
+            data2.caller.length !== 0 &&
+            data2.bet3 !== undefined &&
+            data2.hero.length !== 0 &&
+            data2.SqueezeStackDepth.length !== 0
+
+            // data.heroPositionList.length !== 0 &&
+            // data.stackDepthList.length !== 0 &&
+            // data.range !== undefined &&
+            // data.squeeze !== null &&
+            // data.squeezeAction !== null
         ) {
+
             async function fetchMyAPI() {
-                const response = await mainDataHandInfo(data)
+                data2.isSqueeze = true
+                data2.actionLit = actionLit
+
+                const response = await mainDataHandInfo(data2)
                 setReportingResult(response)
             }
             fetchMyAPI()
         }
-    }, [mainDataFilter, valueStatus, filter, squeezeSetting])
+    }, [filter, squeezePanel, actionLit])
 
     useEffect(() => {
 
@@ -382,7 +441,6 @@ const Report = () => {
         fetchMyAPI()
     }, [])
 
-
     return (
         <div>
             <div className='relative flex justify-between items-center flex-wrap w-full 2xl:h-[205px]'>
@@ -396,6 +454,13 @@ const Report = () => {
                         setAdvancedOptionModal={(bool: boolean) => setAdvancedOptionModal(bool)}
                     />
                     <Premium
+
+                        squeezePanel={squeezePanel}
+                        setSqueezePanel={(total: any) => setSqueezePanel(total)}
+
+                        actionLit={actionLit}
+                        setActionList={(total: any) => setActionList(total)}
+
                         premiumStatus={premiumStatus}
                         valueStatus={valueStatus}
                         advancedOptionModal={advancedOptionModal}
@@ -457,8 +522,10 @@ const Report = () => {
                     <div>
                         {displayTabSelect === 2 ?
                             <DetailTable
+                                filter={filter}
                                 detailedTable={detailedTable}
                                 reportSetting={reportSetting}
+                                raiseSizingTable={(type: any, field: any, position: any, actionType: any, stackDepth: any) => raiseSizingTable(type, field, position, actionType, stackDepth)}
                                 setReportSetting={(position: any, action: any) => setReportSetting({ ...reportSetting, position: position, action: action })}
                             />
                             :
@@ -563,6 +630,7 @@ const Report = () => {
                         setPageSize={(e: any) => setPageSize(e)}
                         onPageChange={(p: any) => setPage(p)}
                     />
+
                     <UserDataDetail
                         page={page}
                         pageSize={pageSize}

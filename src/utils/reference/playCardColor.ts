@@ -45,6 +45,19 @@ export const playCardSymbolSet: any = {
     "s": "Grey_Spade.png",
 }
 
+
+export const detailTablePosition: any = {
+    0: "UTG",
+    1: "UTG+1",
+    2: "LJ",
+    3: "HJ",
+    4: "CO",
+    5: "BTN",
+    6: "SB",
+    7: "BB",
+    10: "Global",
+}
+
 export const hero8Site: any = {
     0: "UTG",
     1: "UTG+1",
@@ -66,6 +79,57 @@ export const hero9Site: any = {
     6: "BTN",
     7: "SB",
     8: "BB",
+}
+
+export const RFIPosition: any = {
+    0: "UTG",
+    1: "UTG+1",
+    2: "LJ",
+    3: "HJ",
+    4: "CO",
+    5: "BTN",
+}
+
+export const coldRFIPosition: any = {
+    0: "UTG",
+    1: "UTG+1",
+    2: "LJ",
+    3: "HJ",
+    4: "CO",
+}
+
+export const CallerPosition: any = {
+    1: "UTG+1",
+    2: "LJ",
+    3: "HJ",
+    4: "CO",
+    5: "BTN",
+    6: "SB",
+}
+
+export const coldCallerPosition: any = {
+    1: "UTG+1",
+    2: "LJ",
+    3: "HJ",
+    4: "CO",
+    5: "BTN",
+}
+
+export const BET3Position: any = {
+    2: "LJ",
+    3: "HJ",
+    4: "CO",
+    5: "BTN",
+    6: "SB",
+    7: "BB",
+}
+
+export const coldBET3Position: any = {
+    2: "LJ",
+    3: "HJ",
+    4: "CO",
+    5: "BTN",
+    6: "SB",
 }
 
 export const actionArray = ["VPIP", "PFR", "RFI", "vs RFI", "3-Bet", "vs 3-Bet", "4-Bet", "vs 4-Bet", "5-Bet"]
@@ -98,9 +162,9 @@ export const villianPokerTable: any = [
         postion: 0,
         title: "UTG",
         gps: {
-            top: -30,
-            right: 50,
-            left: 70,
+            top: -3,
+            right: 40,
+            left: 0,
             bottom: 0
         }
     },
@@ -108,9 +172,9 @@ export const villianPokerTable: any = [
         postion: 1,
         title: "UTG+1",
         gps: {
-            top: 15,
-            right: 50,
-            left: 110,
+            top: 20,
+            right: -35,
+            left: 0,
             bottom: 0
         }
     },
@@ -118,9 +182,9 @@ export const villianPokerTable: any = [
         postion: 2,
         title: "LJ",
         gps: {
-            top: 85,
-            right: 50,
-            left: 110,
+            top: 80,
+            right: -35,
+            left: 0,
             bottom: 0
         }
     },
@@ -128,9 +192,9 @@ export const villianPokerTable: any = [
         postion: 3,
         title: "HJ",
         gps: {
-            top: 130,
-            right: 50,
-            left: 70,
+            top: 100,
+            right: 40,
+            left: 0,
             bottom: 0
         }
     },
@@ -138,9 +202,9 @@ export const villianPokerTable: any = [
         postion: 4,
         title: "CO",
         gps: {
-            top: 130,
-            right: 50,
-            left: 30,
+            top: 100,
+            right: 0,
+            left: 90,
             bottom: 0
         }
     },
@@ -148,9 +212,9 @@ export const villianPokerTable: any = [
         postion: 5,
         title: "BTN",
         gps: {
-            top: 85,
-            right: 50,
-            left: -10,
+            top: 20,
+            right: 0,
+            left: 10,
             bottom: 0
         }
     },
@@ -158,9 +222,9 @@ export const villianPokerTable: any = [
         postion: 6,
         title: "SB",
         gps: {
-            top: 15,
-            right: 50,
-            left: -10,
+            top: 80,
+            right: 0,
+            left: 10,
             bottom: 0
         }
     },
@@ -168,9 +232,9 @@ export const villianPokerTable: any = [
         postion: 7,
         title: "BB",
         gps: {
-            top: -30,
-            right: 50,
-            left: 30,
+            top: -3,
+            right: 0,
+            left: 90,
             bottom: 0
         }
     }

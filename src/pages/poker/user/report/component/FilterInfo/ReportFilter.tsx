@@ -19,7 +19,7 @@ export default function ReportFilter({ valueStatus, defaultReportSetting, userTa
         })
 
         setCritical(critical)
-        
+
     }, [reportingResult])
 
     return (

@@ -9,7 +9,7 @@ import { defaultReportSetting } from '../../../../../../utils/reference/reportin
 import 'tippy.js/dist/tippy.css';
 import Squeeze from '../Squeeze'
 
-export default function Premium({ advancedOptionModal, setAdvancedOptionModal, actionPoint, setValueStatus, arrayPoint, premiumStatus, valueStatus, setIsSqueeze, setPremiumStatus, defaultReportSetting, squeezeSetting, setSqueezeSetting }: any) {
+export default function Premium({ squeezePanel, setSqueezePanel, actionLit, setActionList, advancedOptionModal, setAdvancedOptionModal, actionPoint, setValueStatus, arrayPoint, premiumStatus, valueStatus, setIsSqueeze, setPremiumStatus, defaultReportSetting, squeezeSetting, setSqueezeSetting }: any) {
 
     const MySwal = withReactContent(Swal);
     const [squeezeModal, setSqueezeModal] = useState(false)
@@ -302,6 +302,13 @@ export default function Premium({ advancedOptionModal, setAdvancedOptionModal, a
                 </div>
             </div>
             <Squeeze
+
+                squeezePanel={squeezePanel}
+                setSqueezePanel={(total: any) => setSqueezePanel(total)}
+
+                actionLit={actionLit}
+                setActionList={(total: any) => setActionList(total)}
+
                 valueStatus={valueStatus}
                 premiumStatus={premiumStatus}
                 squeezeModal={squeezeModal}

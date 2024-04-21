@@ -19,7 +19,7 @@ export default function FilterInfo({ userTab, filter, valueStatus, userInfoResul
     }
 
     return (
-        <div className='relative w-full 2xl:w-1/2 p-2 border border-gray-700 rounded-[8px] 2xl:rounded-tl-[0px] 2xl:rounded-bl-[0px] 2xl:border-l-[0px] 2xl:pb-[43px] p-1 2xl:h-[205px] flex justify-between items-start flex-wrap'>
+        <div className='relative w-full 2xl:w-1/2 p-2 border border-gray-700 rounded-[8px] 2xl:rounded-tl-[0px] 2xl:rounded-bl-[0px] 2xl:border-l-[0px] 2xl:pb-[43px] p-1 2xl:h-[205px] flex justify-between items-start flex-wrap mt-20 md:mt-0'>
             <div className='w-full sm:w-[33.33%] p-1 h-[185px] border-r-[0px] sm:border-r-[1px] border border-dashed border-t-0 border-l-0 border-b-0 border-primary'>
                 <ReportFilter
                     userTab={userTab}

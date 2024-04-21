@@ -3,9 +3,113 @@ import clsx from 'clsx'
 import VillianPokerTable from './VillianPokerTable'
 import { hero8Site, stackArray, villianPokerTable } from '../../../../../../utils/reference/playCardColor'
 import { defaultReportSetting } from '../../../../../../utils/reference/reporting'
+import { heroPositionValidation } from '../../../../../../utils/reference/heroPositionValidation'
 import 'tippy.js/dist/tippy.css';
 
-export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, arrayPoint, premiumStatus, setPremiumStatus }: any) {
+export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, setValueStatus, arrayPoint, premiumStatus, valueStatus, setPremiumStatus, notification, squeezeSetting, setSqueezeSetting }: any) {
+
+    const bufferPosition = (index: any) => {
+
+        let availableHeroPostion = heroPositionValidation[valueStatus.action]
+
+        // if (availableHeroPostion.some((item: any) => item === hero8Site[index]) === true) {
+        if
+            (
+            //    availableHeroPostion.some((item: any) => item === hero8Site[index]) === true
+            true
+        ) {
+            let currentAction = valueStatus.action
+            if (valueStatus.heroPosition.some((currentHero: any) => currentHero === hero8Site[index])) {
+                let real = valueStatus.heroPosition.filter((currentHero: any) => currentHero !== hero8Site[index])
+                let realValueStatus = { action: currentAction, heroPosition: real, stackDepth: [], VillianPosition: [] }
+                setValueStatus(realValueStatus)
+                setPremiumStatus({ ...premiumStatus, action: currentAction, heroPosition: real, stackDepth: [], VillianPosition: [] })
+            } else {
+
+                let currentHeroPosition = valueStatus.heroPosition
+                let real = [...currentHeroPosition, hero8Site[index]]
+
+                let isMatch = checkMatch(defaultReportSetting.heroPosition, real);
+
+                if (isMatch) {
+                    let realValueStatus = { action: currentAction, heroPosition: real, stackDepth: [], VillianPosition: [] }
+                    setValueStatus(realValueStatus)
+                    setPremiumStatus({ ...premiumStatus, action: currentAction, heroPosition: real, stackDepth: [], VillianPosition: [] })
+                } else {
+                    notification('Range has been exceeded', 'info')
+                }
+
+                // let currentHeroPosition = valueStatus.heroPosition
+                // let real = [...currentHeroPosition, hero8Site[index]]
+                // let realValueStatus = { action: currentAction, heroPosition: real, stackDepth: [], VillianPosition: [] }
+                // setValueStatus(realValueStatus)
+                // setPremiumStatus({ ...premiumStatus, action: currentAction, heroPosition: real, stackDepth: [], VillianPosition: [] })
+            }
+        } else notification(`That position is not allow in ${valueStatus.action} `, 'error')
+
+    }
+
+    const bufferStack = (index: any) => {
+        if (valueStatus.stackDepth.some((currentStack: any) => currentStack === index)) {
+            let real = valueStatus.stackDepth.filter((currentStack: any) => currentStack !== index)
+            arrayPoint("stackDepth", real)
+            setPremiumStatus({ ...premiumStatus, stackDepth: real })
+        } else {
+            let currentStack = valueStatus.stackDepth
+            let real = [...currentStack, index]
+
+            let isMatch = stackMatch(defaultReportSetting.stackDepth, real);
+
+            if (isMatch) {
+                arrayPoint("stackDepth", real)
+                setPremiumStatus({ ...premiumStatus, stackDepth: real })
+            } else {
+                notification('Range has been exceeded', 'info')
+            }
+        }
+    }
+
+    function checkMatch(heroPosition: any, randomArray: any) {
+        for (let i = 0; i < heroPosition.length; i++) {
+            const position = heroPosition[i];
+            const stringList = position.stringList;
+            let match = true;
+
+            for (let j = 0; j < randomArray.length; j++) {
+                if (!stringList.includes(randomArray[j])) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function stackMatch(stackDepthList: any, randomArray: any) {
+        for (let i = 0; i < stackDepthList.length; i++) {
+            const position = stackDepthList[i];
+            const valueList = position.valueList;
+            let match = true;
+
+            for (let j = 0; j < randomArray.length; j++) {
+                if (!valueList.includes(randomArray[j] === 40 ? 398750 : randomArray[j])) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    // squeezeSetting = { squeezeSetting }
+    // setSqueezeSetting = {(total: any) => setSqueezeSetting(total)
 
     return (
         <div className={
@@ -23,8 +127,8 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, ar
             <div className='w-full flex justify-between items-start flex-wrap'>
                 <div className='w-full 2xl:w-2/3 p-0 2xl:p-2 flex justify-between items-start'>
                     <div className='w-[40%]'>
-                        <div className='flex justify-center items-center mb-0 p-1 pt-2 pb-[8px]'>
-                            <p className='text-center font-bold text-[16px] text-gray-300 mb-0'>
+                        {/* <div className='flex justify-center items-center mb-0 p-1 pt-2 pb-[8px]'>
+                            <p className='text-center font-bold text-[16px] text-gray-300 mb-0 pr-2'>
                                 Action
                             </p>
                             <Tippy trigger="click" content="Define the Action">
@@ -32,8 +136,53 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, ar
                                     <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z"></path>
                                 </svg>
                             </Tippy>
-                        </div>
+                        </div> */}
                         <div>
+                            <div className='flex justify-between items-center mt-[1px] mb-0 p-1 pt-2 pb-[9px]'>
+                                <p className='w-[40%] text-center font-bold text-[16px] text-gray-300 mb-0'>
+                                    Squeeze
+                                </p>
+                                <p className='w-[60%] text-center font-bold text-[16px] text-gray-300 mb-0'>
+                                    VS Squ
+                                </p>
+                            </div>
+                            <div className='flex justify-between items-start'>
+                                <div
+                                    className={clsx("mb-1 w-[40%] p-[1px] transition-all cursor-pointer")}
+                                >
+                                    {defaultReportSetting.squeezeAction.squeeze.map((item: any, index: any) =>
+                                        <div
+                                            key={index}
+                                            className={clsx(
+                                                '2xl:p-[5.5px] rounded-tl-[4px] rounded-bl-[4px] transition-all mb-[6px]',
+                                                squeezeSetting.squeeze === item ? "bg-gray-500 text-gray-100" : " bg-gray-800"
+                                            )}
+                                            onClick={() => setSqueezeSetting({ ...squeezeSetting, squeeze: squeezeSetting.squeeze === item ? null : item })}
+                                        >
+                                            <p className='text-center'>{item}</p>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div
+                                    className={clsx("mb-1 w-[60%] p-[1px] transition-all cursor-pointer")}
+                                >
+                                    {defaultReportSetting.squeezeAction.action.map((item: any, index: any) =>
+                                        <div
+                                            key={index}
+                                            className={clsx(
+                                                '2xl:p-[5.5px] rounded-tr-[4px] rounded-br-[4px] transition-all mb-[6px]',
+                                                squeezeSetting.squeezeAction === item.value ? "bg-gray-500 text-gray-100" : " bg-gray-800"
+                                            )}
+                                            onClick={() => setSqueezeSetting({ ...squeezeSetting, squeezeAction: squeezeSetting.squeezeAction === item.value ? null : item.value })}
+                                        >
+                                            <p className='text-center'>{item.value}</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        {/* <div>
                             <div className={
                                 clsx(
                                     'flex justify-between items-center flex-wrap rounded-[4px]',
@@ -45,10 +194,7 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, ar
                                         <div className={clsx("mb-1 w-1/3 rounded-[4px] p-[1px] transition-all cursor-pointer bg-gray-900")}>
                                             <div
                                                 className={clsx('p-[4px] 2xl:p-[4px] 2xl:p-[6px] rounded-[4px] transition-all', premiumStatus.action === item.title ? "bg-gray-500 text-gray-100" : " bg-gray-800")}
-                                            // onClick={() => {
-                                            //     actionPoint(item.title)
-                                            //     setPremiumStatus({ ...premiumStatus, action: item.title })
-                                            // }}
+                                                onClick={() => actionPoint(item.title)}
                                             >
                                                 <p className='text-center'>{item.title}</p>
                                             </div>
@@ -56,11 +202,11 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, ar
                                     </Tippy>
                                 )}
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className='w-[30%]'>
-                        <div className='flex justify-center items-center mb-0'>
-                            <p className='text-center font-bold text-[16px] text-gray-300 mb-0 p-1 pt-2 pb-[12px]'>
+                        <div className='flex justify-center items-center mb-0 p-1 pt-2 pb-[9px]'>
+                            <p className='text-center font-bold text-[16px] text-gray-300 mb-0 pr-2'>
                                 Hero Pos
                             </p>
                             <Tippy trigger="click" content="Define the Hero's Position">
@@ -70,18 +216,14 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, ar
                             </Tippy>
                         </div>
                         <div className='flex justify-between items-center flex-wrap'>
-
                             {Object.keys(hero8Site).map((key: any, index: any) =>
                                 <Tippy key={index} content={hero8Site[key]}>
                                     <div
-                                        className={clsx("mb-1 w-1/2 p-[1px] transition-all cursor-pointer")}
+                                        className={clsx("mb-[5px] w-1/2 p-[1px] transition-all cursor-pointer")}
                                     >
                                         <div
-                                            className={clsx('2xl:p-[5.5px] rounded-[4px] transition-all', premiumStatus.heroPosition === index ? "bg-gray-500 text-gray-100" : " bg-gray-800")}
-                                            onClick={() => {
-                                                arrayPoint("heroPosition", [hero8Site[key]])
-                                                setPremiumStatus({ ...premiumStatus, heroPosition: index })
-                                            }}
+                                            className={clsx('2xl:p-[5.5px] rounded-[4px] transition-all', premiumStatus.heroPosition.includes(hero8Site[index]) ? "bg-gray-500 text-gray-100" : " bg-gray-800")}
+                                            onClick={() => bufferPosition(index)}
                                         >
 
                                             <p className='text-center'>{hero8Site[key]}</p>
@@ -92,8 +234,8 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, ar
                         </div>
                     </div>
                     <div className='w-[30%]'>
-                        <div className='flex justify-center items-center mb-0'>
-                            <p className='text-center font-bold text-[16px] text-gray-300 mb-0 p-1 pt-2 pb-[12px]'>
+                        <div className='flex justify-center items-center mb-0 p-1 pt-2 pb-[8px]'>
+                            <p className='text-center font-bold text-[16px] text-gray-300 mb-0 pr-2'>
                                 Stack Dep
                             </p>
                             <Tippy trigger="click" content="Define the Stack Depth">
@@ -108,11 +250,8 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, ar
                                 <Tippy key={item} content={item}>
                                     <div className={clsx("mb-1 w-1/2 p-[1px] transition-all cursor-pointer")}>
                                         <div
-                                            className={clsx('p-[0.5px] 2xl:p-[2px] rounded-[4px] transition-all', premiumStatus.stackDepth === item ? "bg-gray-500 text-gray-100" : " bg-gray-800")}
-                                            onClick={() => {
-                                                arrayPoint("stackDepth", [item])
-                                                setPremiumStatus({ ...premiumStatus, stackDepth: item })
-                                            }}
+                                            className={clsx('p-[0.5px] 2xl:p-[2px] rounded-[4px] transition-all', premiumStatus.stackDepth.includes(item) ? "bg-gray-500 text-gray-100" : " bg-gray-800")}
+                                            onClick={() => bufferStack(item)}
                                         >
                                             <p className='text-center'>{item} bb</p>
                                         </div>
@@ -123,16 +262,6 @@ export default function Squeeze({ squeezeModal, setSqueezeModal, actionPoint, ar
                     </div>
                 </div>
                 <div className='w-full 2xl:w-1/3 p-2 pt-0'>
-                    {/* <div className='flex justify-center items-center mb-0'>
-                        <p className='text-center font-bold text-[16px] text-gray-300 p-1 py-4 mb-0 mr-2'>
-                            Villian Seleting
-                        </p>
-                        <Tippy trigger="click" content="Define the Villian">
-                            <svg viewBox="64 64 896 896" focusable="false" data-icon="info-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" className='cursor-pointer'>
-                                <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z"></path>
-                            </svg>
-                        </Tippy>
-                    </div> */}
                     <VillianPokerTable
                         premiumStatus={premiumStatus}
                         villianPokerTable={villianPokerTable}
