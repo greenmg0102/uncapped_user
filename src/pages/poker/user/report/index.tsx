@@ -270,7 +270,7 @@ const Report = () => {
                 dispatch(toggleLoadingStatus())
                 setUserInfoResult(response.userData)
             }
-            // fetchData()
+            fetchData()
         }
     }, [valueStatus, filter])
 

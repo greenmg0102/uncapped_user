@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../store';
 import { useEffect, useState } from 'react';
@@ -40,7 +40,7 @@ const LoginBoxed = () => {
             let result = await join(credential)
             if (result.result) {
                 navigate(result.redirectUrl)
-            }else{
+            } else {
                 MySwal.fire({
                     title: result.message,
                     toast: true,
