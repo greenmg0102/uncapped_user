@@ -4,6 +4,7 @@ import DefaultLayout from "../components/Layouts/DefaultLayout";
 import { routes } from "./routes";
 
 const finalRoutes = routes.map((route) => {
+  
   return {
     ...route,
     element:
