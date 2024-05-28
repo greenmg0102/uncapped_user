@@ -38,6 +38,8 @@ const Report = () => {
     const displayTab = ["Chart Comparison", "Gradient Heat", "Detailed Table", "Histogram"]
 
     const [displayTabSelect, setDisplayTabSelect] = useState(0)
+    const [stackDepthCategory, setStackDepthCategory] = useState("10, 15, 20, 25, 30, 40, 50, 60, 80, 100")
+    const [detailType, setDetailType] = useState("Hero")
     const [isSqueeze, setIsSqueeze] = useState(false)
     const [valueStatus, setValueStatus] = useState<valueStatusInterFace>({
         heroPosition: [],
@@ -110,6 +112,14 @@ const Report = () => {
     const [userResultModal, setUserResultModal] = useState(false)
     const [advancedOptionModal, setAdvancedOptionModal] = useState(false)
     const [activeUserData, setActiveUserData] = useState("Pairs")
+
+    const [raiseSizingConfig, setRaiseSizingConfig] = useState({
+        type: undefined,
+        field: undefined,
+        position: undefined,
+        actionType: undefined,
+        stackDepth: undefined,
+    })
 
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + 1);
@@ -194,24 +204,56 @@ const Report = () => {
         setUserResultList(response)
     }
 
+    useEffect(() => {
+        if (
+            raiseSizingConfig.type !== undefined &&
+            raiseSizingConfig.field !== undefined &&
+            raiseSizingConfig.position !== undefined &&
+            raiseSizingConfig.actionType !== undefined &&
+            raiseSizingConfig.stackDepth !== undefined
+        ) {
+
+            async function fetchData() {
+                const data = {
+                    type: raiseSizingConfig.type,
+                    field: raiseSizingConfig.field,
+                    position: raiseSizingConfig.position,
+                    actionType: raiseSizingConfig.actionType,
+                    stackDepth: raiseSizingConfig.stackDepth,
+                    page: page,
+                    pageSize: pageSize,
+                    ...filter
+                }
+
+                let result = await raisingSizeTabelExtracting(data)
+
+                if (result.isOkay) {
+
+                    setUserResultList({
+                        totalCount: result.totalCount,
+                        result: result.result
+                    })
+                }
+            }
+            fetchData()
+        }
+
+    }, [raiseSizingConfig, pageSize, page, filter])
+
     const raiseSizingTable = async (type: any, field: any, position: any, actionType: any, stackDepth: any) => {
 
-        const data = {
+        setRaiseSizingConfig({
             type: type,
             field: field,
             position: position,
             actionType: actionType,
-            stackDepth: stackDepth,
-            ...filter
-        }
-
-        let result = await raisingSizeTabelExtracting(data)
-
-        setUserResultList({
-            totalCount: 1,
-            result: result.length > 10 ? result.slice(0, 10) : result
+            stackDepth: stackDepth
         })
+    }
 
+    const bufferStackDepthCategory = (value: any, type: any) => {
+        setStackDepthCategory(value)
+        // setDetailType(type)
     }
 
     useEffect(() => {
@@ -316,14 +358,15 @@ const Report = () => {
                     reportSetting: reportSetting,
                     page: page,
                     pageSize: pageSize,
-                    ...filter
+                    ...filter,
+                    stackDepthCategory: stackDepthCategory
                 }
                 const response = await conditionPair(data)
                 setUserResultList(response)
             }
             fetchMyAPI()
         }
-    }, [reportSetting, page, pageSize])
+    }, [reportSetting, page, pageSize, stackDepthCategory])
 
     useEffect(() => {
         async function fetchMyAPI() {
@@ -332,6 +375,8 @@ const Report = () => {
                 page: page,
                 pageSize: pageSize
             }
+
+            console.log("reportEachPair");
 
             const response = await reportEachPair(data)
             setUserResultList(response)
@@ -416,7 +461,13 @@ const Report = () => {
         if (accessToken === null && refreshToken === null) navigate('/auth/boxed-signin');
 
         async function fetchMyAPI() {
-            const detailedTableGetData: any = { ...valueStatus, ...filter }
+            const detailedTableGetData: any = {
+                ...valueStatus,
+                ...filter,
+                stackDepthCategory: stackDepthCategory,
+                detailType: detailType
+            }
+
             // if (
             //     detailedTableGetData.action !== "" &&
             //     detailedTableGetData.pokerType !== "N/A" &&
@@ -425,12 +476,15 @@ const Report = () => {
             //     detailedTableGetData.stackDepth.length !== 0 &&
             //     detailedTableGetData.range !== undefined
             // ) {
+
+            console.log();
+
             const detailResult = await detailedTableGet(detailedTableGetData)
             setDetailedTable(detailResult)
             // }
         }
         fetchMyAPI()
-    }, [valueStatus, filter])
+    }, [valueStatus, filter, stackDepthCategory])
 
     useEffect(() => {
         async function fetchMyAPI() {
@@ -440,6 +494,7 @@ const Report = () => {
         }
         fetchMyAPI()
     }, [])
+
 
     return (
         <div>
@@ -525,8 +580,11 @@ const Report = () => {
                                 filter={filter}
                                 detailedTable={detailedTable}
                                 reportSetting={reportSetting}
+                                stackDepthCategory={stackDepthCategory}
+                                setDetailType={(type: any) => setDetailType(type)}
                                 raiseSizingTable={(type: any, field: any, position: any, actionType: any, stackDepth: any) => raiseSizingTable(type, field, position, actionType, stackDepth)}
                                 setReportSetting={(position: any, action: any) => setReportSetting({ ...reportSetting, position: position, action: action })}
+                                setStackDepthCategory={(stackCategory: any, type: any) => bufferStackDepthCategory(stackCategory, type)}
                             />
                             :
                             <div className=''>

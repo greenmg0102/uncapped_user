@@ -10,7 +10,9 @@ function App({ children }: PropsWithChildren) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-
+        
+        console.log('app');
+        
         axiosAuthMiddleware.initialize(); // Call the initialization function
 
         // document.addEventListener('contextmenu', event => event.preventDefault());

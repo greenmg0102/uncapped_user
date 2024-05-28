@@ -6,7 +6,7 @@ import { detailTablePosition } from '../../../../../../../utils/reference/playCa
 function RaiseSizingTable({ actionType, stackDepth, raiseSizingData, raiseSizingTable }: any) {
 
     const extractingHand = (field: any, position: any) => {
-        raiseSizingTable("Hero", field, position, actionType, stackDepth)
+        raiseSizingTable("Suqeeze", field, position, actionType, stackDepth)
     }
 
     return (
@@ -27,138 +27,160 @@ function RaiseSizingTable({ actionType, stackDepth, raiseSizingData, raiseSizing
                         )
                     },
                     {
-                        accessor: actionType.includes("all in") ? '10bballin' : '2bb',
-                        title: actionType.includes("all in") ? '<10bb' : '2.00x ~ 2.49x',
+                        accessor: '1squeeze',
+                        title: '1.0x ~ 2.99x',
                         render: (data: any) => (
                             <div className='flex justify-center items-end'>
                                 <p
                                     className={
                                         clsx(
                                             'hover:cursor-pointer hover:text-yellow-500 transition-all mr-[2px]',
-                                            data && data[actionType.includes("all in") ? '10bballin' : '2bb'] === 0 ? "" : "text-green-500"
+                                            data && data['1squeeze'] === 0 ? "" : "text-green-500"
                                         )
                                     }
-                                    onClick={() => extractingHand(actionType.includes("all in") ? '10bballin' : '2bb', data["_id"])}
+                                    onClick={() => extractingHand('1squeeze', data["_id"])}
                                 >
-                                    {data && data[actionType.includes("all in") ? '10bballin' : '2bb']}
+                                    {data && data['1squeeze']}
+                                </p>
+
+                            </div>
+                        )
+                    },
+                    {
+                        accessor: '3squeeze',
+                        title: '3.0x ~ 3.49x',
+                        render: (data: any) => (
+                            <div className='flex justify-center items-end'>
+                                <p
+                                    className={
+                                        clsx(
+                                            'hover:cursor-pointer hover:text-yellow-500 transition-all mr-[2px]',
+                                            data && data['3squeeze'] === 0 ? "" : "text-green-500"
+                                        )
+                                    }
+                                    onClick={() => extractingHand('3squeeze', data["_id"])}
+                                >
+                                    {data && data['3squeeze']}
+                                </p>
+
+                            </div>
+                        )
+                    },
+                    {
+                        accessor: '35squeeze',
+                        title: '3.5x ~ 3.99x',
+                        render: (data: any) => (
+                            <div className='flex justify-center items-end'>
+                                <p
+                                    className={
+                                        clsx(
+                                            'hover:cursor-pointer hover:text-yellow-500 transition-all mr-[2px]',
+                                            data && data['35squeeze'] === 0 ? "" : "text-green-500"
+                                        )
+                                    }
+                                    onClick={() => extractingHand('35squeeze', data["_id"])}
+                                >
+                                    {data && data['35squeeze']}
                                 </p>
                             </div>
                         )
                     },
                     {
-                        accessor: actionType.includes("all in") ? '20bballin' : '25bb',
-                        title: actionType.includes("all in") ? '11-20bb' : '2.50x ~ 2.99x',
+                        accessor: '4squeeze',
+                        title: '4.0x ~ 4.49x',
                         render: (data: any) => (
                             <div className='flex justify-center items-end'>
                                 <p
                                     className={
                                         clsx(
                                             'hover:cursor-pointer hover:text-yellow-500 transition-all mr-[2px]',
-                                            data && data[actionType.includes("all in") ? '20bballin' : '25bb'] === 0 ? "" : "text-green-500"
+                                            data && data['4squeeze'] === 0 ? "" : "text-green-500"
                                         )
                                     }
-                                    onClick={() => extractingHand(actionType.includes("all in") ? '20bballin' : '25bb', data["_id"])}
+                                    onClick={() => extractingHand('4squeeze', data["_id"])}
                                 >
-                                    {data && data[actionType.includes("all in") ? '20bballin' : '25bb']}
+                                    {data && data['4squeeze']}
                                 </p>
                             </div>
                         )
                     },
                     {
-                        accessor: actionType.includes("all in") ? '30bballin' : '3bb',
-                        title: actionType.includes("all in") ? '21bb-30bb' : '3.00x ~ 3.49x',
+                        accessor: '45squeeze',
+                        title: '4.5x ~ 4.99x',
                         render: (data: any) => (
                             <div className='flex justify-center items-end'>
                                 <p
                                     className={
                                         clsx(
                                             'hover:cursor-pointer hover:text-yellow-500 transition-all mr-[2px]',
-                                            data && data[actionType.includes("all in") ? '30bballin' : '3bb'] === 0 ? "" : "text-green-500"
+                                            data && data['45squeeze'] === 0 ? "" : "text-green-500"
                                         )
                                     }
-                                    onClick={() => extractingHand(actionType.includes("all in") ? '30bballin' : '3bb', data["_id"])}
+                                    onClick={() => extractingHand('45squeeze', data["_id"])}
                                 >
-                                    {data && data[actionType.includes("all in") ? '30bballin' : '3bb']}
+                                    {data && data['45squeeze']}
                                 </p>
                             </div>
                         )
                     },
                     {
-                        accessor: actionType.includes("all in") ? '40bballin' : '35bb',
-                        title: actionType.includes("all in") ? '31bb-40bb' : '3.50x ~ 3.99x',
+                        accessor: '5squeeze',
+                        title: '5.0x ~ 5.49x',
                         render: (data: any) => (
                             <div className='flex justify-center items-end'>
                                 <p
                                     className={
                                         clsx(
                                             'hover:cursor-pointer hover:text-yellow-500 transition-all mr-[2px]',
-                                            data && data[actionType.includes("all in") ? '40bballin' : '35bb'] === 0 ? "" : "text-green-500"
+                                            data && data['5squeeze'] === 0 ? "" : "text-green-500"
                                         )
                                     }
-                                    onClick={() => extractingHand(actionType.includes("all in") ? '40bballin' : '35bb', data["_id"])}
+                                    onClick={() => extractingHand('5squeeze', data["_id"])}
                                 >
-                                    {data && data[actionType.includes("all in") ? '40bballin' : '35bb']}
+                                    {data && data['5squeeze']}
+                                </p>
+
+                            </div>
+                        )
+                    },
+                    {
+                        accessor: '55squeeze',
+                        title: '5.5x ~ 5.99x',
+                        render: (data: any) => (
+                            <div className='flex justify-center items-end'>
+                                <p
+                                    className={
+                                        clsx(
+                                            'hover:cursor-pointer hover:text-yellow-500 transition-all mr-[2px]',
+                                            data && data['55squeeze'] === 0 ? "" : "text-green-500"
+                                        )
+                                    }
+                                    onClick={() => extractingHand('55squeeze', data["_id"])}
+                                >
+                                    {data && data['55squeeze']}
                                 </p>
                             </div>
                         )
                     },
                     {
-                        accessor: actionType.includes("all in") ? '50bballin' : '4bb',
-                        title: actionType.includes("all in") ? '41-50bb' : '4.00x ~ 4.49x',
+                        accessor: '6squeeze',
+                        title: '6.0x +',
                         render: (data: any) => (
                             <div className='flex justify-center items-end'>
                                 <p
                                     className={
                                         clsx(
                                             'hover:cursor-pointer hover:text-yellow-500 transition-all mr-[2px]',
-                                            data && data[actionType.includes("all in") ? '50bballin' : '4bb'] === 0 ? "" : "text-green-500"
+                                            data && data['6squeeze'] === 0 ? "" : "text-green-500"
                                         )
                                     }
-                                    onClick={() => extractingHand(actionType.includes("all in") ? '50bballin' : '4bb', data["_id"])}
+                                    onClick={() => extractingHand('6squeeze', data["_id"])}
                                 >
-                                    {data && data[actionType.includes("all in") ? '50bballin' : '4bb']}
+                                    {data && data['6squeeze']}
                                 </p>
                             </div>
                         )
                     },
-                    {
-                        accessor: actionType.includes("all in") ? '60bballin' : '45bb',
-                        title: actionType.includes("all in") ? '51-60bb' : '4.50x ~ 5.00x',
-                        render: (data: any) => (
-                            <div className='flex justify-center items-end'>
-                                <p
-                                    className={
-                                        clsx(
-                                            'hover:cursor-pointer hover:text-yellow-500 transition-all mr-[2px]',
-                                            data && data[actionType.includes("all in") ? '60bballin' : '45bb'] === 0 ? "" : "text-green-500"
-                                        )
-                                    }
-                                    onClick={() => extractingHand(actionType.includes("all in") ? '60bballin' : '45bb', data["_id"])}
-                                >
-                                    {data && data[actionType.includes("all in") ? '60bballin' : '45bb']}
-                                </p>
-                            </div>
-                        )
-                    },
-                    {
-                        accessor: actionType.includes("all in") ? '61bballin' : '501bb',
-                        title: actionType.includes("all in") ? '>61bb' : '5.01 x +',
-                        render: (data: any) => (
-                            <div className='flex justify-center items-end'>
-                                <p
-                                    className={
-                                        clsx(
-                                            'hover:cursor-pointer hover:text-yellow-500 transition-all mr-[2px]',
-                                            data && data[actionType.includes("all in") ? '61bballin' : '501bb'] === 0 ? "" : "text-green-500"
-                                        )
-                                    }
-                                    onClick={() => extractingHand(actionType.includes("all in") ? '61bballin' : '501bb', data["_id"])}
-                                >
-                                    {data && data[actionType.includes("all in") ? '61bballin' : '501bb']}
-                                </p>
-                            </div>
-                        )
-                    }
                 ]}
                 minHeight={200}
             />

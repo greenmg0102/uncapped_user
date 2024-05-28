@@ -19,6 +19,7 @@ const FileUploadPreview = () => {
     const MySwal = withReactContent(Swal);
 
     const dispatch = useDispatch();
+    
     useEffect(() => {
         dispatch(setPageTitle('File Upload Preview'));
     });
@@ -61,9 +62,7 @@ const FileUploadPreview = () => {
             const intervalId = setInterval(myFunction, 1000);
 
             function myFunction() {
-
                 dispatch(passedTime())
-
                 if (totalCount === rejectedCount + completedAmonut && totalCount !== 0) {
                     clearInterval(intervalId);
                 }
@@ -138,7 +137,7 @@ const FileUploadPreview = () => {
     }
 
     const handleFileUpload = async (file: any) => {
-        const url = 'https://api.uncappedtheory.com/api/v1/data-stream/data';
+        const url = 'http://localhost:8000/api/v1/data-stream/data';
         const options = {
             method: 'post',
             body: file,

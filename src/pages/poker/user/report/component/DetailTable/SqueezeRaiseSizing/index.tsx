@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
+import SqueezeSizing from './SqueezeSizing'
+import { defaultReportSetting } from '../../../../../../../utils/reference/reporting'
+import { squeezeRaisingSize } from '../../../../../../../utils/functions/user/report/RaiseSizing'
 
-import HeroSizing from './HeroSizing'
-import { defaultReportSetting, raiseSizingActionList } from '../../../../../../../utils/reference/reporting'
-import { heroRaisingSize } from '../../../../../../../utils/functions/user/report/RaiseSizing'
+export default function SqueezeRaiseSizing({ filter, raiseSizingTable }: any) {
 
-function HeroRasingSize({ filter, raiseSizingTable }: any) {
-
-    const [actionType, setActionType] = useState("RFI")
+    const [actionType] = useState("squeeze")
     const [stackDepth, setStackDepth] = useState("Shallow Stack")
 
     const [raiseSizingData, setRaiseSizingData] = useState([])
@@ -18,7 +17,7 @@ function HeroRasingSize({ filter, raiseSizingTable }: any) {
                 stackDepth: stackDepth,
                 ...filter
             }
-            let result = await heroRaisingSize(data)
+            let result = await squeezeRaisingSize(data)
 
             result.sort((a: any, b: any) => { if (a._id < b._id) return -1; });
             setRaiseSizingData(result)
@@ -31,16 +30,6 @@ function HeroRasingSize({ filter, raiseSizingTable }: any) {
             <div className='flex justify-around items-center flex-wrap my-2 mx-auto w-[600px]'>
                 <select
                     className="form-select text-white-dark w-[150px] mb-2"
-                    value={actionType}
-                    onChange={(e: any) => setActionType(e.target.value)}
-                    required
-                >
-                    {raiseSizingActionList.map((item: any, index: any) =>
-                        <option key={index} value={item}>{item}</option>
-                    )}
-                </select>
-                <select
-                    className="form-select text-white-dark w-[150px] mb-2"
                     value={stackDepth}
                     onChange={(e: any) => setStackDepth(e.target.value)}
                     required
@@ -51,7 +40,7 @@ function HeroRasingSize({ filter, raiseSizingTable }: any) {
                 </select>
             </div>
             <div className='w-full flex justify-center items-center my-4 mt-2 px-2'>
-                <HeroSizing
+                <SqueezeSizing
                     actionType={actionType}
                     stackDepth={stackDepth}
                     raiseSizingData={raiseSizingData}
@@ -61,5 +50,3 @@ function HeroRasingSize({ filter, raiseSizingTable }: any) {
         </div>
     )
 }
-
-export default HeroRasingSize

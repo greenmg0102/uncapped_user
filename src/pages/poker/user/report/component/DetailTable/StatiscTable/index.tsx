@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { DataTable, DataTableSortStatus } from 'mantine-datatable';
 import clsx from 'clsx'
+import { detailtackDepthCategory } from '../../../../../../../utils/reference/reporting'
 import sortBy from 'lodash/sortBy';
 import CircleChart from "./CircleChart"
 import DetailStaticTable from './DetailStaticTable'
 import "../detailStyle.css"
 
-const StatisTable = ({ reportSetting, setReportSetting, detailedTable }: any) => {
+const StatisTable = ({ reportSetting, setReportSetting, type, detailedTable, stackDepthCategory, setStackDepthCategory }: any) => {
 
     const [initialRecords, setInitialRecords] = useState(sortBy(detailedTable, '_id'));
 
@@ -84,6 +85,18 @@ const StatisTable = ({ reportSetting, setReportSetting, detailedTable }: any) =>
 
     return (
         <div>
+            <div className='flex justify-around items-center flex-wrap my-2 mx-auto w-[600px]'>
+                <select
+                    className="form-select text-white-dark w-[150px] mb-2"
+                    value={stackDepthCategory}
+                    onChange={(e: any) => setStackDepthCategory(e.target.value)}
+                    required
+                >
+                    {detailtackDepthCategory.map((item: any, index: any) =>
+                        <option key={index} value={item.valueList}>{item.title}</option>
+                    )}
+                </select>
+            </div>
             {
                 detailedTable.length === 0 ?
                     <div className='h-[250px] sm:h-[450px] flex flex-col justify-center items-center w-full'>
@@ -102,8 +115,10 @@ const StatisTable = ({ reportSetting, setReportSetting, detailedTable }: any) =>
                         <div className="w-full md:w-3/4 p-[4px]">
                             <DetailStaticTable
                                 reportSetting={reportSetting}
-                                setReportSetting={setReportSetting}
                                 detailedTable={detailedTable}
+                                setReportSetting={setReportSetting}
+                                stackDepthCategory={stackDepthCategory}
+                                setStackDepthCategory={(stackCategory: any) => setStackDepthCategory(stackCategory, type)}
                             />
                         </div>
                     </div>

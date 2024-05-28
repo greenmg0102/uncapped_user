@@ -2,11 +2,12 @@ import { Fragment, useState } from 'react';
 import { Tab } from '@headlessui/react';
 import StatisTable from "./StatiscTable"
 import HeroRasingSize from "./HeroRasingSize"
+import SqueezeRaiseSizing from "./SqueezeRaiseSizing"
 import VillainRasingSize from "./VillainRasingSize"
 
 import "./detailStyle.css"
 
-const DetailTable = ({ reportSetting, setReportSetting, detailedTable, filter, raiseSizingTable }: any) => {
+const DetailTable = ({ reportSetting, setReportSetting, detailedTable, setDetailType, filter, raiseSizingTable, stackDepthCategory, setStackDepthCategory }: any) => {
 
     const [displayTabSelect, setDisplayTabSelect] = useState(0)
 
@@ -21,11 +22,24 @@ const DetailTable = ({ reportSetting, setReportSetting, detailedTable, filter, r
                                 <button
                                     className={
                                         `${selected ? '!border-white-light !border-b-white text-primary !outline-none dark:!border-[#191e3a] dark:!border-b-black ' : ''}
-                                                dark:hover:border-b-black' -mb-[1px] w-full lg:w-[160px] block border border-transparent p-3.5 py-2 hover:text-primary`}
-                                    onClick={() => setDisplayTabSelect(0)}
+                                                dark:hover:border-b-black' -mb-[1px] w-full lg:max-w-[160px] block border border-transparent p-3.5 py-2 hover:text-primary flex`}
+                                    onClick={() => {
+                                        setDisplayTabSelect(0)
+                                        setDetailType("Hero")
+                                    }}
                                 >
+                                    <svg fill="#00ff00" height="1.7em" width="1.7em" version="1.1" viewBox="0 0 286.439 286.439" className='mr-2'>
+                                        <g>
+                                            <path d="m45.422,135.326c-3.313,0-6,2.687-6,6v22.064c0,3.313 2.687,6 6,6s6-2.687 6-6v-22.064c0-3.314-2.687-6-6-6z" />
+                                            <path d="m69.883,120.619c-3.313,0-6,2.687-6,6v36.771c0,3.313 2.687,6 6,6s6-2.687 6-6v-36.771c0-3.313-2.687-6-6-6z" />
+                                            <path d="m94.344,98.817c-3.313,0-6,2.687-6,6v58.573c0,3.313 2.687,6 6,6s6-2.687 6-6v-58.573c0-3.314-2.687-6-6-6z" />
+                                            <path d="m118.805,83.849c-3.313,0-6,2.687-6,6v73.542c0,3.313 2.687,6 6,6s6-2.687 6-6v-73.542c0-3.314-2.687-6-6-6z" />
+                                            <path d="m281.728,196.948l-43.009-43.009c4.473-10.953 4.097-23.43-1.11-34.131v-47.09c0-8.808-7.166-15.974-15.974-15.974h-205.661c-8.808-0.001-15.974,7.165-15.974,15.973v114.683c0,8.808 7.166,15.974 15.974,15.974h65.068v14.322h-17.278c-3.313,0-6,2.686-6,6s2.687,6 6,6h110.081c3.313,0 6-2.686 6-6s-2.687-6-6-6h-17.278v-14.322h65.068c5.674,0 10.653-2.982 13.487-7.453l23.816,23.816c3.142,3.142 7.268,4.712 11.395,4.712s8.253-1.571 11.395-4.712h0.001c6.281-6.283 6.281-16.507-0.001-22.789zm-8.486,14.304c-1.604,1.604-4.214,1.604-5.819,0l-40.719-40.719 5.819-5.819 40.719,40.719c1.605,1.604 1.605,4.214 0,5.819zm-51.607-19.878h-205.661c-2.191,0-3.974-1.783-3.974-3.974v-114.683c0-2.191 1.782-3.974 3.974-3.974h205.661c2.191,0 3.974,1.783 3.974,3.974v32.357c-16.362-12.656-40.032-11.492-55.035,3.51-16.276,16.278-16.276,42.763 0,59.04 7.886,7.885 18.369,12.228 29.521,12.228 5.526,0 10.888-1.07 15.852-3.106l9.663,9.662v0.993c-0.002,2.19-1.784,3.973-3.975,3.973zm-128.593,26.322v-14.322h51.524v14.322h-51.524zm128.087-58.558c-5.619,5.619-13.09,8.713-21.035,8.713-7.946,0-15.416-3.094-21.035-8.713-11.598-11.598-11.598-30.47 0-42.069 5.8-5.799 13.417-8.699 21.035-8.699 7.617,0 15.235,2.9 21.034,8.699 11.599,11.598 11.599,30.47 0.001,42.069z" />
+                                            <path d="m199.306,151.167c-7.204-0.435-12.711-6.648-12.276-13.852 0.199-3.308-2.32-6.151-5.628-6.351-3.309-0.197-6.151,2.32-6.351,5.628-0.833,13.809 9.724,25.72 23.532,26.553 0.123,0.007 0.245,0.011 0.367,0.011 3.148,0 5.791-2.454 5.983-5.639 0.2-3.307-2.32-6.15-5.627-6.35z" />
+                                        </g>
+                                    </svg>
 
-                                    Action Analysis
+                                    Hero Action
                                 </button>
                             )}
                         </Tab>
@@ -34,8 +48,34 @@ const DetailTable = ({ reportSetting, setReportSetting, detailedTable, filter, r
                                 <button
                                     className={
                                         `${selected ? '!border-white-light !border-b-white text-primary !outline-none dark:!border-[#191e3a] dark:!border-b-black ' : ''}
-                                                dark:hover:border-b-black' -mb-[1px] w-full lg:w-[160px] block border border-transparent p-3.5 py-2 hover:text-primary flex `}
-                                    onClick={() => setDisplayTabSelect(1)}
+                                                dark:hover:border-b-black' -mb-[1px] w-full lg:max-w-[160px] block border border-transparent p-3.5 py-2 hover:text-primary flex`}
+                                    onClick={() => {
+                                        setDisplayTabSelect(1)
+                                        setDetailType("Villain")
+                                    }}
+                                >
+                                    <svg fill="#ff0000" height="1.7em" width="1.7em" version="1.1" viewBox="0 0 286.439 286.439" className='mr-2'>
+                                        <g>
+                                            <path d="m45.422,135.326c-3.313,0-6,2.687-6,6v22.064c0,3.313 2.687,6 6,6s6-2.687 6-6v-22.064c0-3.314-2.687-6-6-6z" />
+                                            <path d="m69.883,120.619c-3.313,0-6,2.687-6,6v36.771c0,3.313 2.687,6 6,6s6-2.687 6-6v-36.771c0-3.313-2.687-6-6-6z" />
+                                            <path d="m94.344,98.817c-3.313,0-6,2.687-6,6v58.573c0,3.313 2.687,6 6,6s6-2.687 6-6v-58.573c0-3.314-2.687-6-6-6z" />
+                                            <path d="m118.805,83.849c-3.313,0-6,2.687-6,6v73.542c0,3.313 2.687,6 6,6s6-2.687 6-6v-73.542c0-3.314-2.687-6-6-6z" />
+                                            <path d="m281.728,196.948l-43.009-43.009c4.473-10.953 4.097-23.43-1.11-34.131v-47.09c0-8.808-7.166-15.974-15.974-15.974h-205.661c-8.808-0.001-15.974,7.165-15.974,15.973v114.683c0,8.808 7.166,15.974 15.974,15.974h65.068v14.322h-17.278c-3.313,0-6,2.686-6,6s2.687,6 6,6h110.081c3.313,0 6-2.686 6-6s-2.687-6-6-6h-17.278v-14.322h65.068c5.674,0 10.653-2.982 13.487-7.453l23.816,23.816c3.142,3.142 7.268,4.712 11.395,4.712s8.253-1.571 11.395-4.712h0.001c6.281-6.283 6.281-16.507-0.001-22.789zm-8.486,14.304c-1.604,1.604-4.214,1.604-5.819,0l-40.719-40.719 5.819-5.819 40.719,40.719c1.605,1.604 1.605,4.214 0,5.819zm-51.607-19.878h-205.661c-2.191,0-3.974-1.783-3.974-3.974v-114.683c0-2.191 1.782-3.974 3.974-3.974h205.661c2.191,0 3.974,1.783 3.974,3.974v32.357c-16.362-12.656-40.032-11.492-55.035,3.51-16.276,16.278-16.276,42.763 0,59.04 7.886,7.885 18.369,12.228 29.521,12.228 5.526,0 10.888-1.07 15.852-3.106l9.663,9.662v0.993c-0.002,2.19-1.784,3.973-3.975,3.973zm-128.593,26.322v-14.322h51.524v14.322h-51.524zm128.087-58.558c-5.619,5.619-13.09,8.713-21.035,8.713-7.946,0-15.416-3.094-21.035-8.713-11.598-11.598-11.598-30.47 0-42.069 5.8-5.799 13.417-8.699 21.035-8.699 7.617,0 15.235,2.9 21.034,8.699 11.599,11.598 11.599,30.47 0.001,42.069z" />
+                                            <path d="m199.306,151.167c-7.204-0.435-12.711-6.648-12.276-13.852 0.199-3.308-2.32-6.151-5.628-6.351-3.309-0.197-6.151,2.32-6.351,5.628-0.833,13.809 9.724,25.72 23.532,26.553 0.123,0.007 0.245,0.011 0.367,0.011 3.148,0 5.791-2.454 5.983-5.639 0.2-3.307-2.32-6.15-5.627-6.35z" />
+                                        </g>
+                                    </svg>
+
+                                    Villain Action
+                                </button>
+                            )}
+                        </Tab>
+                        <Tab as={Fragment}>
+                            {({ selected }) => (
+                                <button
+                                    className={
+                                        `${selected ? '!border-white-light !border-b-white text-primary !outline-none dark:!border-[#191e3a] dark:!border-b-black ' : ''}
+                                                dark:hover:border-b-black' -mb-[1px] w-full lg:max-w-[140px] block border border-transparent p-3.5 py-2 hover:text-primary flex `}
+                                    onClick={() => setDisplayTabSelect(2)}
                                 >
                                     <svg height="1.5em" width="1.5em" version="1.1" id="_x32_" viewBox="0 0 512 512" fill="#00ff00" className='mr-2'>
                                         <style type="text/css">
@@ -94,13 +134,26 @@ const DetailTable = ({ reportSetting, setReportSetting, detailedTable, filter, r
                                 <button
                                     className={
                                         `${selected ? '!border-white-light !border-b-white text-primary !outline-none dark:!border-[#191e3a] dark:!border-b-black ' : ''}
-                                                dark:hover:border-b-black' -mb-[1px] w-full lg:w-[160px] block border border-transparent p-3.5 py-2 hover:text-primary flex`}
-                                    onClick={() => setDisplayTabSelect(2)}
+                                                dark:hover:border-b-black' -mb-[1px] w-full lg:max-w-[130px] block border border-transparent p-3.5 py-2 hover:text-primary flex`}
+                                    onClick={() => setDisplayTabSelect(3)}
                                 >
                                     <svg width="1.5em" height="1.5em" viewBox="0 0 32 32" version="1.1" fill="#ff0000" className='mr-2'>
                                         <path d="M19.971 14.602c0.578-0.088 1.666-0.472 2.049-0.771 0.418-0.244 0.635-0.534 0.648-0.872 0.041-0.515 0.018-1.015-0.070-1.501-0.088-0.487-0.187-1.041-0.295-1.663-1.176 1.853-2.771 3.103-4.786 3.752l-0.224 0.486c0.947 0.609 1.84 0.798 2.678 0.569v0zM13.42 13.547c-2.028-0.649-3.631-1.899-4.807-3.752-0.095 0.622-0.189 1.176-0.284 1.663s-0.115 0.986-0.061 1.501c0.027 0.352 0.243 0.642 0.649 0.872 0.306 0.252 1.511 0.723 2.028 0.771 0.838 0.229 1.73 0.040 2.678-0.568l-0.203-0.487zM14.018 17.015c-0.155 0.406-0.125 1.037 0.092 1.578h0.941v-2.978c-0.393 0.528-0.878 0.994-1.033 1.4zM16.053 18.593h0.908c0.054-0.148 0.095-0.438 0.122-0.554s0.041-0.24 0.041-0.375c0-0.365-0.079-0.696-0.235-0.994s-0.564-0.648-0.836-1.055v2.978zM26.568 8.654c0.203 0.798 0.271 1.609 0.203 2.434-0.135 1.65-0.838 3.306-2.109 4.604l1.116 2.13-1.644 1.866c-2.326-1.11-3.063 0.044-3.063 1.663v6.649h-1.047v-5.964h-0.946v5.964h-1.088v-5.964h-0.938v5.964h-1.034v-5.964h-0.938v5.964h-1.033v-5.946l-0.939-0.018v5.964h-1.090v-5.964h-0.943v5.964h-1.035v-6.649c0-1.625-0.867-2.855-3.198-1.663l-1.683-1.866 1.176-2.13c-1.271-1.298-1.951-2.951-2.1-4.613-0.075-0.833-0.014-1.647 0.182-2.445 0.997-4.056 4.496-4.698 5.182-4.807 3.905-0.541 7.818-0.541 11.737 0 0.669 0.115 4.213 0.819 5.232 4.827z"></path>
                                     </svg>
                                     Population
+                                </button>
+                            )}
+                        </Tab>
+                        <Tab as={Fragment}>
+                            {({ selected }) => (
+                                <button
+                                    className={
+                                        `${selected ? '!border-white-light !border-b-white text-primary !outline-none dark:!border-[#191e3a] dark:!border-b-black ' : ''}
+                                                dark:hover:border-b-black' -mb-[1px] w-full lg:max-w-[160px] block border border-transparent p-3.5 py-2 hover:text-primary flex `}
+                                    onClick={() => setDisplayTabSelect(4)}
+                                >
+                                    <svg viewBox="64 64 896 896" focusable="false" data-icon="rise" width="1.5em" height="1.5em" fill="#ffffff" aria-hidden="true" className='mr-2'><path d="M917 211.1l-199.2 24c-6.6.8-9.4 8.9-4.7 13.6l59.3 59.3-226 226-101.8-101.7c-6.3-6.3-16.4-6.2-22.6 0L100.3 754.1a8.03 8.03 0 000 11.3l45 45.2c3.1 3.1 8.2 3.1 11.3 0L433.3 534 535 635.7c6.3 6.2 16.4 6.2 22.6 0L829 364.5l59.3 59.3a8.01 8.01 0 0013.6-4.7l24-199.2c.7-5.1-3.7-9.5-8.9-8.8z"></path></svg>
+                                    Squeeze Sizing
                                 </button>
                             )}
                         </Tab>
@@ -110,14 +163,28 @@ const DetailTable = ({ reportSetting, setReportSetting, detailedTable, filter, r
 
             {displayTabSelect === 0 &&
                 <StatisTable
+                    type={"Hero"}
                     reportSetting={reportSetting}
-                    setReportSetting={setReportSetting}
                     detailedTable={detailedTable}
+                    setReportSetting={setReportSetting}
+                    stackDepthCategory={stackDepthCategory}
+                    setStackDepthCategory={(stackCategory: any, type: any) => setStackDepthCategory(stackCategory, type)}
+                />
+            }
+
+            {displayTabSelect === 1 &&
+                <StatisTable
+                    type={"Villain"}
+                    reportSetting={reportSetting}
+                    detailedTable={detailedTable}
+                    setReportSetting={setReportSetting}
+                    stackDepthCategory={stackDepthCategory}
+                    setStackDepthCategory={(stackCategory: any, type: any) => setStackDepthCategory(stackCategory, type)}
                 />
             }
 
             {
-                displayTabSelect === 1 &&
+                displayTabSelect === 2 &&
                 <HeroRasingSize
                     filter={filter}
                     raiseSizingTable={(type: any, field: any, position: any, actionType: any, stackDepth: any) => raiseSizingTable(type, field, position, actionType, stackDepth)}
@@ -125,8 +192,16 @@ const DetailTable = ({ reportSetting, setReportSetting, detailedTable, filter, r
             }
 
             {
-                displayTabSelect === 2 &&
+                displayTabSelect === 3 &&
                 <VillainRasingSize
+                    filter={filter}
+                    raiseSizingTable={(type: any, field: any, position: any, actionType: any, stackDepth: any) => raiseSizingTable(type, field, position, actionType, stackDepth)}
+                />
+            }
+
+            {
+                displayTabSelect === 4 &&
+                <SqueezeRaiseSizing
                     filter={filter}
                     raiseSizingTable={(type: any, field: any, position: any, actionType: any, stackDepth: any) => raiseSizingTable(type, field, position, actionType, stackDepth)}
                 />

@@ -160,6 +160,33 @@ export const defaultReportSetting: any = {
     ]
 }
 
+export const raiseSizingActionList = [
+    'VPIP', 'VPIP (all in)', 'RFI', 'RFI (all in)', 'vs RFI', 'vs RFI (all in)', 'VPIP', 'VPIP (all in)', 'PFR', 'PFR (all in)', '3-Bet', '3-Bet (all in)', 'vs 3-Bet', 'vs 3-Bet (all in)',
+    '4-Bet', '4-Bet (all in)', 'VS 4-Bet', 'VS 4-Bet (all in)', '5-Bet +', '5-Bet + (all in)'
+]
+
+export const detailtackDepthCategory = [
+    {
+        id: 0,
+        title: "All Stack",
+        valueList: [10, 15, 20, 25, 30, 40, 50, 60, 80, 100]
+    },
+    {
+        id: 1,
+        title: "Deep Stack",
+        valueList: [60, 80, 100]
+    },
+    {
+        id: 2,
+        title: "Middle Stack",
+        valueList: [25, 30, 40, 50]
+    },
+    {
+        id: 3,
+        title: "Shallow Stack",
+        valueList: [10, 15, 20]
+    }
+]
 
 export const gradientColor: any = {
 

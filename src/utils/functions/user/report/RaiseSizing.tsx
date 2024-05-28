@@ -10,6 +10,11 @@ export async function villainRaisingSize(data: any): Promise<any> {
     return result
 }
 
+export async function squeezeRaisingSize(data: any): Promise<any> {
+    const result = await axios.post('report/raise-sizing/squeeze', data).then((result: any) => { return result.data })
+    return result
+}
+
 export async function raisingSizeTabelExtracting(data: any): Promise<any> {
     const result = await axios.post('report/raise-sizing/raisingSizeTabelExtracting', data).then((result: any) => { return result.data })
     return result

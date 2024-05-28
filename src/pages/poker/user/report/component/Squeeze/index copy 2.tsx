@@ -7,7 +7,7 @@ import { defaultReportSetting } from '../../../../../../utils/reference/reportin
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
 import { heroPositionValidation } from '../../../../../../utils/reference/heroPositionValidation'
-import { makingRange, availableHeroPosition, keyExtract, allowKey, makingColdRange, extractingMaximumPosition } from '../../../../../../utils/actionValidation/reporting/makingRange'
+import { availableHeroPosition, keyExtract, allowKey, makingColdRange, extractingMaximumPosition } from '../../../../../../utils/actionValidation/reporting/makingRange'
 import 'tippy.js/dist/tippy.css';
 
 export default function Squeeze({ squeezePanel, setSqueezePanel, actionLit, setActionList, squeezeModal, setSqueezeModal, actionPoint, setValueStatus, arrayPoint, premiumStatus, valueStatus, setPremiumStatus, notification, squeezeSetting, setSqueezeSetting }: any) {

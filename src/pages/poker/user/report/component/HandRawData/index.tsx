@@ -148,23 +148,6 @@ export default function HandRawData({ handRawData, activeNodeData, setHandRawDat
                                 <div className='bg-[#fbfbfb] dark:bg-[#121c2c] px-5 py-3'>
                                     <div className="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-start justify-between pb-2">
                                         <h4 className="font-bold text-xl">Hand Data</h4>
-                                        <div className='w-[30px] h-[30px] flex justify-center items-center transition-all'>
-                                            <svg
-                                                width="100%"
-                                                height="100%"
-                                                viewBox="0 0 1024 1024"
-                                                className="w-[20px] hover:cursor-pointer hover:w-[40px] transition-all"
-                                                onClick={() => {
-                                                    setActiveUserData(activeNodeData._id)
-                                                    setUserResultModal(true)
-                                                    setHandRawData(false)
-                                                }}
-                                            >
-                                                <path d="M391.166 156.304H501.7c228.857 0 422.263 184.597 422.263 403.115C923.963 780.312 742.427 960 519.315 960c-235.128 0-419.278-193.554-419.278-440.625 0-10.564 8.584-19.11 19.109-19.11h113.159c10.602 0 19.11 8.546 19.11 19.11 0 218.781 138.391 296.747 267.9 296.747 134.92 0 253.27-123.2 253.27-263.605 0-131.897-124.059-243.34-270.885-243.34l-106.555-3.227-3.979-149.646z" fill="#FF3B30" /><path d="M407.884 309.176v77.275c0 6.941-3.73 13.267-9.777 16.664-6.011 3.398-13.398 3.209-19.295-0.375L128.305 249.013c-5.71-3.508-9.147-9.669-9.147-16.383 0.078-6.681 3.585-12.876 9.333-16.312L378.998 66.729c5.894-3.542 13.285-3.657 19.221-0.221 6.008 3.358 9.665 9.702 9.665 16.609V309.176z" fill="#FF3B30" />
-                                                <path d="M439.717 307.301l40.724-150.999h-72.557v150.035z" fill="#070707" />
-                                            </svg>
-
-                                        </div>
                                     </div>
                                     <div className='flex justify-between items-center flex-wrap px-5 mt-2 border border-dashed p-2 rounded-[6px] border-gray-500'>
                                         <div className=''>
@@ -216,7 +199,7 @@ export default function HandRawData({ handRawData, activeNodeData, setHandRawDat
                                         </svg>
                                     </Tippy>
                                 </div>
-                                <div className="p-5 pt-2">
+                                <div className="p-5 pt-2">  
                                     <div className='h-[400px] overflow-y-scroll'>
                                         {handData.map((item: any, index: any) =>
                                             <p
@@ -227,7 +210,18 @@ export default function HandRawData({ handRawData, activeNodeData, setHandRawDat
                                             </p>
                                         )}
                                     </div>
-                                    <div className="flex justify-end items-center mt-8">
+                                    <div className="flex justify-between items-center mt-8">
+                                        <button
+                                            type="button"
+                                            className="btn btn-success ltr:ml-4 rtl:mr-4"
+                                            onClick={() => {
+                                                setActiveUserData(activeNodeData._id)
+                                                setUserResultModal(true)
+                                                setHandRawData(false)
+                                            }}
+                                        >
+                                            Reply
+                                        </button>
                                         <button type="button" className="btn btn-primary ltr:ml-4 rtl:mr-4" onClick={() => setHandRawData(false)}>
                                             Cancel
                                         </button>
