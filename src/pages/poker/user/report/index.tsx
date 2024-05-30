@@ -359,14 +359,15 @@ const Report = () => {
                     page: page,
                     pageSize: pageSize,
                     ...filter,
-                    stackDepthCategory: stackDepthCategory
+                    stackDepthCategory: stackDepthCategory,
+                    detailType: detailType
                 }
                 const response = await conditionPair(data)
                 setUserResultList(response)
             }
             fetchMyAPI()
         }
-    }, [reportSetting, page, pageSize, stackDepthCategory])
+    }, [reportSetting, page, pageSize, stackDepthCategory, detailType])
 
     useEffect(() => {
         async function fetchMyAPI() {
@@ -476,8 +477,6 @@ const Report = () => {
             //     detailedTableGetData.stackDepth.length !== 0 &&
             //     detailedTableGetData.range !== undefined
             // ) {
-
-            console.log();
 
             const detailResult = await detailedTableGet(detailedTableGetData)
             setDetailedTable(detailResult)

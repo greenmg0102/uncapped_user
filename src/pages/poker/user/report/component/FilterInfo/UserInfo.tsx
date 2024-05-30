@@ -25,7 +25,7 @@ export default function UserInfo({ pokerTypeCount, pokerMarkList }: any) {
             </div>
             <div className='flex justify-start items-center flex-wrap px-2'>
                 {pokerTypeCount.map((item: any, index: any) =>
-                    <div key={index} className="w-1/2 3xl:w-1/3 flex justify-start items-center pl-0 mb-1">
+                    <div key={index} className="w-1/4 3xl:w-1/5 flex justify-start items-center pl-0 mb-1">
                         <p className="text-left mr-1">
                             <img
                                 src={pokerMarkList.filter((each: any) => each.value === item._id)[0].image}
