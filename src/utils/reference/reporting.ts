@@ -157,7 +157,9 @@ export const defaultReportSetting: any = {
         //     title: "vs 5-Bet +",
         //     valueList: "vs 5-Bet +"
         // }
-    ]
+    ],
+    eachPosition: ["UTG", "UTG+1", "LJ", "HJ", "CO", "BTN", "SB", "BB"],
+    eachStack: [10, 15, 20, 25, 30, 398750, 50, 60, 80, 100],
 }
 
 export const raiseSizingActionList = [

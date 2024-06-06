@@ -12,7 +12,7 @@ const SettingPreFlop = ({ settingStatus, setSettingStatus, currentOption, defaul
     const bbData = [10, 15, 20, 25, 30, 398750, 50, 60, 80, 100]
     const tabBar = ["Analysis Settings", "Reporting Setting"]
     const gameType = ['Heads-Up', 'ChipEV', 'PKO']
-    const playersList = ['6', '8']
+    const playersList = [2, 3, 4, 5, 6, 7, 8]
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
 

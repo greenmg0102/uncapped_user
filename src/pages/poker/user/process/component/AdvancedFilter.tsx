@@ -21,7 +21,7 @@ export default function AdvancedFilter({ pageSize, page, dragModel, setDragModel
 
     const [filter, setFilter] = useState({
         pokerType: "N/A",
-        tableSize: "N/A",
+        tableSize: "2~10",
         heroPosition: "N/A",
         range: `2023-11-30 to ${nextDay}`,
         newRange: `2023-11-30 to ${nextDay}`

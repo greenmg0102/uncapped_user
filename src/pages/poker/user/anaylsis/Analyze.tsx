@@ -31,7 +31,6 @@ const Analyze = ({ nodeList, decideNode, activeNode, activeNodeNumber, activeNod
     const bufferSetValue = (value: any) => setActive((preValue: any) => preValue === value ? "" : value)
 
 
-
     return (
         <div>
             <Stages

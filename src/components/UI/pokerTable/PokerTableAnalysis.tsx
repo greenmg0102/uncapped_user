@@ -58,7 +58,7 @@ const PokerTableAnalysis = ({ maxSeat, nodeList, activePlayer, currentOption, ac
                         retrunBB={(index: any) => retrunBB(index)}
                         status={nodeList[index + 1] && nodeList[index + 1].sequence[nodeList[index + 1].sequence.length - 1]}
                     />
-
+                    {/* 
                     <div
                         className={clsx(
                             'absolute flex justify-center bg-gray-100 hover:bg-red-500 rounded-full font-bold w-[20px] h-[20px] text-black hover:text-white cursor-pointer transition-all',
@@ -69,7 +69,7 @@ const PokerTableAnalysis = ({ maxSeat, nodeList, activePlayer, currentOption, ac
                         }}
                     >
                         D
-                    </div>
+                    </div> */}
                 </div>
             )}
             {/* <div className={clsx(styles.poker_tracker, "")}>
