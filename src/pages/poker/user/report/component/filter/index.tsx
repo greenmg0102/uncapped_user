@@ -3,7 +3,7 @@ import ReportFilter from "./reportFilter"
 import UserFilter from "./userFilter"
 import Datafilter from "./datafilter"
 
-export default function Filtering({ defaultReportSetting, filter, valueStatus, setValueStatus, setFilter, heroPosition, stackDepth, VillianPosition, bufferRportingStatue }: any) {
+export default function Filtering({ userTab, setUserTab, squeezePanel, setSqueezePanel, actionLit, setActionList, reportingResult, premiumStatus, setPremiumStatus, squeezeSetting, setSqueezeSetting, defaultReportSetting, filter, valueStatus, setValueStatus, setFilter, heroPosition, stackDepth, VillianPosition, bufferRportingStatue }: any) {
 
   return (
     <div className="border border-gray-500 rounded-[8px] flex justify-between flex-wrap p-2">
@@ -11,13 +11,30 @@ export default function Filtering({ defaultReportSetting, filter, valueStatus, s
         valueStatus={valueStatus}
         setValueStatus={(total: any) => setValueStatus(total)}
         bufferRportingStatue={(type: any, list: any) => bufferRportingStatue(type, list)}
-        
+
+        squeezePanel={squeezePanel}
+        setSqueezePanel={(total: any) => setSqueezePanel(total)}
+
+        actionLit={actionLit}
+        setActionList={(total: any) => setActionList(total)}
+
+        premiumStatus={premiumStatus}
+        setPremiumStatus={(total: any) => setPremiumStatus(total)}
+
+        squeezeSetting={squeezeSetting}
+        setSqueezeSetting={(total: any) => setSqueezeSetting(total)}
+
         heroPosition={heroPosition}
         stackDepth={stackDepth}
         VillianPosition={VillianPosition}
       />
       <div className="w-full xl:w-1/2 flex justify-between flex-wrap">
         <ReportFilter
+
+          userTab={userTab}
+          setUserTab={(userTab: any) => setUserTab(userTab)}
+          reportingResult={reportingResult}
+
           valueStatus={valueStatus}
           defaultReportSetting={defaultReportSetting}
           setValueStatus={(total: any) => setValueStatus(total)}

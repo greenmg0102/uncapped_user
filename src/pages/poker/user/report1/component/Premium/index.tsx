@@ -7,7 +7,7 @@ import { heroPositionValidation } from '../../../../../../utils/reference/heroPo
 import { hero8Site, stackArray, villianPokerTable } from '../../../../../../utils/reference/playCardColor'
 import { defaultReportSetting } from '../../../../../../utils/reference/reporting'
 import 'tippy.js/dist/tippy.css';
-import Squeeze from '../Squeeze'
+import Squeeze from '../../../report/component/filter/actionFilter/Squeeze'
 
 export default function Premium({ squeezePanel, setSqueezePanel, actionLit, setActionList, advancedOptionModal, setAdvancedOptionModal, actionPoint, setValueStatus, arrayPoint, premiumStatus, valueStatus, setIsSqueeze, setPremiumStatus, defaultReportSetting, squeezeSetting, setSqueezeSetting }: any) {
 

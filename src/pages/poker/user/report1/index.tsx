@@ -173,7 +173,7 @@ const Report = () => {
         let startPosition = (validationSeatWhenDefiningAction[total.action as keyof typeof validationSeatWhenDefiningAction] || [])[0]
 
         console.log("startPosition", startPosition);
-        
+
         setMainDataFilter({ ...mainDataFilter, heroPosition: startPosition })
         setValueStatus(total)
     }
@@ -514,18 +514,15 @@ const Report = () => {
                         setAdvancedOptionModal={(bool: boolean) => setAdvancedOptionModal(bool)}
                     />
                     <Premium
-
-                        squeezePanel={squeezePanel}
-                        setSqueezePanel={(total: any) => setSqueezePanel(total)}
-
                         actionLit={actionLit}
-                        setActionList={(total: any) => setActionList(total)}
-
+                        squeezePanel={squeezePanel}
                         premiumStatus={premiumStatus}
                         valueStatus={valueStatus}
                         advancedOptionModal={advancedOptionModal}
                         squeezeSetting={squeezeSetting}
+                        setActionList={(total: any) => setActionList(total)}
                         defaultReportSetting={defaultReportSetting}
+                        setSqueezePanel={(total: any) => setSqueezePanel(total)}
                         setIsSqueeze={(bool: any) => setIsSqueeze(bool)}
                         setSqueezeSetting={(total: any) => setSqueezeSetting(total)}
                         setPremiumStatus={(total: any) => bufferSetPremiumStatus(total)}

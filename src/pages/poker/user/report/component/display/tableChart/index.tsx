@@ -7,8 +7,7 @@ import DetailTable from './detailTable';
 import Histogram from './histogram';
 
 
-export default function TableChart({ filter, userTab, userInfoResult, reportingResult, setInterestingPair }: any) {
-
+export default function TableChart({ page, PAGE_SIZES, pageSize, filter, valueStatus, heroPosition, stackDepth, VillianPosition, userTab, userInfoResult, reportingResult, setInterestingPair }: any) {
 
     const [reportItemActive, setReportItemActive] = useState("")
 
@@ -63,10 +62,27 @@ export default function TableChart({ filter, userTab, userInfoResult, reportingR
                             />
                         </Tab.Panel>
                         <Tab.Panel>
-                            <GradientHeat />
+                            <GradientHeat
+                                filter={filter}
+                                valueStatus={valueStatus}
+                                heroPosition={heroPosition}
+                                stackDepth={stackDepth}
+                                VillianPosition={VillianPosition}
+                                userTab={userTab}
+                                userInfoResult={userInfoResult}
+                                reportingResult={reportingResult}
+                                reportItemActive={reportItemActive}
+                                setInterestingPair={(pair: any) => setInterestingPair(pair)}
+                                setReportItemActive={(item: any) => setReportItemActive(item)}
+                            />
                         </Tab.Panel>
                         <Tab.Panel>
-                            <DetailTable />
+                            <DetailTable
+                                page={page}
+                                pageSize={pageSize}
+                                PAGE_SIZES={PAGE_SIZES}
+                                filter={filter}
+                            />
                         </Tab.Panel>
                         <Tab.Panel>
                             <Histogram

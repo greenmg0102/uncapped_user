@@ -12,7 +12,7 @@ export default function GeneralPanel({ changeStatus, setValueStatus, valueStatus
           <div className=" flex justify-between flex-wrap mt-2">
             {defaultReportSetting.action.map((item: any, index: any) =>
               <div className="w-1/3">
-                <PanelItem key={index} value={item.title} height={30} valueStatus={valueStatus} type={"action"} setValueStatus={(total: any) => setValueStatus(total)} />
+                <PanelItem key={index} value={item.title} height={22} valueStatus={valueStatus} type={"action"} setValueStatus={(total: any) => setValueStatus({ ...total, action: valueStatus.action === total.action ? "" : total.action })} />
               </div>
             )}
           </div>
@@ -23,7 +23,7 @@ export default function GeneralPanel({ changeStatus, setValueStatus, valueStatus
             <div className=" flex flex-col justify-between mt-2">
               {
                 defaultReportSetting.heroPosition.map((item: any, index: any) =>
-                  <PanelItem key={index} value={item.title} height={30} valueStatus={valueStatus} type={"heroPosition"} setValueStatus={(total: any) => setValueStatus(total)} />
+                  <PanelItem key={index} value={item.title} height={22} valueStatus={valueStatus} type={"heroPosition"} setValueStatus={(total: any) => setValueStatus({ ...total, heroPosition: valueStatus.heroPosition === total.heroPosition ? "" : total.heroPosition })} />
                 )
               }
             </div>
@@ -33,7 +33,7 @@ export default function GeneralPanel({ changeStatus, setValueStatus, valueStatus
             <div className=" flex flex-col justify-between mt-2">
               {
                 defaultReportSetting.stackDepth.map((item: any, index: any) =>
-                  <PanelItem key={index} value={item.title} height={30} valueStatus={valueStatus} type={"stackDepth"} setValueStatus={(total: any) => setValueStatus(total)} />
+                  <PanelItem key={index} value={item.title} height={22} valueStatus={valueStatus} type={"stackDepth"} setValueStatus={(total: any) => setValueStatus({ ...total, stackDepth: valueStatus.stackDepth === total.stackDepth ? "" : total.stackDepth })} />
                 )
               }
             </div>
@@ -43,7 +43,7 @@ export default function GeneralPanel({ changeStatus, setValueStatus, valueStatus
             <div className=" flex flex-col justify-between mt-2">
               {
                 defaultReportSetting.VillianPosition.map((item: any, index: any) =>
-                  <PanelItem key={index} value={item.title} height={30} valueStatus={valueStatus} type={"VillianPosition"} setValueStatus={(total: any) => setValueStatus(total)} />
+                  <PanelItem key={index} value={item.title} height={22} valueStatus={valueStatus} type={"VillianPosition"} setValueStatus={(total: any) => setValueStatus({ ...total, VillianPosition: valueStatus.VillianPosition === total.VillianPosition ? "" : total.VillianPosition })} />
                 )
               }
             </div>

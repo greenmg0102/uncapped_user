@@ -14,7 +14,7 @@ export default function CompareHeatItemUser({ userTab, data, handResult, standar
                 )
             }
             onClick={() => {
-                bufferSetReportItemActive(data)
+                bufferSetReportItemActive((previous: any) => previous === data ? "" : data)
                 setInterestingPair(actionNodeDistinguish(handResult, userTab) ? actionNodeDistinguish(handResult, userTab) : [])
             }}
         >

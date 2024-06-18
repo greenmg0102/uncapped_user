@@ -14,7 +14,7 @@ export default function PremiumPanel({ changeStatus, setValueStatus, valueStatus
                     <div className=" flex justify-between flex-wrap mt-2">
                         {defaultReportSetting.action.map((item: any, index: any) =>
                             <div className="w-1/3">
-                                <PanelItem key={index} value={item.title} height={30} valueStatus={valueStatus} type={"action"} setValueStatus={(total: any) => setValueStatus(total)} />
+                                <PanelItem key={index} value={item.title} height={22} valueStatus={valueStatus} type={"action"} setValueStatus={(total: any) => setValueStatus(total)} />
                             </div>
                         )}
                     </div>
@@ -27,7 +27,7 @@ export default function PremiumPanel({ changeStatus, setValueStatus, valueStatus
                                 defaultReportSetting.eachPosition.map((item: any, index: any) =>
                                     <div className="w-1/2">
                                         <RangeItem
-                                            key={index} value={item} height={30} valueStatus={valueStatus} type={"heroPosition"} list={heroPosition}
+                                            key={index} value={item} height={22} valueStatus={valueStatus} type={"heroPosition"} list={heroPosition}
                                             bufferRportingStatue={(type: any, list: any) => bufferRportingStatue(type, list)}
                                         />
                                     </div>
@@ -42,7 +42,7 @@ export default function PremiumPanel({ changeStatus, setValueStatus, valueStatus
                                 defaultReportSetting.eachStack.map((item: any, index: any) =>
                                     <div className="w-1/2">
                                         <RangeItem
-                                            key={index} value={item} height={30} valueStatus={valueStatus} type={"stackDepth"} list={stackDepth}
+                                            key={index} value={item} height={22} valueStatus={valueStatus} type={"stackDepth"} list={stackDepth}
                                             bufferRportingStatue={(type: any, list: any) => bufferRportingStatue(type, list)}
                                         />
                                     </div>
@@ -57,7 +57,7 @@ export default function PremiumPanel({ changeStatus, setValueStatus, valueStatus
                                 defaultReportSetting.eachPosition.map((item: any, index: any) =>
                                     <div className="w-1/2">
                                         <RangeItem
-                                            key={index} value={item} height={30} valueStatus={valueStatus} type={"VillianPosition"} list={VillianPosition}
+                                            key={index} value={item} height={22} valueStatus={valueStatus} type={"VillianPosition"} list={VillianPosition}
                                             bufferRportingStatue={(type: any, list: any) => bufferRportingStatue(type, list)}
                                         />
                                     </div>
@@ -73,7 +73,7 @@ export default function PremiumPanel({ changeStatus, setValueStatus, valueStatus
                     className="border border-blue-500 transition-all hover:border-blue-200 hover:text-blue-200 rounded-[4px] text-center text-blue-500 py-[4px] w-[200px] cursor-pointer"
                     onClick={() => changeStatus(0)}
                 >
-                    Back
+                    Back (General)
                 </div>
                 <div
                     className="border border-blue-500 transition-all hover:border-blue-200 hover:text-blue-200 rounded-[4px] text-center text-blue-500 py-[4px] w-[200px] cursor-pointer"

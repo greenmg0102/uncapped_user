@@ -33,7 +33,7 @@ const HeatMap = ({ isGrid, userTab, userInfoResult, reportingResult, globalFre, 
                                                 <div
                                                     key={index}
                                                     className='relative cursor-pointer'
-                                                    style={{ width: "7.692%", padding: "0px" }}
+                                                    style={{ width: "7.692%", padding: "1px" }}
                                                 >
                                                     <HeatMapItem
                                                         data={item}

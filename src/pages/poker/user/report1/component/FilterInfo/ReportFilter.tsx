@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import EachButton from '../eachButton'
 import clsx from 'clsx'
-import StreetItem from '../../component/secondPanel'
+import StreetItem from '../../../report/component/filter/reportFilter/secondPanel'
 import { pokerStreetOptionUser } from '../../../../../../utils/reference/playCardColor'
 
 export default function ReportFilter({ valueStatus, defaultReportSetting, userTab, reportingResult, setAdvancedOptionModal, userInfoResult, interruptValueStatus, setUserTab }: any) {
@@ -123,7 +123,7 @@ export default function ReportFilter({ valueStatus, defaultReportSetting, userTa
                 </div>
                 <div className="flex justify-start items-center mb-1">
                     <div className='w-[70px] flex justify-between items-center pr-1'>
-                        <p className="text-left">Villain </p>
+                        <p className="text-left">Villain</p>
                         <p className="text-left">:</p>
                     </div>
                     <div className='w-[calc(100%-70px)] flex justify-start items-center flex-wrap'>

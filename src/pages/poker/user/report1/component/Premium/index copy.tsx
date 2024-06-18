@@ -5,7 +5,7 @@ import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
 import { hero8Site, stackArray, villianPokerTable } from '../../../../../../utils/reference/playCardColor'
 import 'tippy.js/dist/tippy.css';
-import Squeeze from '../Squeeze'
+import Squeeze from '../../../report/component/filter/actionFilter/Squeeze'
 
 export default function Premium({ advancedOptionModal, setAdvancedOptionModal, actionPoint, arrayPoint, premiumStatus, setPremiumStatus, defaultReportSetting }: any) {
 

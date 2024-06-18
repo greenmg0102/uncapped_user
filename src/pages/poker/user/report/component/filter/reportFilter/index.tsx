@@ -1,7 +1,25 @@
+import { useEffect, useState } from 'react'
 import ReportButton from "./reportButton"
+import { pokerStreetOptionUser } from '../../../../../../../utils/reference/playCardColor'
+import StreetItem from './secondPanel'
 
+export default function ReportFilter({ userTab, setUserTab, valueStatus, setValueStatus, reportingResult, defaultReportSetting, heroPosition, stackDepth, VillianPosition, bufferRportingStatue }: any) {
 
-export default function ReportFilter({ valueStatus, setValueStatus, defaultReportSetting, heroPosition, stackDepth, VillianPosition, bufferRportingStatue }: any) {
+  const [critical, setCritical] = useState([false, false, false, false, true])
+
+  useEffect(() => {
+
+    let critical = [false, false, false, false, true]
+
+    Object.keys(reportingResult).forEach((key: any) => {
+      reportingResult[key].played.forEach((item: any, index: any) => {
+        critical[index] = critical[index] ? critical[index] : !critical[index] && item !== 0
+      })
+    })
+
+    setCritical(critical)
+
+  }, [reportingResult])
 
   return (
     <div className="w-full sm:w-1/3 p-2">
@@ -14,9 +32,9 @@ export default function ReportFilter({ valueStatus, setValueStatus, defaultRepor
           </div>
           {valueStatus["action"] !== "" ?
             <ReportButton
+              type={"action"}
               isClickable={false}
               value={valueStatus["action"]}
-              type={"action"}
               list={[valueStatus["action"]]}
             />
             :
@@ -73,6 +91,19 @@ export default function ReportFilter({ valueStatus, setValueStatus, defaultRepor
           ) :
             <p className="border border-gray-500 rounded-[4px] px-4">Empty</p>
           }
+        </div>
+
+        <div className='w-full mt-2 flex justify-center items-center flex-wrap'>
+          {pokerStreetOptionUser.map((item: any, index: any) =>
+            <StreetItem
+              key={index}
+              item={item}
+              userTab={userTab}
+              critical={critical[index]}
+              action={valueStatus.action}
+              setUserTab={(order: any) => setUserTab(order)}
+            />
+          )}
         </div>
 
       </div>
