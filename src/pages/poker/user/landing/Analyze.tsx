@@ -1,3 +1,4 @@
+import './style.css'
 
 export default function Analyze() {
 
@@ -14,12 +15,12 @@ export default function Analyze() {
                     <div className="mt-1 sm:mt-1 w-full pr-0 lg:pr-24 py-12 pb-24">
                         <div className='flex justify-center justify-between items-center flex-wrap w-full' >
                             <div className='w-full 2xl:w-1/2 flex justify-center'>
-                                <img src="/assets/images/pokerImage/2_2.png" alt="radar" className="opacity-[100%]" />
+                                <img src="/assets/images/pokerImage/2_2_1.png" alt="radar" className="opacity-[100%] transition-all rounded-[30px] md:rounded-2xl xl:rounded-xlelement_blue" />
                             </div>
-                            <div className='w-full 2xl:w-1/2 pl-0 2xl:pl-24'>
-                                <p className='text-[45px] leading-[64px] font-bold text-primary text-center 2xl:text-right'>Hand History Analysis Made Easy</p>
-                                <p className='text-[24px] leading-[64px] font-bold pl-0 md:pl-8 text-center 2xl:text-right'>Analyze and detect leaks with</p>
-                                <p className='text-[24px] leading-[64px] font-bold pl-0 md:pl-8 text-center 2xl:text-right'>our innovative reporting system</p>
+                            <div className='w-full mt-12 2xl:w-1/2 2xl:mt-0 pl-0 2xl:pl-24'>
+                                <p className='transition-all text-[28px] lg:text-[45px] leading-[64px] font-bold text-primary text-center 2xl:text-right'>Hand History Analysis Made Easy</p>
+                                <p className='text-[18px] leading-[64px] font-bold pl-0 md:pl-8 text-center 2xl:text-right'>Analyze and detect leaks with</p>
+                                <p className='text-[18px] leading-[64px] font-bold pl-0 md:pl-8 text-center 2xl:text-right'>our innovative reporting system</p>
                             </div>
                         </div>
                     </div>

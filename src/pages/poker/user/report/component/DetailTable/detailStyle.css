@@ -2,3 +2,23 @@
     background-color: #4B5563 !important;    
 }
 /* 4B5563 */
+
+/* Apply styles to the element */
+.element {
+    position: relative; /* Ensure the element has position relative */
+    z-index: 1; /* Keep the element above the pseudo-element */
+  }
+  
+  /* Create the pseudo-element */
+  .element::before {
+    content: '';
+    position: absolute;
+    top: -10px; /* Adjust the offset as needed */
+    left: -10px; /* Adjust the offset as needed */
+    right: -10px; /* Adjust the offset as needed */
+    bottom: -10px; /* Adjust the offset as needed */
+    background: linear-gradient(white, transparent); /* Create a white gradient */
+    z-index: -1; /* Place the pseudo-element behind the original element */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7); /* Apply a white shadow */
+    border-radius: inherit; /* Ensure the pseudo-element has the same border radius as the element */
+  }

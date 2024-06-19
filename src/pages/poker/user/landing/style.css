@@ -1,0 +1,30 @@
+.element_red {
+    background: linear-gradient(white, transparent);
+    box-shadow: 0 0 100px rgba(255, 0, 0, 0.7);
+}
+
+.element_blue {
+    background: linear-gradient(white, transparent);
+    box-shadow: 0 0 100px rgba(0, 0, 255, 0.7);
+}
+
+.element_green {
+    background: linear-gradient(white, transparent);
+    box-shadow: 0 0 100px rgba(255, 125, 4, 0.7);
+}
+
+.element_study {
+    background: linear-gradient(white, transparent);
+    box-shadow: 0 0 100px rgba(196, 240, 4, 0.7);
+}
+
+.element_laptop {
+    background: linear-gradient(white, transparent);
+    box-shadow: 0 0 100px rgba(0, 117, 252, 0.7);
+}
+
+.element_mobile {
+    background: linear-gradient(white, transparent);
+    box-shadow: 0 0 100px rgba(247, 60, 13, 0.7);
+}
+

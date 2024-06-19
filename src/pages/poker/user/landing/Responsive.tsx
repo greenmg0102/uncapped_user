@@ -1,6 +1,6 @@
 import './style.css'
 
-export default function Review() {
+export default function Responsive() {
 
     return (
         <div className="sm:flex transition-all">
@@ -14,12 +14,11 @@ export default function Review() {
                 <div className="mt-1 sm:mt-1 w-full pr-0 lg:pr-24 py-12 pb-24">
                     <div className='flex justify-center justify-between items-center flex-wrap w-full' >
                         <div className='w-full 2xl:w-1/2 flex justify-center'>
-                            <img src="/assets/images/pokerImage/reviewbg.png" alt="radar" className="opacity-[100%] rounded-xl " />
+                            <img src="/assets/images/pokerImage/Capture7_1.png" alt="radar" className="opacity-[100%] transition-all rounded-[30px] md:rounded-2xl xl:rounded-xl element_laptop" />
                         </div>
-                        <div className='w-full 2xl:w-1/2 pl-0 2xl:pl-24'>
-                            <p className='transition-all text-[28px] lg:text-[45px] leading-[64px] font-bold text-primary text-center 2xl:text-right'>Review your Hand Histories</p>
-                            <p className='text-[18px] leading-[64px] font-bold pl-0 md:pl-8 text-center 2xl:text-right'>A place to upload, store, review, and export your hand histories</p>
-                        </div>
+                        <div className='w-full 2xl:w-1/2 pl-0 mt-12 2xl:pl-24 2xl:mt-0 flex justify-center'>
+                            <img src="/assets/images/pokerImage/Capture7_2.png" alt="radar" className="opacity-[100%] transition-all rounded-[30px] md:rounded-2xl xl:rounded-xl element_mobile" />
+                        </div> 
                     </div>
                 </div>
             </div>
