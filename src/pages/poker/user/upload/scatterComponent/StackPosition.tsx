@@ -48,7 +48,8 @@ export default function StackPosition({ deviation }: any) {
             },
         },
         xaxis: {
-            categories: []
+            categories: [],
+            tickAmount:10
         }
     };
 

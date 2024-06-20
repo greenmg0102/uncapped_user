@@ -20,7 +20,6 @@ const StasticData = () => {
                 range: `2023-11-30 to 2025-11-30`
             }
             let result = await globalStatistic(data)
-
             let real = []
 
             real.push({
@@ -33,13 +32,9 @@ const StasticData = () => {
                 sumShowData: result.map((item: any) => item.sumShow),
                 nameSumNotShowHand: "sumNotShowHand",
                 sumNotShowHandData: result.map((item: any) => item.sumNotShowHand),
-
-                xXios: [...Array(303).fill(0).map((item: any, index: any) => index)]
-
+                xXios: [...Array(result.length).fill(0).map((item: any, index: any) => index)]
             })
-
             setDeviations(real)
-
         }
         fetchData()
     }, [])
