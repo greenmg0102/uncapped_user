@@ -1,6 +1,6 @@
 
 import { useEffect } from "react"
-import ApexCharts from 'apexcharts';
+import ApexCharts from 'apexcharts' 
 
 export default function StackPosition({ deviation }: any) {
 
@@ -24,7 +24,7 @@ export default function StackPosition({ deviation }: any) {
             },
         ],
         chart: {
-            height: 750,
+            height: 350,
             type: 'line',
             zoom: {
                 enabled: true
@@ -49,8 +49,11 @@ export default function StackPosition({ deviation }: any) {
         },
         xaxis: {
             categories: [],
-            tickAmount:10
-        }
+            tickAmount:10,
+            axisTicks: {
+                show: false // Hides the ticks
+            }
+        },
     };
 
     useEffect(() => {
