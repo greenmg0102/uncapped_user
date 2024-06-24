@@ -23,7 +23,6 @@ const StasticData = () => {
             let real = []
 
             real.push({
-
                 nameSumBB: "sumBB",
                 sumBBData: result.map((item: any) => item.sumBB),
                 nameSumExpected: "Net Expected",
@@ -32,7 +31,7 @@ const StasticData = () => {
                 sumShowData: result.map((item: any) => item.sumShow),
                 nameSumNotShowHand: "sumNotShowHand",
                 sumNotShowHandData: result.map((item: any) => item.sumNotShowHand),
-                xXios: [...Array(result.length).fill(0).map((item: any, index: any) => index)]
+                xXios: [...Array(result.length).fill(0).map((item: any, index: any) => index + 1)]
             })
             setDeviations(real)
         }
