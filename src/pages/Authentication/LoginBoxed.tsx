@@ -198,6 +198,7 @@ const LoginBoxed = () => {
                             <button
                                 onClick={() => authTest('google')}
                                 className="btn btn-gradient !mt-6 w-full border-0 hover:uppercase transition-all"
+                                disabled
                             >
                                 Google mail
                             </button>

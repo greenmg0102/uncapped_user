@@ -21,18 +21,30 @@ const StasticData = () => {
             }
             let result = await globalStatistic(data)
             let real = []
+            result.unshift({
+                nameSumBB: "sumBB",
+                sumBB: 0,
+                nameSumExpected: "Won EV",
+                sumExpected: 0,
+                nameSumShow: "sumShow",
+                sumShow: 0,
+                nameSumNotShowHand: "sumNotShowHand",
+                sumNotShowHand: 0
+            })
 
             real.push({
                 nameSumBB: "sumBB",
                 sumBBData: result.map((item: any) => item.sumBB),
-                nameSumExpected: "Net Expected",
+                nameSumExpected: "Won EV",
                 sumExpectedData: result.map((item: any) => item.sumExpected),
                 nameSumShow: "sumShow",
                 sumShowData: result.map((item: any) => item.sumShow),
                 nameSumNotShowHand: "sumNotShowHand",
-                sumNotShowHandData: result.map((item: any) => item.sumNotShowHand),
-                xXios: [...Array(result.length).fill(0).map((item: any, index: any) => index + 1)]
+                sumNotShowHandData: result.map((item: any) => parseFloat((item.sumShow - item.sumBB).toFixed(3))),
+                // sumNotShowHandData: result.map((item: any) => item.sumNotShowHand),
+                xXios: [...Array(result.length).fill(0).map((item: any, index: any) => index)]
             })
+
             setDeviations(real)
         }
         fetchData()

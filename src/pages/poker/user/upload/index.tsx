@@ -13,7 +13,7 @@ const PokerFileUpload = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        
+
         dispatch(setPageTitle('User DashBoard'));
 
         const accessToken = localStorage.getItem('accessToken');
@@ -35,11 +35,11 @@ const PokerFileUpload = () => {
                 <div className='w-full'>
                     <div className='flex justify-center mb-4'>
                         <div className='w-[90%] xl:w-5/6 block xl:flex xl:justify-between items-center'>
-                            <div className='w-full xl:w-2/3 h-[350px] xl:pr-4 flex justify-center items-center'>
-                                <NewsItem />
-                            </div>
-                            <div className='w-full mt-4 xl:mt-0 xl:w-1/3 h-[350px] border rounded-[6px] border-gray-700 border-dashed transition-all hover:border-solid cursor-pointer hover:border-gray-500'>
+                            <div className='w-full xl:w-1/3 h-[350px] border rounded-[6px] border-gray-700 border-dashed transition-all hover:border-solid cursor-pointer hover:border-gray-500'>
                                 <UploadItem />
+                            </div>
+                            <div className='w-full mt-4 xl:mt-0 xl:w-2/3 h-[350px] xl:pl-4 flex justify-center items-center'>
+                                <NewsItem />
                             </div>
                         </div>
                     </div>

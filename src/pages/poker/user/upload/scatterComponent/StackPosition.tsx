@@ -11,7 +11,7 @@ export default function StackPosition({ deviation }: any) {
                 data: []
             },
             {
-                name: "Net Expected",
+                name: "Won EV",
                 data: []
             },
             {
@@ -65,7 +65,7 @@ export default function StackPosition({ deviation }: any) {
             options.series[0].name = "BB"
             options.series[0].data = deviation[0].sumBBData
 
-            options.series[1].name = "Net Expected"
+            options.series[1].name = "Won EV"
             options.series[1].data = deviation[0].sumExpectedData
 
             options.series[2].name = "ShowCase"

@@ -166,7 +166,7 @@ const HandTable = () => {
                         {
                             accessor: 'holeCards', title: 'HOLE CARDS', render: ({ holeCards }) => <strong className="text-info flex justify-center">
                                 <div className='flex justify-center items-center'>
-                                    {holeCards[0].cards.map((item: any, index: any) =>
+                                    {holeCards.find((item: any) => item.playerName === "Hero").cards.map((item: any, index: any) =>
                                         <div key={index}>
                                             {holdCard(item)}
                                         </div>
