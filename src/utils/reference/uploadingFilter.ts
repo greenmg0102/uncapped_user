@@ -1,4 +1,5 @@
 export const pokerType = [
+    
     { title: 'All Network', value: 'N/A' },
     { title: 'GG Poker', value: 'GGPoker' },
     // { title: '888 Poker', value: '888Poker' },
