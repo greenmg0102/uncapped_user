@@ -35,7 +35,7 @@ export default function PaymentHistory() {
             <div className="flex items-center justify-between mb-5">
                 <h5 className="font-semibold text-lg dark:text-white-light">Payment History</h5>
             </div>
-            <div className='h-[13em] overflow-y-auto pr-[4px]'>
+            <div className='h-[550px] overflow-y-auto pr-[4px]'>
                 {payList.map((item: any, index: any) =>
 
                     <div key={index} className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">

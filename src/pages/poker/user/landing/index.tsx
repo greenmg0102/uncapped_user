@@ -1,5 +1,7 @@
 import Radar from './Radar'
 import Analyze from './Analyze'
+import Study from './Study'
+import Responsive from './Responsive'
 import Compare from './Compare'
 import Review from './Review'
 import Stastic from './Stastic'
@@ -23,6 +25,8 @@ export default function Landing() {
                 <Analyze />
                 <Compare />
                 <Review />
+                <Study />
+                <Responsive />
             </div>
             <div className='w-full static lg:top-1/2 lg:right-0 lg:transform lg:-translate-y-1/2 lg:fixed lg:w-[30%] xl:w-[25%] border border-gray-700 border-dashed rounded-[12px] px-6 pt-6 transition-all'>
                 <Stastic />

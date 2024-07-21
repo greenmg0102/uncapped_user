@@ -10,7 +10,7 @@ export default function Stripe({ price, way, setPayway }: any) {
         const { error } = await stripe.redirectToCheckout({
             lineItems: [
                 {
-                    price: "price_1OPfXzF9Pl7uN3pFTtubbnID",
+                    price: price,
                     quantity: 1,
                 },
             ],

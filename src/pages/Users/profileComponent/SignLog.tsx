@@ -37,7 +37,7 @@ const SignLog = () => {
     }, [])
 
     return (
-        <div className="panel mt-6">
+        <div className="panel mt-0">
             <h5 className="font-semibold text-lg dark:text-white-light mb-5">Activity Log</h5>
             <div className="datatables">
                 <DataTable

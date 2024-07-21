@@ -353,12 +353,12 @@ export const pokerStreetOptionUser: any = [
         color: '#7d1f1f',
         available: ["vs RFI", "vs 3-Bet", "VS 4-Bet", "vs RFI", "RFI", "3-Bet", "4-Bet", "5-Bet +"]
     },
-    // {
-    //     id: 0,
-    //     stage: "total",
-    //     color: '#323424',
-    //     available: ["vs RFI", "vs 3-Bet", "VS 4-Bet", "vs RFI"]
-    // },
+    {
+        id: 0,
+        stage: "total",
+        color: '#323424',
+        available: ["VPIP", "RFI", "vs RFI", "vs 3-Bet", "VS 4-Bet", "vs RFI", "RFI", "3-Bet", "4-Bet", "5-Bet +"]
+    },
 ]
 
 export const pokerStageExample: any = [

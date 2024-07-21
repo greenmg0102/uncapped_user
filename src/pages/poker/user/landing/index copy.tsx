@@ -112,14 +112,14 @@ export default function Landing() {
                     </div>
 
                     <div className='w-2/5 pl-24'>
-                        <p className='text-[45px] leading-[64px] font-bold text-primary'>RADAR</p>
-                        <p className='text-[24px] leading-[64px] font-bold pl-8'>Poker Solutions</p>
+                        <p className='transition-all text-[28px] lg:text-[45px] leading-[64px] font-bold text-primary'>RADAR</p>
+                        <p className='text-[18px] leading-[64px] font-bold pl-8'>Poker Solutions</p>
 
-                        <p className='text-[45px] leading-[64px] font-bold text-primary'>Track, Analyze, and</p>
-                        <p className='text-[45px] leading-[64px] font-bold text-primary'>accelerate your growth</p>
+                        <p className='transition-all text-[28px] lg:text-[45px] leading-[64px] font-bold text-primary'>Track, Analyze, and</p>
+                        <p className='transition-all text-[28px] lg:text-[45px] leading-[64px] font-bold text-primary'>accelerate your growth</p>
 
-                        <p className='text-[24px] leading-[64px] font-bold pl-8'>Leak Tracking and Database</p>
-                        <p className='text-[24px] leading-[64px] font-bold pl-8'>Surveillance Tool</p>
+                        <p className='text-[18px] leading-[64px] font-bold pl-8'>Leak Tracking and Database</p>
+                        <p className='text-[18px] leading-[64px] font-bold pl-8'>Surveillance Tool</p>
 
                     </div>
                     <div className='w-3/5 pl-24 pr-4'>
@@ -137,14 +137,14 @@ export default function Landing() {
                     </div>
 
                     <div className='w-2/5 pl-24'>
-                        <p className='text-[45px] leading-[64px] font-bold text-primary'>Equity Definition</p>
-                        <p className='text-[24px] leading-[64px] font-bold pl-8'>Poker Solutions</p>
+                        <p className='transition-all text-[28px] lg:text-[45px] leading-[64px] font-bold text-primary'>Equity Definition</p>
+                        <p className='text-[18px] leading-[64px] font-bold pl-8'>Poker Solutions</p>
 
-                        <p className='text-[45px] leading-[64px] font-bold text-primary'>Track, Analyze, and</p>
-                        <p className='text-[45px] leading-[64px] font-bold text-primary'>accelerate your growth</p>
+                        <p className='transition-all text-[28px] lg:text-[45px] leading-[64px] font-bold text-primary'>Track, Analyze, and</p>
+                        <p className='transition-all text-[28px] lg:text-[45px] leading-[64px] font-bold text-primary'>accelerate your growth</p>
 
-                        <p className='text-[24px] leading-[64px] font-bold pl-8'>Leak Tracking and Database</p>
-                        <p className='text-[24px] leading-[64px] font-bold pl-8'>Surveillance Tool</p>
+                        <p className='text-[18px] leading-[64px] font-bold pl-8'>Leak Tracking and Database</p>
+                        <p className='text-[18px] leading-[64px] font-bold pl-8'>Surveillance Tool</p>
 
                     </div>
                 </div>

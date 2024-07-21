@@ -1,6 +1,6 @@
 
 import { useEffect } from "react"
-import ApexCharts from 'apexcharts';
+import ApexCharts from 'apexcharts' 
 
 export default function StackPosition({ deviation }: any) {
 
@@ -11,7 +11,7 @@ export default function StackPosition({ deviation }: any) {
                 data: []
             },
             {
-                name: "Net Expected",
+                name: "Won EV",
                 data: []
             },
             {
@@ -24,7 +24,7 @@ export default function StackPosition({ deviation }: any) {
             },
         ],
         chart: {
-            height: 750,
+            height: 350,
             type: 'line',
             zoom: {
                 enabled: true
@@ -48,8 +48,12 @@ export default function StackPosition({ deviation }: any) {
             },
         },
         xaxis: {
-            categories: []
-        }
+            categories: [],
+            tickAmount:10,
+            axisTicks: {
+                show: false // Hides the ticks
+            }
+        },
     };
 
     useEffect(() => {
@@ -61,7 +65,7 @@ export default function StackPosition({ deviation }: any) {
             options.series[0].name = "BB"
             options.series[0].data = deviation[0].sumBBData
 
-            options.series[1].name = "Net Expected"
+            options.series[1].name = "Won EV"
             options.series[1].data = deviation[0].sumExpectedData
 
             options.series[2].name = "ShowCase"

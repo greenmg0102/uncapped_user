@@ -1,3 +1,4 @@
+import './style.css'
 
 export default function Radar() {
 
@@ -15,15 +16,19 @@ export default function Radar() {
                     <div className="mt-1 sm:mt-1 w-full lg:pr-24 pb-40 pt-12">
                         <div className='flex justify-center justify-between items-center flex-wrap w-full'>
                             <div className='w-full 2xl:w-1/2 pl-0 2xl:pl-24'>
-                                <p className='text-[45px] leading-[64px] font-bold text-primary text-center 2xl:text-left'>Uncapped Theory</p>
-                                <p className='text-[24px] leading-[64px] font-bold pl-0 md:pl-8 text-center 2xl:text-left'>Poker Solutions</p>
-                                <p className='text-[45px] leading-[64px] font-bold text-primary text-center 2xl:text-left'>Track, Analyze, and</p>
-                                <p className='text-[45px] leading-[64px] font-bold text-primary text-center 2xl:text-left'>accelerate your growth</p>
-                                <p className='text-[24px] leading-[64px] font-bold pl-0 md:pl-8 text-center 2xl:text-left'>Leak Tracking and Database</p>
-                                <p className='text-[24px] leading-[64px] font-bold pl-0 md:pl-8 text-center 2xl:text-left'>Surveillance Tool</p>
+                                <p className='transition-all text-[20px] lg:transition-all text-[28px] lg:text-[45px] leading-[64px] font-bold text-primary text-center 2xl:text-left'>Uncapped Theory</p>
+                                <p className='text-[18px] leading-[64px] font-bold pl-0 md:pl-8 text-center 2xl:text-left'>Poker Solutions</p>
+                                <p className='transition-all text-[28px] lg:text-[45px] leading-[64px] font-bold text-primary text-center 2xl:text-left'>Track, Analyze, and</p>
+                                <p className='transition-all text-[28px] lg:text-[45px] leading-[64px] font-bold text-primary text-center 2xl:text-left'>accelerate your growth</p>
+                                <p className='text-[18px] leading-[64px] font-bold pl-0 md:pl-8 text-center 2xl:text-left'>Leak Tracking and Database</p>
+                                <p className='text-[18px] leading-[64px] font-bold pl-0 md:pl-8 text-center 2xl:text-left'>Surveillance Tool</p>
                             </div>
-                            <div className='w-full 2xl:w-1/2 flex justify-center'>
-                                <img src="/assets/images/pokerImage/1_2.png" alt="radar" className="opacity-[100%]" />
+                            <div className='w-full mt-12 2xl:w-1/2 2xl:mt-0 flex justify-center'>
+                                <img
+                                    src="/assets/images/pokerImage/1_2_1.png"
+                                    alt="radar"
+                                    className="opacity-[100%] transition-all rounded-[30px] md:rounded-2xl xl:rounded-xl element_red"
+                                />
                             </div>
                         </div>
                     </div>

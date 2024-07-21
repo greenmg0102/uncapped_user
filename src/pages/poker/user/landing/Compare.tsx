@@ -1,3 +1,4 @@
+import './style.css'
 
 export default function Compare() {
 
@@ -18,8 +19,8 @@ export default function Compare() {
                                 <p className='text-[38px] leading-[64px] font-bold text-primary text-center md:text-left'>Thousands of modern high accuracy preflop solutions</p>
                                 <p className='text-[20px] leading-[32px] font-bold pl-0 md:pl-8 text-center md:text-left'>Creating preflop charts is a relative process and should be tailored to your gam. For this reason, we are introducing dynamic inputs such as limps and cold calls so you can get a closer comparison to what happens out in the field.</p>
                             </div>
-                            <div className='w-full 2xl:w-1/2 flex justify-center'>
-                                <img src="/assets/images/pokerImage/3.png" alt="radar" className=" opacity-[100%]" />
+                            <div className='w-full mt-12 2xl:w-1/2 2xl:mt-0 flex justify-center'>
+                                <img src="/assets/images/pokerImage/3_1.png" alt="radar" className="opacity-[100%] transition-all rounded-[30px] md:rounded-2xl xl:rounded-xl element_green" />
                             </div>
                         </div>
                     </div>

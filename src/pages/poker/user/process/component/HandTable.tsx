@@ -37,7 +37,7 @@ const HandTable = () => {
 
     const [filter, setFilter] = useState({
         pokerType: "N/A",
-        tableSize: "N/A",
+        tableSize: "2~10",
         heroPosition: "N/A",
         range: `2023-11-30 to ${nextDay}`
     })
@@ -166,7 +166,7 @@ const HandTable = () => {
                         {
                             accessor: 'holeCards', title: 'HOLE CARDS', render: ({ holeCards }) => <strong className="text-info flex justify-center">
                                 <div className='flex justify-center items-center'>
-                                    {holeCards[0].cards.map((item: any, index: any) =>
+                                    {holeCards.find((item: any) => item.playerName === "Hero").cards.map((item: any, index: any) =>
                                         <div key={index}>
                                             {holdCard(item)}
                                         </div>

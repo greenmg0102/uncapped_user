@@ -2,14 +2,14 @@ import { pokerMarkList } from '../../../utils/reference'
 export default function Summary({ pokerTypeCount }: any) {
 
     return (
-        <div className="panel w-full md:w-1/2">
+        <div className="w-full md:w-1/2">
             <div className="mb-10">
                 <h5 className="font-semibold text-lg dark:text-white-light">Summary</h5>
             </div>
             <div className="space-y-4 h-[24em] overflow-y-auto pr-4">
                 {pokerTypeCount.map((item: any, index: any) =>
                     <div key={index} className="border border-[#ebedf2] rounded dark:bg-[#1b2e4b] dark:border-0">
-                        <div className="flex items-center justify-between p-4 py-2">
+                        <div className="flex items-center justify-between p-4 py-1">
                             <div className="flex justify-center items-center grid place-content-center w-9 h-9 rounded-md bg-secondary-light dark:bg-gray-600 text-secondary dark:text-secondary-light">
                                 <img
                                     src={pokerMarkList.filter((each: any) => each.value === item._id)[0].image}

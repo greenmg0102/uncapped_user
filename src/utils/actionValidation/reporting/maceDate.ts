@@ -14,3 +14,10 @@ export const maceDate = (dateList: any, y: any, x: any): any => {
     }
 };
 
+export const nowDate = () => {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 1);
+    const nextDay = currentDate.toISOString().split('T')[0];
+
+    return nextDay
+}

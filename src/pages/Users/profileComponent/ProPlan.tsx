@@ -1,13 +1,17 @@
+import { Link } from 'react-router-dom';
 
 export default function ProPlan({ proPlan }: any) {
 
     if (Object.keys(proPlan).length > 0) {
 
         return (
-            <div className="panel w-full md:w-1/2">
+            <div className="w-full md:w-1/2 pl-4 mt-8 md:mt-0">
                 <div className="flex items-center justify-between mb-10">
                     <h5 className="font-semibold text-lg dark:text-white-light">{proPlan.title}</h5>
-                    <button className="btn btn-primary">Renew Now</button>
+                    <Link to="https://billing.stripe.com/p/login/test_5kA4gG8UY2ccacgbII" className="btn btn-primary">
+                        Renew Now
+                    </Link>
+
                 </div>
                 <div className="group h-[20em] overflow-y-auto pr-4">
                     {proPlan.majorInfo.map((item: any, index: any) =>
@@ -26,7 +30,7 @@ export default function ProPlan({ proPlan }: any) {
                     )}
                 </div>
 
-                <div className="flex items-center justify-between my-4 font-semibold">
+                {/* <div className="flex items-center justify-between my-4 font-semibold">
                     <p className="flex items-center rounded-full bg-dark px-2 py-1 text-xs text-white-light font-semibold">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="ltr:mr-1 rtl:ml-1">
                             <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
@@ -38,7 +42,7 @@ export default function ProPlan({ proPlan }: any) {
                 </div>
                 <div className="rounded-full h-2.5 p-0.5 bg-dark-light overflow-hidden mb-5 dark:bg-dark-light/10">
                     <div className="bg-gradient-to-r from-[#f67062] to-[#fc5296] w-full h-full rounded-full relative" style={{ width: '65%' }}></div>
-                </div>
+                </div> */}
 
             </div>
         )

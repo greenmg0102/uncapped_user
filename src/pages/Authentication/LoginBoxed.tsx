@@ -57,7 +57,7 @@ const LoginBoxed = () => {
     };
 
     const authTest = (provider: any) => {
-        return window.location.href = `https://api.uncappedtheory.com/api/v1/auth/${provider}/login`
+        return window.location.href = `http://localhost:8000/api/v1/auth/${provider}/login`
     }
 
     return (
@@ -198,6 +198,7 @@ const LoginBoxed = () => {
                             <button
                                 onClick={() => authTest('google')}
                                 className="btn btn-gradient !mt-6 w-full border-0 hover:uppercase transition-all"
+                                disabled
                             >
                                 Google mail
                             </button>
