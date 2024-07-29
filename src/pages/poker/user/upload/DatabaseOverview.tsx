@@ -31,7 +31,6 @@ const DatabaseOverview = () => {
             to="/user/poker/report"
             className='relative w-full flex justify-between items-center flex-wrap sm:h-[350px] border rounded-[6px] border-gray-700 border-dashed transition-all hover:border-solid cursor-pointer hover:border-gray-500'
         >
-
             <div className='w-full sm:w-1/2 p-2'>
                 <CategoryCircle />
             </div>
