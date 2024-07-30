@@ -51,9 +51,7 @@ const PokerFileUpload = () => {
                             <div className='w-full mt-4 xl:mt-0 xl:w-1/2 h-[350px] border rounded-[6px] border-gray-700 border-dashed transition-all hover:border-solid cursor-pointer hover:border-gray-500'>
                                 <StasticData />
                             </div> */}
-                            <div className='w-full mt-4 xl:mt-0 h-[380px] border rounded-[6px] border-gray-700 border-dashed transition-all hover:border-solid cursor-pointer hover:border-gray-500'>
-                                <StasticData />
-                            </div>
+                            <StasticData />
                         </div>
                     </div>
                 </div>
