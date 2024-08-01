@@ -15,9 +15,9 @@ export default function Reporting() {
     const dispatch = useDispatch();
     const MySwal = withReactContent(Swal);
 
-    const [valueStatus, setValueStatus] = useState<any>({ action: "", heroPosition: "", stackDepth: "", VillianPosition: "" })
-    const [heroPosition, setHeroPosition] = useState<any>([])
-    const [stackDepth, setStackDepth] = useState<any>([])
+    const [valueStatus, setValueStatus] = useState<any>({ action: "RFI", heroPosition: "Early", stackDepth: "Shallow Stack", VillianPosition: "" })
+    const [heroPosition, setHeroPosition] = useState<any>(["UTG", "UTG+1", "LJ"])
+    const [stackDepth, setStackDepth] = useState<any>([10, 15, 20])
     const [VillianPosition, setVillianPosition] = useState<any>([])
 
     const [filter, setFilter] = useState({
@@ -169,7 +169,12 @@ export default function Reporting() {
                 data2.actionLit = actionLit
 
                 const response = await mainDataHandInfo(data2)
-                setReportingResult(response)
+                if (Object.keys(response).length > 0) {
+                    setReportingResult(response)
+                } else {
+                    setReportingResult({})
+                }
+
             }
             fetchMyAPI()
         }
@@ -195,7 +200,13 @@ export default function Reporting() {
         ) {
             async function fetchMyAPI() {
                 const response = await mainDataHandInfo(data)
-                setReportingResult(response)
+
+                if (Object.keys(response).length > 0) {
+                    setReportingResult(response)
+                } else {
+                    setReportingResult({})
+                }
+
             }
             fetchMyAPI()
         }

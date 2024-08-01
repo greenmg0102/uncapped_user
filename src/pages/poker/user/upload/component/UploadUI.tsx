@@ -33,7 +33,7 @@ const UploadUI = ({ availableCount, onslider, onFiles }: any) => {
                                     {
                                         isDragActive ?
                                             <p>Drop the files here ...</p> :
-                                            <p>Drag 'n' drop some files here, or click to select files</p>
+                                            <p>Drag drop some files here, or click to select files</p>
                                     }
                                 </h3>
                                 <h3 className='font-bold transition-all'>

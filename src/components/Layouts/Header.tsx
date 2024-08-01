@@ -139,8 +139,6 @@ const Header = () => {
         navigate(path);
     }
 
-    console.log("userInfo && userInfo.socialAvatar", userInfo && userInfo.socialAvatar);
-
 
     return (
         <header className={`z-40 ${themeConfig.semidark && themeConfig.menu === 'horizontal' ? 'dark' : ''}`}>
