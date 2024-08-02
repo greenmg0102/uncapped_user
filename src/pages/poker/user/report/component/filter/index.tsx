@@ -3,10 +3,11 @@ import ReportFilter from "./reportFilter"
 import UserFilter from "./userFilter"
 import Datafilter from "./datafilter"
 
-export default function Filtering({ userTab, setUserTab, squeezePanel, setSqueezePanel, actionLit, setActionList, reportingResult, premiumStatus, setPremiumStatus, squeezeSetting, setSqueezeSetting, defaultReportSetting, filter, valueStatus, setValueStatus, setFilter, heroPosition, stackDepth, VillianPosition, bufferRportingStatue }: any) {
+export default function Filtering({ userTab, isGradinet, setUserTab, squeezePanel, setSqueezePanel, actionLit, setActionList, reportingResult, premiumStatus, setPremiumStatus, squeezeSetting, setSqueezeSetting, defaultReportSetting, filter, valueStatus, setValueStatus, setFilter, heroPosition, stackDepth, VillianPosition, bufferRportingStatue }: any) {
 
   return (
     <div className="border border-gray-500 rounded-[8px] flex justify-between flex-wrap p-2">
+
       <ActionFilter
         valueStatus={valueStatus}
         setValueStatus={(total: any) => setValueStatus(total)}
@@ -43,6 +44,7 @@ export default function Filtering({ userTab, setUserTab, squeezePanel, setSqueez
           heroPosition={heroPosition}
           stackDepth={stackDepth}
           VillianPosition={VillianPosition}
+          isGradinet={isGradinet}
         />
         <UserFilter />
         <Datafilter

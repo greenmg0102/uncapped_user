@@ -1,4 +1,4 @@
-export const defineOpacity = (userCardFrequency: any): any => {
+export const defineOpacity = (userCardFrequency: any): any => { 
 
     let buffer = {
         fold: 0,

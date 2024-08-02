@@ -8,7 +8,6 @@ const StreetItem = ({ item, userTab, action, critical, setUserTab }: any) => {
                 "mr-1 mt-1 rounded-[4px] py-[2px] px-2 font-bold cursor-pointer hover:opacity-50 transition-all flex justify-center items-center",
                 userTab === item.id ? "h-[26px] opacity-100 border border-yellow-100" : "h-[20px] opacity-30",
                 critical ? "" : "hidden"
-
                 // item.id.some((each: any) => each === action) ? "" : "hidden",
                 // critical.some((each: any) => each === )
             )}

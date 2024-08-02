@@ -8,7 +8,6 @@ import { defaultReportSetting } from '../../../../utils/reference/reporting';
 import { toggleLoadingStatus } from "../../../../store/utilConfigSlice"
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
-import { log } from 'console';
 
 export default function Reporting() {
 
@@ -50,6 +49,7 @@ export default function Reporting() {
     })
 
     const [userTab, setUserTab] = useState(0)
+    const [isGradinet, setIsGradient] = useState(false)
 
     const [reportingResult, setReportingResult] = useState<any>({});
     const [userInfoResult, setUserInfoResult] = useState<any>({});
@@ -85,7 +85,6 @@ export default function Reporting() {
     }
 
     const bufferValueStatue = (total: any) => {
-        console.log("total", total);
 
         if (total.heroPosition !== "") setHeroPosition(defaultReportSetting.heroPosition.find((item: any) => item.title === total.heroPosition).stringList)
         if (total.stackDepth !== "") setStackDepth(defaultReportSetting.stackDepth.find((item: any) => item.title === total.stackDepth).valueList)
@@ -247,6 +246,7 @@ export default function Reporting() {
                 setUserTab={(userTab: any) => setUserTab(userTab)}
 
                 filter={filter}
+                isGradinet={isGradinet}
                 valueStatus={valueStatus}
                 defaultReportSetting={defaultReportSetting}
                 setFilter={(total: any) => setFilter(total)}
@@ -280,6 +280,7 @@ export default function Reporting() {
                 userTab={userTab}
                 userInfoResult={userInfoResult}
                 reportingResult={reportingResult}
+                setIsGradient={(bool: any) => setIsGradient(bool)}
             />
         </div>
     )

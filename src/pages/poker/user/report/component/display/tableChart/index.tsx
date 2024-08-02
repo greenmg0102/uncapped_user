@@ -7,7 +7,7 @@ import DetailTable from './detailTable';
 import Histogram from './histogram';
 
 
-export default function TableChart({ page, PAGE_SIZES, pageSize, filter, valueStatus, heroPosition, stackDepth, VillianPosition, userTab, userInfoResult, reportingResult, setInterestingPair }: any) {
+export default function TableChart({ page, PAGE_SIZES, pageSize, filter, valueStatus, heroPosition, stackDepth, VillianPosition, userTab, userInfoResult, reportingResult, setInterestingPair, setIsGradient }: any) {
 
     const [reportItemActive, setReportItemActive] = useState("")
 
@@ -19,6 +19,7 @@ export default function TableChart({ page, PAGE_SIZES, pageSize, filter, valueSt
                     <Tab as={Fragment}>
                         {({ selected }) => (
                             <button
+                                onClick={() => setIsGradient(false)}
                                 className={`${selected ? '!border-white-light !border-b-white  text-primary !outline-none dark:!border-[#191e3a] dark:!border-b-black' : ''} dark:hover:border-b-black -mb-[1px] block border border-transparent p-3.5 py-2 hover:text-primary`}>
                                 Chart Comparison
                             </button>
@@ -27,6 +28,7 @@ export default function TableChart({ page, PAGE_SIZES, pageSize, filter, valueSt
                     <Tab as={Fragment}>
                         {({ selected }) => (
                             <button
+                                onClick={() => setIsGradient(true)}
                                 className={`${selected ? '!border-white-light !border-b-white  text-primary !outline-none dark:!border-[#191e3a] dark:!border-b-black' : ''} dark:hover:border-b-black -mb-[1px] block border border-transparent p-3.5 py-2 hover:text-primary`}>
                                 Gradient Heat
                             </button>
@@ -35,6 +37,7 @@ export default function TableChart({ page, PAGE_SIZES, pageSize, filter, valueSt
                     <Tab as={Fragment}>
                         {({ selected }) => (
                             <button
+                                onClick={() => setIsGradient(false)}
                                 className={`${selected ? '!border-white-light !border-b-white  text-primary !outline-none dark:!border-[#191e3a] dark:!border-b-black' : ''} dark:hover:border-b-black -mb-[1px] block border border-transparent p-3.5 py-2 hover:text-primary`}>
                                 Detail Table
                             </button>
@@ -43,6 +46,7 @@ export default function TableChart({ page, PAGE_SIZES, pageSize, filter, valueSt
                     <Tab as={Fragment}>
                         {({ selected }) => (
                             <button
+                                onClick={() => setIsGradient(false)}
                                 className={`${selected ? '!border-white-light !border-b-white  text-primary !outline-none dark:!border-[#191e3a] dark:!border-b-black' : ''} dark:hover:border-b-black -mb-[1px] block border border-transparent p-3.5 py-2 hover:text-primary`}>
                                 Histogram
                             </button>

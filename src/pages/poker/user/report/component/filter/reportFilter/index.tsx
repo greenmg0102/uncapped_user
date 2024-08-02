@@ -3,7 +3,7 @@ import ReportButton from "./reportButton"
 import { pokerStreetOptionUser } from '../../../../../../../utils/reference/playCardColor'
 import StreetItem from './secondPanel'
 
-export default function ReportFilter({ userTab, setUserTab, valueStatus, setValueStatus, reportingResult, defaultReportSetting, heroPosition, stackDepth, VillianPosition, bufferRportingStatue }: any) {
+export default function ReportFilter({ userTab, isGradinet, setUserTab, valueStatus, setValueStatus, reportingResult, defaultReportSetting, heroPosition, stackDepth, VillianPosition, bufferRportingStatue }: any) {
 
   const [critical, setCritical] = useState([false, false, false, false, true])
 
@@ -20,6 +20,10 @@ export default function ReportFilter({ userTab, setUserTab, valueStatus, setValu
     setCritical(critical)
 
   }, [reportingResult])
+
+  useEffect(() => {
+    if (isGradinet) setUserTab(1)
+  }, [isGradinet])
 
   return (
     <div className="w-full sm:w-1/3 p-2">
@@ -94,7 +98,7 @@ export default function ReportFilter({ userTab, setUserTab, valueStatus, setValu
         </div>
 
         <div className='w-full mt-2 flex justify-center items-center flex-wrap'>
-          {pokerStreetOptionUser.map((item: any, index: any) =>
+          {pokerStreetOptionUser.slice(0, isGradinet ? 4 : 5).map((item: any, index: any) =>
             <StreetItem
               key={index}
               item={item}

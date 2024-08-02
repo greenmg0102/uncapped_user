@@ -2,7 +2,7 @@ import { useState } from 'react'
 import TableChart from './tableChart'
 import HandList from './handList'
 
-export default function Displaying({ filter, valueStatus, heroPosition, stackDepth, VillianPosition, userTab, reportingResult, userInfoResult }: any) {
+export default function Displaying({ filter, valueStatus, heroPosition, stackDepth, VillianPosition, userTab, reportingResult, userInfoResult, setIsGradient }: any) {
 
     const [interestingPair, setInterestingPair] = useState([])
 
@@ -24,6 +24,7 @@ export default function Displaying({ filter, valueStatus, heroPosition, stackDep
                 page={page}
                 PAGE_SIZES={PAGE_SIZES}
                 pageSize={pageSize}
+                setIsGradient={(bool: any) => setIsGradient(bool)}
                 setInterestingPair={(pair: any) => setInterestingPair(pair)}
             />
             <HandList

@@ -5,7 +5,7 @@ import clsx from 'clsx'
 
 export const ChipStatus = ({ totalBet }: any) => {
 
-    return <div className='flex justify-center items-end'>
+    return <div className='flex justify-center items-end mt-24'>
         {Object.keys(getChipStatus(totalBet)).map((key: any, index: any) =>
             <div
                 key={index}

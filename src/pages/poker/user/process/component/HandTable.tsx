@@ -7,6 +7,7 @@ import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
 import { useDispatch } from 'react-redux';
 import clsx from 'clsx'
+import ConfrimModal from './ConfrimModal'
 import Filtering from './Filtering'
 import { setPageTitle } from '../../../../../store/themeConfigSlice';
 import { getHands, deleteHand } from '../../../../../utils/functions/HandAPI'
@@ -30,6 +31,9 @@ const HandTable = () => {
     const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({ columnAccessor: '_id', direction: 'asc' });
 
     const [dragModel, setDragModel] = useState(false)
+
+    const [confrimModal, setConfrimModal] = useState(false);
+    const [removeId, setRemoveId] = useState(undefined);
 
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + 1);
@@ -100,6 +104,22 @@ const HandTable = () => {
 
     const checkDetailInfo = (_id: any) => navigate("/user/poker/process/" + _id);
 
+    const removeStep1 = async (id: any) => {
+        setRemoveId(id)
+        setConfrimModal(true)
+    }
+
+    const removeStep2 = async (bool: any, isRemove: any) => {
+        if (!isRemove) {
+            setRemoveId(undefined)
+        }
+        else {
+            itemDelete(removeId)
+        }
+
+        setConfrimModal(bool)
+    }
+
     const actionSet: { [key: string]: string } = {
         "fold": 'F',
         "folds": 'F',
@@ -127,6 +147,11 @@ const HandTable = () => {
                 setTotalCount={(totalCount: any) => setInitialRecords(totalCount)}
             />
 
+            <ConfrimModal
+                confrimModal={confrimModal}
+                setConfrimModal={(bool: any, isRemove: any) => removeStep2(bool, isRemove)}
+            />
+
             <div className="datatables">
                 <DataTable
                     noRecordsText="No results match your search query"
@@ -135,23 +160,7 @@ const HandTable = () => {
                     records={initialRecords}
                     columns={[
                         {
-                            accessor: 'handId', title: 'DETAILS', render: ({ handId }) => <div className="text-info flex justify-center items-center">
-                                <div className='w-[20px] h-[20px] hover:w-[40px] hover:h-[40px] transition-all'>
-                                    <svg
-                                        width="100%"
-                                        height="100%"
-                                        viewBox="0 0 1024 1024"
-                                        className="w-[20px] hover:cursor-pointer hover:w-[40px] transition-all"
-                                        onClick={() => checkDetailInfo(handId)}
-                                    >
-                                        <path d="M391.166 156.304H501.7c228.857 0 422.263 184.597 422.263 403.115C923.963 780.312 742.427 960 519.315 960c-235.128 0-419.278-193.554-419.278-440.625 0-10.564 8.584-19.11 19.109-19.11h113.159c10.602 0 19.11 8.546 19.11 19.11 0 218.781 138.391 296.747 267.9 296.747 134.92 0 253.27-123.2 253.27-263.605 0-131.897-124.059-243.34-270.885-243.34l-106.555-3.227-3.979-149.646z" fill="#FF3B30" /><path d="M407.884 309.176v77.275c0 6.941-3.73 13.267-9.777 16.664-6.011 3.398-13.398 3.209-19.295-0.375L128.305 249.013c-5.71-3.508-9.147-9.669-9.147-16.383 0.078-6.681 3.585-12.876 9.333-16.312L378.998 66.729c5.894-3.542 13.285-3.657 19.221-0.221 6.008 3.358 9.665 9.702 9.665 16.609V309.176z" fill="#FF3B30" />
-                                        <path d="M439.717 307.301l40.724-150.999h-72.557v150.035z" fill="#070707" />
-                                    </svg>
-                                </div>
-                            </div>
-                        },
-                        {
-                            accessor: 'pokerRoomId', title: 'PORKER', sortable: true, render: ({ pokerRoomId }) =>
+                            accessor: 'pokerRoomId', title: 'NET', sortable: true, render: ({ pokerRoomId }) =>
                                 <div className="text-info flex justify-center">
                                     <img
                                         src={pokerMarkList.filter((item: any) => item.value === pokerRoomId)[0].image}
@@ -160,11 +169,11 @@ const HandTable = () => {
                                     />
                                 </div>
                         },
-                        { accessor: 'gameFormat', title: 'GAME FORMAT', render: ({ gameFormat }) => <strong className="text-info flex justify-center">{gameFormat}</strong> },
-                        { accessor: 'maxTableSeats', title: 'TABLE SIZE', sortable: true, render: ({ maxTableSeats }) => <strong className="text-info flex justify-center">{maxTableSeats}-max</strong> },
+                        { accessor: 'gameFormat', title: 'FORMAT', render: ({ gameFormat }) => <strong className="text-info flex justify-center">{gameFormat}</strong> },
+                        { accessor: 'maxTableSeats', title: 'SIZE', sortable: true, render: ({ maxTableSeats }) => <strong className="text-info flex justify-center">{maxTableSeats}-max</strong> },
                         { accessor: 'reportContent', title: 'HERO', sortable: true, render: ({ reportContent }) => <strong className="text-info flex justify-center">{heroFinding(reportContent)}</strong> },
                         {
-                            accessor: 'holeCards', title: 'HOLE CARDS', render: ({ holeCards }) => <strong className="text-info flex justify-center">
+                            accessor: 'holeCards', title: 'HERO', render: ({ holeCards }) => <strong className="text-info flex justify-center">
                                 <div className='flex justify-center items-center'>
                                     {holeCards.find((item: any) => item.playerName === "Hero").cards.map((item: any, index: any) =>
                                         <div key={index}>
@@ -175,7 +184,7 @@ const HandTable = () => {
                             </strong>
                         },
                         {
-                            accessor: 'actions', title: 'PF Act', render: ({ actions }) => <strong className="text-info flex justify-start">
+                            accessor: 'actions', title: 'PF', render: ({ actions }) => <strong className="text-info flex justify-start">
                                 <div className='flex justify-center items-center'>
                                     {actions.filter((item: any) => item.street === "preFlop" && item.playerName === "Hero").map((each: any, order: any) =>
                                         <span key={order}>{actionSet[each.action]}</span>
@@ -195,7 +204,7 @@ const HandTable = () => {
                             </strong>
                         },
                         {
-                            accessor: 'actions', title: 'F Act', render: ({ actions }) => <strong className="text-info flex justify-start">
+                            accessor: 'actions', title: 'F', render: ({ actions }) => <strong className="text-info flex justify-start">
                                 <div className='flex justify-center items-center'>
                                     {actions.filter((item: any) => item.street === "Flop" && item.playerName === "Hero").map((each: any, order: any) =>
                                         <span key={order}>{actionSet[each.action]}</span>
@@ -215,7 +224,7 @@ const HandTable = () => {
                             </strong>
                         },
                         {
-                            accessor: 'actions', title: 'T Act', render: ({ actions }) => <strong className="text-info flex justify-start">
+                            accessor: 'actions', title: 'T', render: ({ actions }) => <strong className="text-info flex justify-start">
                                 <div className='flex justify-center items-center'>
                                     {actions.filter((item: any) => item.street === "Turn" && item.playerName === "Hero").map((each: any, order: any) =>
                                         <span key={order}>{actionSet[each.action]}</span>
@@ -235,7 +244,7 @@ const HandTable = () => {
                             </strong>
                         },
                         {
-                            accessor: 'actions', title: 'R Act', render: ({ actions }) => <strong className="text-info flex justify-start">
+                            accessor: 'actions', title: 'R', render: ({ actions }) => <strong className="text-info flex justify-start">
                                 <div className='flex justify-center items-center'>
                                     {actions.filter((item: any) => item.street === "River" && item.playerName === "Hero").map((each: any, order: any) =>
                                         <span key={order}>{actionSet[each.action]}</span>
@@ -243,16 +252,25 @@ const HandTable = () => {
                                 </div>
                             </strong>
                         },
-                        { accessor: 'handDate', title: 'PLAYED DATE', sortable: true, render: ({ handDate }) => <strong className="text-info flex justify-center">{handDate}</strong> },
+                        { accessor: 'handDate', title: 'DATE', sortable: true, render: ({ handDate }) => <strong className="text-info flex justify-center">{handDate.split(' ')[0]}</strong> },
                         {
-                            accessor: '_id', title: 'Action', sortable: true, render: ({ _id }) =>
-                                <button
-                                    type="button"
-                                    className="btn btn-outline-primary rounded-full"
-                                    onClick={() => itemDelete(_id)}
-                                >
-                                    Delete
-                                </button>
+                            accessor: '_id', title: 'Action', sortable: true, render: ({ _id, handId }) =>
+                                <div className='flex justify-between items-center'>
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-primary btn-sm rounded-full"
+                                        onClick={() => checkDetailInfo(handId)}
+                                    >
+                                        Reply
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="mr-1 btn btn-outline-danger btn-sm rounded-full"
+                                        onClick={() => removeStep1(_id)}
+                                    >
+                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="rest" width="1em" height="1em" fill="currentColor" aria-hidden="true"><defs><style></style></defs><path d="M508 704c79.5 0 144-64.5 144-144s-64.5-144-144-144-144 64.5-144 144 64.5 144 144 144zm0-224c44.2 0 80 35.8 80 80s-35.8 80-80 80-80-35.8-80-80 35.8-80 80-80z"></path><path d="M832 256h-28.1l-35.7-120.9c-4-13.7-16.5-23.1-30.7-23.1h-451c-14.3 0-26.8 9.4-30.7 23.1L220.1 256H192c-17.7 0-32 14.3-32 32v28c0 4.4 3.6 8 8 8h45.8l47.7 558.7a32 32 0 0031.9 29.3h429.2a32 32 0 0031.9-29.3L802.2 324H856c4.4 0 8-3.6 8-8v-28c0-17.7-14.3-32-32-32zm-518.6-76h397.2l22.4 76H291l22.4-76zm376.2 664H326.4L282 324h451.9l-44.3 520z"></path></svg>
+                                    </button>
+                                </div>
                         },
                     ]}
                     totalRecords={totalCount}
