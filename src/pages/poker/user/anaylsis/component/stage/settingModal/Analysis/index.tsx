@@ -47,6 +47,7 @@ export default function AnalysisSetting({ currentOption, isRtl, gameType, setCur
                             value={item}
                             checked={currentOption.players === item.toString() ? true : false}
                             onChange={handleOptionChange}
+                            disabled={item !== 8 ? true : false}
                         />
                         <span>{item}</span>
                     </label>

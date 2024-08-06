@@ -40,8 +40,6 @@ const GameAnalyze = () => {
 
     const middlewareCurrentOption = async (total: MiddlewareCurrentOption) => {
 
-        console.log("total", total);
-        // +1 - 633 - 4318
         setCurrentOption({ ...total })
         const data = {
             nodeNumber: 0,
@@ -49,13 +47,6 @@ const GameAnalyze = () => {
             maxUser: total.players
         }
         let zeroNode = await getPreflopModel(data).then()
-        setIsClickable(false)
-        recursiveGetNode(0)
-
-        setActiveNodeNumber((previousValue: any) => 0)
-        setBufferNodeList((previousValue: any) => [])
-        setBettingList((previousValue: any) => [])
-
         let real: Array<any> = [];
         real.push(zeroNode);
 
@@ -66,42 +57,40 @@ const GameAnalyze = () => {
     const middlewareReportingOption = async (total: any) => setReportingOption(total)
 
     useEffect(() => {
-
+        
         dispatch(setPageTitle('Preflop Chart'));
 
         const accessToken = localStorage.getItem('accessToken');
         const refreshToken = localStorage.getItem('refreshToken');
         if (accessToken === null && refreshToken === null) navigate('/auth/boxed-signin');
-
+        
     }, [])
 
     useEffect(() => {
+        async function fetchData() {
+            const data = {
+                nodeNumber: 0,
+                chipAmount: currentOption.stackSize,
+                maxUser: currentOption.players
+            }
+            let zeroNode = await getPreflopModel(data).then()
+            setIsClickable(false)
+            recursiveGetNode(0)
+
+            if (nodeList.length === 0) {
+                let real = nodeList
+                real.push(zeroNode)
+                setNodeList(() => real)
+                setActiveNodeData(zeroNode)
+            }
+        }
         fetchData()
     }, [])
 
-    async function fetchData() {
-        const data = {
-            nodeNumber: 0,
-            chipAmount: currentOption.stackSize,
-            maxUser: currentOption.players
-        }
-        let zeroNode = await getPreflopModel(data).then()
-        setIsClickable(false)
-        recursiveGetNode(0)
-
-        if (nodeList.length === 0) {
-            let real = nodeList
-            real.push(zeroNode)
-            setNodeList(() => real)
-            setActiveNodeData(zeroNode)
-        }
-    }
     const reset = async () => {
-
         setActiveNodeNumber((previousValue: any) => 0)
         setBufferNodeList((previousValue: any) => [])
         setBettingList((previousValue: any) => [])
-
         const data = {
             nodeNumber: 0,
             chipAmount: currentOption.stackSize,

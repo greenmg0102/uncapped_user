@@ -13,7 +13,7 @@ import { setPageTitle } from '../../../../../store/themeConfigSlice';
 import { getHands, deleteHand } from '../../../../../utils/functions/HandAPI'
 import SmallPlayCard from '../../../../../components/UI/playcard/SmallPlayCard';
 import { pokerMarkList } from '../../../../../utils/reference'
-import { toggleLoadingStatus } from "../../../../../store/utilConfigSlice"
+import { toggleLoadingStatus } from "../../../../../store/utilConfigSlice";
 
 const HandTable = () => {
 
