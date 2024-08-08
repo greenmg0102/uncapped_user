@@ -74,7 +74,7 @@ export default function UserDetailList({ userResultList, page, pageSize, activeU
 
       <div className={clsx('flex justify-between items-center mb-1 py-2 pt-1 px-1 pr-2 transition-all')} >
         <p className='w-[20px] text-left text-gray-400 text-[12px] mr-2'>No</p>
-        <p className='w-[80px] text-center text-gray-400 text-[12px] mr-2'>Hold Cards</p>
+        <p className='w-[80px] text-center text-gray-400 text-[12px] mr-2'>Hold</p>
         <div
           className={clsx(filteringCheckOption.BBWon ? 'w-[65px] text-center text-gray-400 text-[12px] flex justify-between items-center cursor-pointer' : 'hidden')}
           onClick={() => setSortingCondition({ ...sortingCondition, bb: !sortingCondition.bb })}
@@ -139,7 +139,9 @@ export default function UserDetailList({ userResultList, page, pageSize, activeU
                     }
 
                   </div>
-                  <div className={clsx(filteringCheckOption.BBWon ? 'w-[65px] text-center text-gray-400 text-[12px]' : "hidden")}>{(item.summary.collected[0].amount / item.bigBlind).toFixed(2)} bb</div>
+                  <div className={clsx(filteringCheckOption.BBWon ? 'w-[65px] text-center text-gray-400 text-[12px]' : "hidden")}>
+                    {(item.summary.collected[0].amount / item.bigBlind).toFixed(2)}
+                  </div>
 
                   <div className="flex justify-start items-center">
 

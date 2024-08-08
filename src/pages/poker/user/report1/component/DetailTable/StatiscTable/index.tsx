@@ -68,9 +68,6 @@ const StatisTable = ({ reportSetting, setReportSetting, type, detailedTable, sta
 
         if (Object.keys(detailedTable).length > 0) {
 
-        console.log("detailedTable", detailedTable);
-            
-
             let bb = 0
             let alliBB = 0
 

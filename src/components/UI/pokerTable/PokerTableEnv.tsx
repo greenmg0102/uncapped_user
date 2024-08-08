@@ -21,6 +21,7 @@ const PokerTableEnv = ({ handData, stage, currentStatus, isNext, isAnimation, ch
     let playSeatInfo = playCount !== undefined && positionSet[playCount]
     let players = handData && handData.players
 
+    
     return (
         <div className='relative py-16'>
             <div className={styles.playcard_table}>
@@ -98,10 +99,18 @@ const PokerTableEnv = ({ handData, stage, currentStatus, isNext, isAnimation, ch
                     </div>
                 </div>
                 <div className={styles.playcard_table_place}>
-
+                    <div className="w-[245px] h-[60px]">
+                        <img
+                            src={"/assets/images/playCardSymbol/ggpoker-logo-new.webp"}
+                            className='bg-cover'
+                            alt="suit"
+                            width="245" height="60"
+                        />
+                    </div>
+{/* 
                     <i>
                         {handData && handData.pokerRoomId}
-                    </i>
+                    </i> */}
 
                     <div className={styles.poker_panel}>
                         {

@@ -157,6 +157,19 @@ export const stackArray: any = [
     100, 80, 60, 50, 40, 30, 25, 20, 15, 10
 ]
 
+export const stackDepthTotal: any = {
+    10: 98750,
+    15: 148750,
+    20: 198750,
+    25: 248750,
+    30: 298750,
+    398750: 398750,
+    50: 498750,
+    60: 598750,
+    80: 798750,
+    100: 25000
+}
+
 export const villianPokerTable: any = [
     {
         postion: 0,

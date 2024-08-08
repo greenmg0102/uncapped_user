@@ -68,8 +68,8 @@ const StatisTable = ({ reportSetting, setReportSetting, type, detailedTable, sta
 
         if (Object.keys(detailedTable).length > 0) {
 
-        console.log("detailedTable", detailedTable);
-            
+            console.log("detailedTable", detailedTable);
+
 
             let bb = 0
             let alliBB = 0
@@ -109,14 +109,14 @@ const StatisTable = ({ reportSetting, setReportSetting, type, detailedTable, sta
                     </div>
                     :
                     <div className="flex justify-between items-start flex-wrap border border-gray-900 p-[4px] rounded-[12px]">
-
+                        {/* 
                         <div className="w-full md:w-1/4 p-[4px] grid grid-cols-1 gap-4 content-between">
                             <div className="w-full flex justify-center items-center">
                                 <CircleChart luckWheel={luckWheel} />
                             </div>
-                        </div>
+                        </div> */}
 
-                        <div className="w-full md:w-3/4 p-[4px]">
+                        <div className="w-full md:w-full p-[4px]">
                             <DetailStaticTable
                                 reportSetting={reportSetting}
                                 detailedTable={detailedTable}

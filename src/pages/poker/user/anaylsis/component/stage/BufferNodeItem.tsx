@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import clsx from 'clsx'
-import { hero8Site } from '../../../../../../utils/reference/playCardColor'
+import { hero8Site, stackDepthTotal } from '../../../../../../utils/reference/playCardColor'
 
 const NodeItem = ({ stageStatus, active, whichStage, order, nodeData, decideNode, activeNode, activeNodeNumber, stackSize, bettingList, isClickable }: any) => {
 
@@ -14,9 +14,16 @@ const NodeItem = ({ stageStatus, active, whichStage, order, nodeData, decideNode
         }
     }
 
+    let currentBB = stackDepthTotal[stackSize]
+
     const stackSizeFormat = (type: any, stack: any) => {
-        return stack === 398750 ? 40 : stack === 0 ? type === 'total' ? 0 : undefined : (stack / 10000).toFixed(1)
+        let divideValue = stackSize === 60 || stackSize === 80 || stackSize === 100 ? 10869.5652: 10000
+        return stack === currentBB ? stack === 398750 ? 40 : stackSize : stack === 0 ? type === 'total' ? 0 : undefined : (stack / divideValue).toFixed(1)
     }
+
+    // const stackSizeFormat = (type: any, stack: any) => {
+    //     return stack === 398750 ? 40 : stack === 0 ? type === 'total' ? 0 : undefined : (stack / 10000).toFixed(1)
+    // }
 
     const totalChipDecide = () => {
         let count = 0
